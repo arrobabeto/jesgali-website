@@ -31,20 +31,39 @@ const stats = [
 ];
 
 const testimonios = [
-  { nombre: 'Carlos Mendoza', area: 'Ventas', cita: 'Entré como Ejecutivo de Ventas y en dos años ya lidero mi propio equipo. El crecimiento aquí es real, no solo en el papel.' },
-  { nombre: 'Laura Rivas', area: 'Recursos Humanos', cita: 'Lo que más valoro es que mi opinión cuenta. Los líderes escuchan, y cuando propones algo bueno, lo implementan.' },
+  {
+    nombre: 'Carlos Mendoza',
+    puesto: 'Líder de Equipo',
+    area: 'Ventas',
+    videoId: null,
+    cita: 'Entré como Ejecutivo de Ventas y en dos años ya lidero mi propio equipo. El crecimiento aquí es real, no solo en el papel. Los líderes invierten en ti de verdad, no solo lo dicen.',
+  },
+  {
+    nombre: 'Laura Rivas',
+    puesto: 'Coordinadora',
+    area: 'Recursos Humanos',
+    videoId: null,
+    cita: 'Lo que más valoro es que mi opinión cuenta. Los líderes escuchan, y cuando propones algo bueno, lo implementan. Es un ambiente donde sientes que tu trabajo importa.',
+  },
+  {
+    nombre: 'Marco Torres',
+    puesto: 'Analista Sr.',
+    area: 'Operaciones',
+    videoId: null,
+    cita: 'Llevo 3 años en Jesgali y cada año encuentro nuevos retos. Las prestaciones son reales, el ambiente es honesto y el crecimiento no es un discurso — lo viví.',
+  },
 ];
 
 const categorias = [
-  'Refrigeración',
-  'Lavado y secado',
+  'Equipo de cocina',
+  'Utensilios',
   'Cocción',
   'Climatización',
   'Pequeños electrodomésticos',
 ];
 
 const hitos = [
-  { año: '2013', texto: 'Fundamos Jesgali en Ciudad de México con la convicción de que una comercializadora puede ser excelente en procesos y en personas al mismo tiempo.' },
+  { año: '2013', texto: 'Fundamos Jesgali con la convicción de que una comercializadora puede ser excelente en procesos y en personas al mismo tiempo.' },
   { año: '2016', texto: 'Primer equipo de 10 colaboradores y expansión a nuevas zonas de distribución en el país.' },
   { año: '2019', texto: '30 personas en el equipo. Entramos a nuevos segmentos del mercado y consolidamos operaciones logísticas.' },
   { año: '2024', texto: 'Más de 50 colaboradores y reconocimiento como referente del sector en México.' },
@@ -96,7 +115,7 @@ const alcance = [
           Comercializamos productos de línea blanca para las familias mexicanas
         </h2>
         <p style="font-size: var(--text-md); line-height: 1.65; color: var(--color-ink-soft); margin-bottom: 1.25rem; max-width: 60ch;">
-          Jesgali es una empresa de distribución y comercialización de productos de línea blanca fundada en Ciudad de México. Llevamos más de una década conectando calidad, logística y servicio para llevar refrigeración, lavado, cocción y climatización a los hogares del país.
+          Jesgali es una empresa de distribución y comercialización de productos de línea blanca fundada en Cuernavaca, Morelos. Llevamos más de una década conectando calidad, logística y servicio para llevar refrigeración, lavado, cocción y climatización a los hogares del país.
         </p>
         <p style="line-height: 1.65; color: var(--color-ink-soft); margin-bottom: 2rem; max-width: 60ch;">
           Operamos con un modelo comercial directo: equipo propio de ventas, relaciones sólidas con distribuidores y un proceso de entrega enfocado en la satisfacción del cliente final.
@@ -119,7 +138,7 @@ const alcance = [
   <!-- B · TRAYECTORIA — SEO: empresa fundada 2013 CDMX, más de 10 años de experiencia línea blanca -->
   <section style="background: var(--color-paper-2);">
     <div class="section-container" style="padding-block: var(--space-3xl);">
-      <p class="eyebrow" style="margin-bottom: 1rem;">Fundados en 2013 · Ciudad de México</p>
+      <p class="eyebrow" style="margin-bottom: 1rem;">Fundados en 2013 · Cuernavaca, Morelos</p>
       <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; margin-bottom: var(--space-xl, 3rem); overflow-wrap: anywhere; min-width: 0; max-width: 20ch;">
         Más de una década construyendo el negocio correcto
       </h2>
@@ -206,10 +225,42 @@ const alcance = [
         </div>
 
         <div class="lg:col-span-7 grid grid-cols-2 gap-4">
-          <div style="aspect-ratio: 4/5; border-radius: var(--radius-lg, 0.875rem); background: linear-gradient(140deg, oklch(87% 0.060 50), oklch(79% 0.090 48));"></div>
-          <div style="aspect-ratio: 4/5; margin-top: 2.5rem; border-radius: var(--radius-lg, 0.875rem); background: linear-gradient(140deg, oklch(85% 0.055 162), oklch(75% 0.070 162));"></div>
-          <div style="aspect-ratio: 4/5; margin-top: -2.5rem; border-radius: var(--radius-lg, 0.875rem); background: linear-gradient(140deg, oklch(88% 0.012 78), oklch(80% 0.012 75));"></div>
-          <div style="aspect-ratio: 4/5; border-radius: var(--radius-lg, 0.875rem); background: var(--color-ink-deep);"></div>
+          <img
+            src="/images/vida/vida-1.avif"
+            alt="Colaboradores de Jesgali revisando documentos en reunión de trabajo"
+            title="Trabajo en equipo en Grupo Jesgali Empresarial"
+            width="400" height="500"
+            loading="eager"
+            decoding="async"
+            style="aspect-ratio: 4/5; border-radius: var(--radius-lg, 0.875rem); object-fit: cover; width: 100%; display: block;"
+          />
+          <img
+            src="/images/vida/vida-2.avif"
+            alt="Colaboradora de Jesgali presentando estrategia comercial en pizarrón"
+            title="Cultura de colaboración y crecimiento en Jesgali"
+            width="400" height="500"
+            loading="lazy"
+            decoding="async"
+            style="aspect-ratio: 4/5; margin-top: 2.5rem; border-radius: var(--radius-lg, 0.875rem); object-fit: cover; width: 100%; display: block;"
+          />
+          <img
+            src="/images/vida/vida-3.avif"
+            alt="Espacio de trabajo de Jesgali, ambiente profesional y humano"
+            title="Ambiente de trabajo en Grupo Jesgali Empresarial"
+            width="400" height="500"
+            loading="lazy"
+            decoding="async"
+            style="aspect-ratio: 4/5; margin-top: -2.5rem; border-radius: var(--radius-lg, 0.875rem); object-fit: cover; width: 100%; display: block;"
+          />
+          <img
+            src="/images/vida/vida-4.avif"
+            alt="Equipo de Jesgali al cierre del día, ambiente cercano y de confianza"
+            title="Equipo humano de Grupo Jesgali Empresarial"
+            width="400" height="500"
+            loading="lazy"
+            decoding="async"
+            style="aspect-ratio: 4/5; border-radius: var(--radius-lg, 0.875rem); object-fit: cover; width: 100%; display: block;"
+          />
         </div>
       </div>
     </div>
@@ -264,31 +315,92 @@ const alcance = [
     </div>
   </section>
 
-  <!-- 6 · VOZ DEL EQUIPO — T1 pull-quote, banda oscura cálida -->
+  <!-- 6 · VOZ DEL EQUIPO — carousel video + quote -->
   <section style="background: var(--color-ink-deep); color: var(--color-paper);">
     <div class="section-container" style="padding-block: var(--space-3xl);">
-      <p class="eyebrow" style="color: oklch(80% 0.014 70); margin-bottom: var(--space-xl, 3rem);">Voz del equipo</p>
 
-      <div class="grid gap-12 md:gap-16">
-        {testimonios.map(t => (
-          <div class="grid md:grid-cols-12 gap-4 md:gap-8">
-            <blockquote class="md:col-span-9" style="font-family: var(--font-display); font-size: var(--text-xl); line-height: 1.3; font-style: normal;">
-              “{t.cita}”
-            </blockquote>
-            <p class="md:col-span-3 md:text-right" style="font-size: 0.9rem; color: oklch(82% 0.014 70); align-self: end;">
-              <span style="color: var(--color-paper); font-weight: 600;">{t.nombre}</span><br />{t.area}
-            </p>
-          </div>
+      <!-- Header + nav -->
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; margin-bottom: var(--space-xl, 3rem); flex-wrap: wrap;">
+        <div>
+          <p class="eyebrow" style="color: oklch(80% 0.014 70); margin-bottom: 0.75rem;">Voz del equipo</p>
+          <h2 style="font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; overflow-wrap: anywhere; min-width: 0; max-width: 22ch; color: var(--color-paper);">
+            Lo que dicen quienes trabajan aquí
+          </h2>
+        </div>
+        <div style="display: flex; align-items: center; gap: 1rem; flex-shrink: 0;">
+          <button class="voz-btn" id="voz-prev" aria-label="Testimonio anterior">←</button>
+          <span class="voz-counter" style="font-size: 0.9rem; color: oklch(70% 0.014 70); min-width: 3ch; text-align: center;">1 / {testimonios.length}</span>
+          <button class="voz-btn" id="voz-next" aria-label="Siguiente testimonio">→</button>
+        </div>
+      </div>
+
+      <!-- Carousel track -->
+      <div class="voz-track-wrap">
+        <div class="voz-track" id="voz-track">
+          {testimonios.map(t => (
+            <div class="voz-card">
+              <div class="voz-card-inner">
+
+                <!-- Video / placeholder -->
+                {t.videoId ? (
+                  <div class="voz-video-wrap" data-vid={t.videoId}
+                       style={`background: url('https://i.ytimg.com/vi/${t.videoId}/hqdefault.jpg') center/cover no-repeat;`}>
+                    <div class="voz-play-ring">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                  </div>
+                ) : (
+                  <div class="voz-video-wrap voz-placeholder">
+                    <div class="voz-play-ring voz-play-ring--muted">
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <p class="eyebrow" style="position: absolute; bottom: 1.25rem; left: 50%; transform: translateX(-50%); white-space: nowrap; color: oklch(55% 0.014 70);">Video próximamente</p>
+                  </div>
+                )}
+
+                <!-- Quote -->
+                <blockquote style="font-family: var(--font-display); font-size: var(--text-xl); line-height: 1.35; font-style: normal; margin-top: 2rem; overflow-wrap: anywhere;">
+                  "{t.cita}"
+                </blockquote>
+
+                <!-- Attribution -->
+                <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 1rem; border-top: var(--rule-hair) solid oklch(30% 0.014 55); padding-top: 1.25rem;">
+                  <div style="width: 38px; height: 38px; border-radius: 9999px; background: var(--color-accent); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <span style="font-family: var(--font-display); font-weight: 600; font-size: 0.9rem; color: var(--color-paper);">{t.nombre[0]}</span>
+                  </div>
+                  <div>
+                    <p style="font-weight: 600; color: var(--color-paper); line-height: 1.2;">{t.nombre}</p>
+                    <p style="font-size: 0.85rem; color: oklch(65% 0.014 70); margin-top: 0.125rem;">{t.puesto} · {t.area}</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Dots -->
+      <div role="tablist" aria-label="Testimonios" style="display: flex; gap: 0.5rem; margin-top: 2rem; justify-content: center;">
+        {testimonios.map((_, i) => (
+          <button
+            class={`voz-dot${i === 0 ? ' is-active' : ''}`}
+            role="tab"
+            aria-label={`Testimonio ${i + 1}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            data-idx={String(i)}
+          ></button>
         ))}
       </div>
+
     </div>
   </section>
 
   <!-- 7 · CTA CIERRE -->
   <section class="section-container" style="padding-block: var(--space-3xl); text-align: center;">
-    <h2 style="font-size: var(--text-3xl); font-weight: 600; line-height: 1.05; max-width: 18ch; margin-inline: auto;">
+    <h4 style="font-size: calc(var(--text-3xl) + 0.5rem); font-weight: 600; line-height: 1.05; max-width: 18ch; margin-inline: auto;">
       ¿Listo para dar el siguiente paso?
-    </h2>
+    </h4>
     <p style="margin-top: 1.25rem; color: var(--color-ink-soft); font-size: var(--text-md);">
       Tu próxima oportunidad está aquí. Revisa las vacantes abiertas y aplica hoy.
     </p>
@@ -300,6 +412,49 @@ const alcance = [
 
 </Layout>
 
+<script>
+(() => {
+  const track = document.getElementById('voz-track');
+  if (!track) return;
+  const cards = track.querySelectorAll('.voz-card');
+  const dots = document.querySelectorAll('.voz-dot');
+  const counter = document.querySelector('.voz-counter');
+  const total = cards.length;
+  let cur = 0;
+  const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function goTo(n) {
+    cur = Math.max(0, Math.min(total - 1, n));
+    if (rm) track.style.transition = 'none';
+    track.style.transform = `translateX(-${cur * 100}%)`;
+    dots.forEach((d, i) => {
+      d.classList.toggle('is-active', i === cur);
+      d.setAttribute('aria-selected', String(i === cur));
+    });
+    if (counter) counter.textContent = `${cur + 1} / ${total}`;
+    if (rm) requestAnimationFrame(() => { track.style.transition = ''; });
+  }
+
+  document.getElementById('voz-prev')?.addEventListener('click', () => goTo(cur - 1));
+  document.getElementById('voz-next')?.addEventListener('click', () => goTo(cur + 1));
+  dots.forEach(d => d.addEventListener('click', () => goTo(Number(d.dataset.idx))));
+
+  let x0 = 0;
+  track.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 50) goTo(cur + (dx < 0 ? 1 : -1));
+  }, { passive: true });
+
+  document.querySelectorAll('.voz-video-wrap[data-vid]').forEach(wrap => {
+    wrap.addEventListener('click', () => {
+      const id = wrap.dataset.vid;
+      wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen loading="lazy" title="Testimonio en video"></iframe>`;
+    });
+  });
+})();
+</script>
+
 <style>
   /* Proof strip — responsive cell padding so 3-col stays clean at 375px */
   .proof-item {
@@ -309,6 +464,68 @@ const alcance = [
   .proof-item + .proof-item {
     border-left: var(--rule-hair) solid var(--color-hairline);
     padding-left: clamp(0.375rem, 1.5vw, 1.5rem);
+  }
+
+  /* === VOZ CAROUSEL === */
+  .voz-track-wrap { overflow: hidden; }
+  .voz-track { display: flex; transition: transform 400ms cubic-bezier(0.25, 0, 0, 1); will-change: transform; }
+  .voz-card { min-width: 100%; }
+  .voz-card-inner { max-width: 700px; margin-inline: auto; }
+
+  .voz-video-wrap {
+    aspect-ratio: 16/9;
+    border-radius: var(--radius-lg, 0.875rem);
+    position: relative;
+    cursor: pointer;
+    background: oklch(20% 0.015 50);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .voz-video-wrap.voz-placeholder { cursor: default; }
+  .voz-video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+
+  .voz-play-ring {
+    width: 60px; height: 60px;
+    border-radius: 9999px;
+    background: var(--color-accent);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-paper);
+    transition: transform 180ms ease;
+    position: relative; z-index: 1;
+  }
+  .voz-video-wrap:not(.voz-placeholder):hover .voz-play-ring { transform: scale(1.1); }
+  .voz-play-ring--muted { background: oklch(32% 0.018 50); }
+
+  .voz-btn {
+    width: 42px; height: 42px;
+    border-radius: 9999px;
+    border: 1px solid oklch(38% 0.014 55);
+    background: transparent;
+    color: var(--color-paper);
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 180ms ease, border-color 180ms ease;
+  }
+  .voz-btn:hover { background: oklch(26% 0.015 50); border-color: oklch(55% 0.014 55); }
+  .voz-btn:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+  .voz-dot {
+    width: 6px; height: 6px;
+    border-radius: 9999px;
+    background: oklch(38% 0.014 55);
+    border: none; cursor: pointer; padding: 0;
+    transition: width 220ms ease, background 220ms ease;
+  }
+  .voz-dot.is-active { width: 22px; background: var(--color-accent); }
+  .voz-dot:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .voz-track { transition: none; }
+    .voz-dot, .voz-dot.is-active, .voz-play-ring, .voz-btn { transition: none; }
   }
 
   .vac-row { transition: background var(--dur-base) var(--ease-out), padding-left var(--dur-base) var(--ease-out); }

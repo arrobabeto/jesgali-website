@@ -7,6 +7,12 @@ const liderazgo = [
   { nombre: 'Roberto Fuentes', cargo: 'Director Comercial', iniciales: 'RF', descripcion: 'Lidera la estrategia de ventas y desarrollo de nuevos mercados. Apasionado por construir equipos comerciales de alto rendimiento.' },
 ];
 
+const compromisos = [
+  { eyebrow: 'Misión', texto: 'Comercializar productos de calidad que mejoren la vida de las familias mexicanas, a través de un equipo apasionado por el servicio y comprometido con la excelencia en cada operación.' },
+  { eyebrow: 'Visión', texto: 'Ser la empresa de comercialización de línea blanca de referencia en México, reconocida por la calidad de su equipo, la solidez de sus relaciones comerciales y el impacto positivo en sus colaboradores.' },
+  { eyebrow: 'Propósito', texto: 'Construir carreras, no solo empleos. Cada persona en Jesgali tiene acceso a las herramientas, el apoyo y las oportunidades para crecer de verdad.' },
+];
+
 const valores = [
   { titulo: 'Integridad', texto: 'Hacemos lo que decimos. Siempre. Con clientes, proveedores y entre nosotros mismos.' },
   { titulo: 'Crecimiento', texto: 'Nos exigimos mejorar constantemente: en procesos, en resultados y como personas.' },
@@ -15,14 +21,14 @@ const valores = [
 ];
 
 const beneficios = [
-  { icon: 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z', label: 'Seguro de Gastos Médicos Mayores' },
-  { icon: 'M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z', label: 'Vales de despensa (15% salario)' },
-  { icon: 'M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z', label: 'Fondo de ahorro' },
-  { icon: 'M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z', label: 'Vacaciones superiores a la ley' },
-  { icon: 'M13 7h8m0 0v8m0-8l-8 8-4-4-6 6', label: 'Plan de carrera estructurado' },
-  { icon: 'M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253', label: 'Capacitación continua' },
-  { icon: 'M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z', label: 'Ambiente colaborativo y de respeto' },
-  { icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2', label: 'Evaluaciones semestrales de desempeño' },
+  'Seguro de Gastos Médicos Mayores',
+  'Vales de despensa (15% salario)',
+  'Fondo de ahorro',
+  'Vacaciones superiores a la ley',
+  'Plan de carrera estructurado',
+  'Capacitación continua',
+  'Ambiente colaborativo y de respeto',
+  'Evaluaciones semestrales de desempeño',
 ];
 
 const hitos = [
@@ -34,165 +40,182 @@ const hitos = [
 ];
 ---
 
+<!-- Hallmark · genre: editorial · macrostructure: Long Document · theme: custom (clay/cream/pine · Fraunces + Hanken Grotesk) · enrichment: none · nav: N6 · footer: Ft1 -->
+<!-- Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V4 -->
+
 <Layout
-  title="Equipo — Grupo Jesgali Empresarial"
-  description="Conoce al equipo de Grupo Jesgali, nuestra historia, valores y los beneficios de trabajar con nosotros."
+  title="Equipo — Grupo Jesgali Empresarial | Quiénes Somos, Historia y Beneficios"
+  description="Conoce al equipo de Grupo Jesgali: nuestra historia desde 2013, misión, valores, liderazgo y los beneficios reales de trabajar en una comercializadora de línea blanca mexicana en crecimiento."
 >
 
-  <!-- HERO -->
-  <section class="relative bg-gradient-to-br from-brand-950 via-brand-900 to-brand-800 text-white py-28">
-    <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 30% 50%, #6366f1, transparent 60%);"></div>
-    <div class="section-container relative text-center">
-      <h1 class="text-5xl lg:text-6xl font-bold mb-6">Somos Jesgali</h1>
-      <p class="text-xl text-brand-200 max-w-2xl mx-auto">
-        Un equipo de personas comprometidas con el crecimiento propio y el de la empresa. Conoce quiénes somos, de dónde venimos y hacia dónde vamos.
-      </p>
-    </div>
-    <div class="absolute bottom-0 left-0 right-0">
-      <svg viewBox="0 0 1440 60" fill="none" class="w-full"><path d="M0 60L1440 60L1440 0C1200 40 720 60 0 0L0 60Z" fill="white"/></svg>
-    </div>
+  <!-- 1 · HERO TIPOGRÁFICO -->
+  <section class="section-container" style="padding-top: var(--space-2xl); padding-bottom: var(--space-xl); min-height: 64vh; display: flex; flex-direction: column; justify-content: center;">
+    <p class="eyebrow reveal reveal-1" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+      <span style="width: 7px; height: 7px; border-radius: 9999px; background: var(--color-pine); display: inline-block;"></span>
+      Nuestro equipo
+    </p>
+
+    <h1 class="reveal reveal-2" style="font-family: var(--font-display); font-weight: 600; font-size: var(--text-display); line-height: 0.96; margin-top: 1.5rem; max-width: 14ch; overflow-wrap: anywhere; min-width: 0;">
+      Somos <span style="color: var(--color-accent-deep);">Jesgali</span>
+    </h1>
+
+    <p class="reveal reveal-3" style="margin-top: 2rem; max-width: 56ch; font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft);">
+      Un equipo de personas comprometidas con su propio crecimiento y el de la empresa. Conoce quiénes somos, de dónde venimos y hacia dónde vamos.
+    </p>
   </section>
 
-  <!-- NUESTRA HISTORIA -->
-  <section class="py-24 bg-white">
-    <div class="section-container">
-      <div class="grid lg:grid-cols-2 gap-16 items-start">
-        <div>
-          <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">Nuestra historia</h2>
-          <p class="text-lg text-slate-600 leading-relaxed mb-4">
-            Grupo Jesgali nació en 2013 con una idea clara: construir una empresa donde las personas y los negocios crezcan juntos. Lo que empezó como una operación pequeña en Cuernavaca, Morelos se ha convertido en una empresa con más de 50 colaboradores y presencia en múltiples zonas del país.
-          </p>
-          <p class="text-slate-500 leading-relaxed">
-            A lo largo de estos más de 10 años hemos aprendido que el verdadero activo de una empresa no está en los productos que comercializa, sino en las personas que la hacen funcionar todos los días.
-          </p>
-        </div>
+  <hr class="rule-thick" />
 
-        <!-- Timeline -->
-        <div class="space-y-6">
-          {hitos.map((h, i) => (
-            <div class="flex gap-4">
-              <div class="flex flex-col items-center">
-                <div class="w-10 h-10 rounded-full bg-brand-600 text-white text-xs font-bold flex items-center justify-center shrink-0">
-                  {h.año.slice(2)}
-                </div>
-                {i < hitos.length - 1 && <div class="w-0.5 h-full bg-brand-100 mt-2"></div>}
-              </div>
-              <div class="pt-2 pb-6">
-                <div class="text-sm font-semibold text-brand-600 mb-1">{h.año}</div>
-                <p class="text-slate-600">{h.evento}</p>
-              </div>
+  <!-- 2 · NUESTRA HISTORIA + TRAYECTORIA -->
+  <section class="section-container" style="padding-block: var(--space-3xl);">
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <div class="lg:col-span-5">
+        <p class="eyebrow" style="margin-bottom: 1.5rem;">Nuestra historia</p>
+        <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; margin-bottom: 1.5rem; overflow-wrap: anywhere; min-width: 0; max-width: 16ch;">
+          Más de una década creciendo juntos
+        </h2>
+        <p style="font-size: var(--text-md); line-height: 1.65; color: var(--color-ink-soft); margin-bottom: 1.25rem; max-width: 52ch;">
+          Grupo Jesgali nació en 2013 con una idea clara: construir una empresa donde las personas y los negocios crezcan juntos. Lo que empezó como una operación pequeña en Cuernavaca, Morelos se ha convertido en una empresa con más de 50 colaboradores y presencia en múltiples zonas del país.
+        </p>
+        <p style="line-height: 1.65; color: var(--color-ink-soft); max-width: 52ch;">
+          A lo largo de estos más de 10 años hemos aprendido que el verdadero activo de una empresa no está en los productos que comercializa, sino en las personas que la hacen funcionar todos los días.
+        </p>
+      </div>
+
+      <div class="lg:col-span-7">
+        {hitos.map((h, i) => (
+          <div>
+            {i > 0 && <hr class="rule-hair" />}
+            <div class="grid grid-cols-12 gap-4 md:gap-8 items-baseline" style="padding-block: var(--space-lg);">
+              <span class="col-span-3 md:col-span-2" style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; color: var(--color-accent-deep);">{h.año}</span>
+              <p class="col-span-9 md:col-span-10" style="font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft);">{h.evento}</p>
             </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- MISIÓN, VISIÓN Y VALORES -->
-  <section class="py-24 bg-slate-50">
-    <div class="section-container">
-      <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 text-center mb-16">Nuestros compromisos</h2>
-      <div class="grid md:grid-cols-3 gap-8 mb-16">
-        <div class="rounded-2xl bg-brand-600 text-white p-8">
-          <h3 class="text-xl font-bold mb-4">Misión</h3>
-          <p class="text-brand-100 leading-relaxed">
-            Comercializar productos de calidad que mejoren la vida de las familias mexicanas, a través de un equipo apasionado por el servicio y comprometido con la excelencia en cada operación.
-          </p>
-        </div>
-        <div class="rounded-2xl bg-white border border-slate-100 p-8">
-          <h3 class="text-xl font-bold text-slate-900 mb-4">Visión</h3>
-          <p class="text-slate-500 leading-relaxed">
-            Ser la empresa de comercialización de línea blanca de referencia en México, reconocida por la calidad de su equipo, la solidez de sus relaciones comerciales y el impacto positivo en sus colaboradores.
-          </p>
-        </div>
-        <div class="rounded-2xl bg-brand-950 text-white p-8">
-          <h3 class="text-xl font-bold mb-4">Propósito</h3>
-          <p class="text-brand-200 leading-relaxed">
-            Construir carreras, no solo empleos. Cada persona en Jesgali tiene acceso a las herramientas, el apoyo y las oportunidades para crecer de verdad.
-          </p>
-        </div>
-      </div>
-
-      <!-- Valores -->
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {valores.map(v => (
-          <div class="rounded-xl bg-white border border-slate-100 p-6 hover:shadow-md transition">
-            <h4 class="font-bold text-slate-900 mb-2">{v.titulo}</h4>
-            <p class="text-sm text-slate-500 leading-relaxed">{v.texto}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- EL LIDERAZGO -->
-  <section class="py-24 bg-white">
-    <div class="section-container">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl lg:text-4xl font-bold text-slate-900 mb-4">El liderazgo</h2>
-        <p class="text-slate-500 text-lg max-w-xl mx-auto">Las personas detrás de las decisiones que definen la empresa.</p>
+  <!-- 3 · MISIÓN · VISIÓN · PROPÓSITO -->
+  <section style="background: var(--color-paper-2);">
+    <div class="section-container" style="padding-block: var(--space-3xl);">
+      <p class="eyebrow" style="margin-bottom: var(--space-xl);">Nuestros compromisos</p>
+      <div class="grid md:grid-cols-3 gap-10 md:gap-12">
+        {compromisos.map(c => (
+          <div style="border-top: var(--rule-thick) solid var(--color-ink); padding-top: 1.5rem;">
+            <p class="eyebrow" style="color: var(--color-accent-deep); margin-bottom: 1rem;">{c.eyebrow}</p>
+            <p style="font-size: var(--text-md); line-height: 1.65; color: var(--color-ink-soft);">{c.texto}</p>
+          </div>
+        ))}
       </div>
-      <div class="grid md:grid-cols-3 gap-8">
+    </div>
+  </section>
+
+  <!-- 4 · VALORES -->
+  <section class="section-container" style="padding-block: var(--space-3xl);">
+    <h2 style="font-size: var(--text-2xl); font-weight: 600; max-width: 16ch; margin-bottom: var(--space-xl); overflow-wrap: anywhere; min-width: 0;">
+      Lo que nos sostiene
+    </h2>
+    <div class="grid sm:grid-cols-2 gap-x-12 gap-y-0">
+      {valores.map((v, i) => (
+        <div class="grid grid-cols-12 gap-4 items-baseline" style="border-top: var(--rule-hair) solid var(--color-hairline); padding-block: var(--space-lg);">
+          <span class="col-span-2" style="font-family: var(--font-display); font-size: var(--text-md); font-weight: 600; color: var(--color-accent-deep);">0{i + 1}</span>
+          <div class="col-span-10">
+            <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: 0.5rem;">{v.titulo}</h3>
+            <p style="font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft);">{v.texto}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 5 · LIDERAZGO -->
+  <section style="background: var(--color-paper-2);">
+    <div class="section-container" style="padding-block: var(--space-3xl);">
+      <div style="max-width: 40ch; margin-bottom: var(--space-xl);">
+        <p class="eyebrow" style="margin-bottom: 1rem;">El liderazgo</p>
+        <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; overflow-wrap: anywhere; min-width: 0;">
+          Las personas detrás de las decisiones
+        </h2>
+      </div>
+      <div class="grid md:grid-cols-3 gap-10">
         {liderazgo.map(l => (
-          <div class="text-center rounded-2xl border border-slate-100 p-8 hover:shadow-lg transition">
-            <div class="w-20 h-20 rounded-full bg-gradient-to-br from-brand-100 to-brand-200 flex items-center justify-center text-brand-700 text-2xl font-bold mx-auto mb-4">
-              {l.iniciales}
+          <div style="border-top: var(--rule-thick) solid var(--color-ink); padding-top: 1.5rem;">
+            <div style="width: 56px; height: 56px; border-radius: 9999px; background: var(--color-accent); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem;">
+              <span style="font-family: var(--font-display); font-weight: 600; font-size: var(--text-lg); color: var(--color-paper);">{l.iniciales}</span>
             </div>
-            <h3 class="text-xl font-bold text-slate-900 mb-1">{l.nombre}</h3>
-            <p class="text-brand-600 text-sm font-medium mb-4">{l.cargo}</p>
-            <p class="text-slate-500 text-sm leading-relaxed">{l.descripcion}</p>
+            <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: 0.25rem;">{l.nombre}</h3>
+            <p class="eyebrow" style="color: var(--color-accent-deep); margin-bottom: 1rem;">{l.cargo}</p>
+            <p style="font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft);">{l.descripcion}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- BENEFICIOS -->
-  <section class="py-24 bg-brand-950 text-white">
-    <div class="section-container">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl lg:text-4xl font-bold mb-4">Beneficios reales</h2>
-        <p class="text-brand-300 text-lg max-w-xl mx-auto">Lo que obtienes cuando te unes al equipo, desde el primer día.</p>
+  <!-- 6 · BENEFICIOS REALES (banda oscura) -->
+  <section style="background: var(--color-ink-deep); color: var(--color-paper);">
+    <div class="section-container" style="padding-block: var(--space-3xl);">
+      <div style="max-width: 44ch; margin-bottom: var(--space-xl);">
+        <p class="eyebrow" style="color: oklch(80% 0.014 70); margin-bottom: 1rem;">Beneficios reales</p>
+        <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; color: var(--color-paper); overflow-wrap: anywhere; min-width: 0;">
+          Estos son algunos de nuestros beneficios
+        </h2>
       </div>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+      <div class="grid sm:grid-cols-2 gap-x-12 gap-y-0">
         {beneficios.map(b => (
-          <div class="flex items-center gap-3 rounded-xl bg-brand-900/50 border border-brand-800 p-4">
-            <div class="w-9 h-9 rounded-lg bg-brand-700 flex items-center justify-center shrink-0">
-              <svg class="w-4 h-4 text-brand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={b.icon} />
-              </svg>
-            </div>
-            <span class="text-sm text-brand-200">{b.label}</span>
+          <div style="display: flex; align-items: center; gap: 1rem; padding-block: 1.125rem; border-top: var(--rule-hair) solid oklch(38% 0.020 50);">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0;" aria-hidden="true">
+              <path d="M20 6L9 17l-5-5" />
+            </svg>
+            <span style="font-size: var(--text-md); color: var(--color-paper);">{b}</span>
           </div>
         ))}
       </div>
-      <div class="text-center mt-12">
-        <a href="/vacantes" class="btn-primary text-base py-3 px-8">Ver vacantes abiertas</a>
+
+      <div style="margin-top: var(--space-xl);">
+        <a href="/vacantes" class="btn-white">Ver vacantes abiertas</a>
       </div>
     </div>
   </section>
 
-  <!-- GALERÍA AMBIENTE -->
-  <section class="py-24 bg-white">
-    <div class="section-container">
-      <h2 class="text-3xl font-bold text-slate-900 text-center mb-12">El día a día en Jesgali</h2>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {[
-          { from: 'from-brand-100', to: 'to-brand-200', text: 'text-brand-500' },
-          { from: 'from-accent-100', to: 'to-accent-200', text: 'text-accent-500' },
-          { from: 'from-slate-100', to: 'to-slate-200', text: 'text-slate-400' },
-          { from: 'from-brand-200', to: 'to-brand-300', text: 'text-brand-600' },
-          { from: 'from-accent-50', to: 'to-accent-100', text: 'text-accent-400' },
-          { from: 'from-brand-800', to: 'to-brand-900', text: 'text-brand-300' },
-        ].map(c => (
-          <div class={`aspect-video rounded-2xl bg-gradient-to-br ${c.from} ${c.to} flex items-center justify-center ${c.text}`}>
-            <svg class="w-10 h-10 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-          </div>
-        ))}
+  <!-- 7 · EL DÍA A DÍA (placeholders editoriales) -->
+  <section class="section-container" style="padding-block: var(--space-3xl);">
+    <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 2rem; flex-wrap: wrap; margin-bottom: var(--space-xl);">
+      <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; max-width: 14ch; overflow-wrap: anywhere; min-width: 0;">
+        El día a día en Jesgali
+      </h2>
+      <p class="eyebrow">Imágenes próximamente</p>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      {Array.from({ length: 6 }).map(() => (
+        <div style="aspect-ratio: 4/3; border: var(--rule-hair) solid var(--color-hairline); background: var(--color-paper-2); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center;">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="var(--color-hairline)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <path d="M21 15l-5-5L5 21" />
+          </svg>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <hr class="rule-thick" />
+
+  <!-- 8 · CTA DE CIERRE -->
+  <section style="background: var(--color-paper-2);">
+    <div class="section-container" style="padding-block: var(--space-3xl); text-align: center;">
+      <h4 style="font-size: calc(var(--text-3xl) + 0.5rem); font-weight: 600; line-height: 1.05; max-width: 20ch; margin-inline: auto;">
+        ¿Quieres construir tu carrera con nosotros?
+      </h4>
+      <p style="margin-top: 1.5rem; max-width: 48ch; margin-inline: auto; font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft);">
+        Conoce nuestras vacantes abiertas y da el siguiente paso en un equipo donde el crecimiento es real.
+      </p>
+      <div style="margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+        <a href="/vacantes" class="btn-primary">Ver vacantes abiertas</a>
+        <a href="/" class="btn-secondary">Volver al inicio</a>
       </div>
-      <p class="text-center text-sm text-slate-400 mt-4">Imágenes del equipo próximamente</p>
     </div>
   </section>
 

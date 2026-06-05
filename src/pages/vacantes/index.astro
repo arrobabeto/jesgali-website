@@ -1,0 +1,278 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const vacantes = await getCollection('vacantes', v => v.data.activa);
+vacantes.sort((a, b) => b.data.fechaPublicacion.getTime() - a.data.fechaPublicacion.getTime());
+
+const areas = [...new Set(vacantes.map(v => v.data.area))];
+const tipos = [...new Set(vacantes.map(v => v.data.tipo))];
+
+const pasos = [
+  { num: '01', titulo: 'Aplica', texto: 'Llena el formulario de la vacante que te interesa. Solo toma 3 minutos.' },
+  { num: '02', titulo: 'Revisamos tu perfil', texto: 'Un miembro del equipo de RH revisa tu solicitud en menos de 5 días hábiles.' },
+  { num: '03', titulo: 'Entrevista', texto: 'Si tu perfil encaja, te contactamos para una entrevista —presencial o en línea.' },
+  { num: '04', titulo: 'Bienvenida', texto: 'Si eres la persona correcta, te hacemos la oferta y comenzamos el proceso de incorporación.' },
+];
+---
+
+<Layout
+  title="Vacantes — Grupo Jesgali Empresarial"
+  description="Explora las posiciones abiertas en Grupo Jesgali. Trabajo de tiempo completo con prestaciones superiores a la ley y plan de carrera real."
+>
+
+  <!-- HERO -->
+  <section class="bg-gradient-to-br from-brand-950 via-brand-900 to-brand-800 text-white py-20 relative">
+    <div class="section-container text-center">
+      <h1 class="text-4xl lg:text-5xl font-bold mb-4">Encuentra tu lugar</h1>
+      <p class="text-xl text-brand-200 mb-4">Posiciones abiertas donde tu talento tiene impacto real.</p>
+      <span class="inline-flex items-center gap-2 rounded-full bg-accent-500/20 border border-accent-400/30 px-4 py-1.5 text-sm font-medium text-accent-300">
+        <span class="w-2 h-2 rounded-full bg-accent-400 animate-pulse"></span>
+        {vacantes.length} posición{vacantes.length !== 1 ? 'es' : ''} abierta{vacantes.length !== 1 ? 's' : ''}
+      </span>
+    </div>
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 40" fill="none" class="w-full"><path d="M0 40L1440 40L1440 0C1200 30 720 40 0 0L0 40Z" fill="white"/></svg>
+    </div>
+  </section>
+
+  <!-- FILTROS + GRID -->
+  <section class="py-16 bg-white">
+    <div class="section-container">
+
+      <!-- Filtros -->
+      <div class="flex flex-wrap gap-3 mb-10" id="filtros">
+        <button
+          data-filter="all"
+          class="filter-btn active rounded-full px-4 py-2 text-sm font-medium border border-brand-600 text-brand-600 bg-brand-50 transition"
+        >
+          Todas
+        </button>
+        {areas.map(area => (
+          <button
+            data-filter={area}
+            data-type="area"
+            class="filter-btn rounded-full px-4 py-2 text-sm font-medium border border-slate-200 text-slate-600 hover:border-brand-300 hover:text-brand-600 transition"
+          >
+            {area}
+          </button>
+        ))}
+        <div class="w-px bg-slate-200 mx-1 self-stretch"></div>
+        {tipos.map(tipo => (
+          <button
+            data-filter={tipo}
+            data-type="tipo"
+            class="filter-btn rounded-full px-4 py-2 text-sm font-medium border border-slate-200 text-slate-600 hover:border-brand-300 hover:text-brand-600 transition"
+          >
+            {tipo}
+          </button>
+        ))}
+      </div>
+
+      <!-- Grid -->
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="vacantes-grid">
+        {vacantes.map(v => (
+          <a
+            href={`/vacantes/${v.slug}`}
+            data-area={v.data.area}
+            data-tipo={v.data.tipo}
+            class="vacante-card group rounded-2xl border border-slate-100 p-6 hover:border-brand-200 hover:shadow-lg transition-all duration-300"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <span class="text-xs font-semibold uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1 rounded-full">
+                {v.data.area}
+              </span>
+              <span class="text-xs text-slate-400 bg-slate-50 px-2 py-1 rounded-full">{v.data.tipo}</span>
+            </div>
+            <h2 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-brand-700 transition">
+              {v.data.titulo}
+            </h2>
+            <p class="text-sm text-slate-500 mb-4 line-clamp-2">{v.data.resumen}</p>
+            <div class="flex items-center justify-between pt-4 border-t border-slate-50">
+              <div>
+                <div class="text-sm font-semibold text-slate-700">
+                  ${v.data.salarioMin.toLocaleString()} – ${v.data.salarioMax.toLocaleString()}
+                </div>
+                <div class="text-xs text-slate-400">{v.data.ubicacion}</div>
+              </div>
+              <span class="text-brand-600 text-sm font-medium group-hover:translate-x-1 transition inline-block">
+                Ver →
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <!-- No results -->
+      <div id="no-results" class="hidden text-center py-16">
+        <p class="text-slate-500 text-lg">No hay vacantes en este filtro por el momento.</p>
+        <button data-filter="all" class="filter-btn mt-4 btn-secondary">Ver todas las vacantes</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO DE SELECCIÓN -->
+  <section class="py-24 bg-slate-50">
+    <div class="section-container">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">El proceso de selección</h2>
+        <p class="text-slate-500 max-w-xl mx-auto">Sin misterios. Así funciona el proceso desde que aplicas hasta que empiezas.</p>
+      </div>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {pasos.map((p, i) => (
+          <div class="relative">
+            <div class="rounded-2xl bg-white border border-slate-100 p-6 hover:shadow-md transition">
+              <div class="text-4xl font-bold text-brand-100 mb-3">{p.num}</div>
+              <h3 class="text-lg font-bold text-slate-900 mb-2">{p.titulo}</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">{p.texto}</p>
+            </div>
+            {i < pasos.length - 1 && (
+              <div class="hidden lg:block absolute top-1/2 -right-3 w-6 text-slate-200">→</div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CV ESPONTÁNEO -->
+  <section id="cv-espontaneo" class="py-24 bg-white">
+    <div class="section-container max-w-2xl">
+      <div class="text-center mb-10">
+        <h2 class="text-3xl font-bold text-slate-900 mb-4">¿No ves tu vacante?</h2>
+        <p class="text-slate-500 text-lg">
+          Igual queremos conocerte. Déjanos tus datos y te consideramos cuando abra una posición que encaje con tu perfil.
+        </p>
+      </div>
+
+      <form
+        id="form-espontaneo"
+        action="https://api.web3forms.com/submit"
+        method="POST"
+        class="space-y-5 rounded-2xl border border-slate-100 p-8 shadow-sm"
+      >
+        <input type="hidden" name="access_key" value="TU_ACCESS_KEY_WEB3FORMS" />
+        <input type="hidden" name="subject" value="CV Espontáneo — Jesgali.com.mx" />
+        <input type="hidden" name="from_name" value="Jesgali Sitio Web" />
+        <input type="checkbox" name="botcheck" class="hidden" />
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Nombre completo *</label>
+            <input type="text" name="nombre" required class="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Email *</label>
+            <input type="email" name="email" required class="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent" />
+          </div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">Área de interés</label>
+            <select name="area_interes" class="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent">
+              <option value="">Selecciona un área</option>
+              <option>Ventas</option>
+              <option>Operaciones</option>
+              <option>Recursos Humanos</option>
+              <option>Marketing</option>
+              <option>Administración</option>
+              <option>Otro</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-slate-700 mb-1.5">LinkedIn (opcional)</label>
+            <input type="url" name="linkedin" placeholder="linkedin.com/in/tu-perfil" class="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1.5">¿Por qué te gustaría trabajar en Jesgali?</label>
+          <textarea name="motivacion" rows="4" class="w-full rounded-lg border border-slate-200 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent resize-none"></textarea>
+        </div>
+
+        <button type="submit" class="btn-primary w-full py-3">
+          Enviar información
+        </button>
+      </form>
+    </div>
+  </section>
+
+</Layout>
+
+<!-- Modal CV espontáneo post-envío -->
+<div id="modal-cv" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+  <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 text-center">
+    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-4">
+      <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>
+    </div>
+    <h3 class="text-xl font-bold text-slate-900 mb-2">¡Gracias por tu interés!</h3>
+    <p class="text-slate-600 mb-4">Recibimos tu información. Para completar tu solicitud, <strong>envíanos tu CV por correo</strong>:</p>
+    <a href="mailto:contacto@jesgali.com.mx?subject=CV%20Espontáneo" class="text-brand-600 font-semibold text-lg hover:underline">
+      contacto@jesgali.com.mx
+    </a>
+    <p class="text-sm text-slate-400 mt-3">Te contactaremos cuando tengamos una posición que encaje con tu perfil.</p>
+    <button id="cerrar-modal-cv" class="mt-6 btn-primary w-full">Entendido</button>
+  </div>
+</div>
+
+<script>
+  // Filtros
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.vacante-card');
+  const noResults = document.getElementById('no-results');
+
+  function applyFilter(filter: string) {
+    let visible = 0;
+    cards.forEach(card => {
+      const match = filter === 'all' || card.dataset.area === filter || card.dataset.tipo === filter;
+      card.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    noResults?.classList.toggle('hidden', visible > 0);
+
+    buttons.forEach(btn => {
+      const isActive = btn.dataset.filter === filter;
+      btn.classList.toggle('active', isActive);
+      btn.classList.toggle('bg-brand-50', isActive);
+      btn.classList.toggle('border-brand-600', isActive);
+      btn.classList.toggle('text-brand-600', isActive);
+    });
+  }
+
+  buttons.forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.filter ?? 'all')));
+
+  // Modal CV espontáneo
+  const form = document.getElementById('form-espontaneo') as HTMLFormElement | null;
+  const modal = document.getElementById('modal-cv');
+  const cerrar = document.getElementById('cerrar-modal-cv');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
+      if (res.ok) {
+        form.reset();
+        modal?.classList.remove('hidden');
+        modal?.classList.add('flex');
+      }
+    } catch {
+      // fallo silencioso — el form nativo hace POST de respaldo
+    }
+  });
+
+  cerrar?.addEventListener('click', () => {
+    modal?.classList.add('hidden');
+    modal?.classList.remove('flex');
+  });
+
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+  });
+</script>

@@ -1,0 +1,176 @@
+/* Hallmark · genre: editorial · macrostructure: Marquee Hero · theme: custom (clay/cream/pine · Fraunces + Hanken Grotesk) · enrichment: none · nav: N6 · footer: Ft1 */
+/* Hallmark · pre-emit critique: P5 H5 E4 S5 R4 V5 */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-paper:        oklch(97.6% 0.009 83);
+    --color-paper-2:      oklch(94.8% 0.013 83);
+    --color-ink:          oklch(24% 0.018 55);
+    --color-ink-soft:     oklch(44% 0.016 58);
+    --color-ink-deep:     oklch(26% 0.028 50);
+    --color-hairline:     oklch(87% 0.012 78);
+    --color-accent:       oklch(54% 0.135 44);
+    --color-accent-deep:  oklch(47% 0.125 43);
+    --color-accent-soft:  oklch(93% 0.030 55);
+    --color-pine:         oklch(48% 0.070 158);
+
+    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+    --font-body:    'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+
+    --text-display:   clamp(3.25rem, 11vw, 8.5rem);
+    --text-display-s: clamp(2.75rem, 6vw, 4.5rem);
+
+    --space-3xl: 8rem;
+    --rule-hair:  1px;
+    --rule-thick: 3px;
+    --radius-md:  0.5rem;
+
+    --dur-base:   260ms;
+    --dur-slow:   600ms;
+    --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+
+    --page-gutter: clamp(1rem, 5vw, 4rem);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+  body {
+    overflow-x: clip;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Editorial: todos los titulares en serif display, romano. */
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    color: var(--color-ink);
+    font-style: normal;
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+  }
+
+  ::selection {
+    background: var(--color-accent-soft);
+    color: var(--color-ink);
+  }
+
+  a { color: inherit; }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-deep);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .section-container {
+    @apply mx-auto max-w-7xl;
+    padding-inline: var(--page-gutter);
+  }
+
+  /* ---- Botones (editorial, radio sobrio, no pill-gradient) ---- */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3 text-sm font-semibold transition;
+    font-family: var(--font-body);
+    background: var(--color-accent-deep);
+    color: var(--color-paper);
+    border-radius: var(--radius-md);
+    transition-duration: var(--dur-base);
+    transition-timing-function: var(--ease-out);
+  }
+  .btn-primary:hover { background: var(--color-accent); transform: translateY(-1px); }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3 text-sm font-semibold transition;
+    font-family: var(--font-body);
+    color: var(--color-ink);
+    border: var(--rule-hair) solid var(--color-ink);
+    border-radius: var(--radius-md);
+    transition-duration: var(--dur-base);
+    transition-timing-function: var(--ease-out);
+  }
+  .btn-secondary:hover { background: var(--color-ink); color: var(--color-paper); }
+
+  .btn-white {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3 text-sm font-semibold transition;
+    font-family: var(--font-body);
+    background: var(--color-paper);
+    color: var(--color-ink);
+    border-radius: var(--radius-md);
+    transition-duration: var(--dur-base);
+  }
+  .btn-white:hover { background: var(--color-accent-soft); }
+
+  /* ---- Enlace tipográfico con subrayado que se dibuja ---- */
+  .link-underline {
+    position: relative;
+    font-weight: 600;
+    color: var(--color-accent-deep);
+  }
+  .link-underline::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -2px;
+    width: 100%; height: 1.5px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .link-underline:hover::after { transform: scaleX(1); }
+
+  /* ---- Reglas ---- */
+  .rule-hair  { border: 0; border-top: var(--rule-hair) solid var(--color-hairline); }
+  .rule-thick { border: 0; border-top: var(--rule-thick) solid var(--color-ink); }
+
+  /* ---- Eyebrow / kicker (small-caps) ---- */
+  .eyebrow {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+  }
+}
+
+@layer utilities {
+  /* ---- Entrada fade-up (una orquestación) ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: reveal-up var(--dur-slow) var(--ease-out) forwards;
+  }
+  .reveal-1 { animation-delay: 80ms; }
+  .reveal-2 { animation-delay: 160ms; }
+  .reveal-3 { animation-delay: 240ms; }
+
+  @keyframes reveal-up {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; animation: none; }
+  }
+}

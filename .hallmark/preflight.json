@@ -1,0 +1,10 @@
+{
+  "date": "2026-06-05",
+  "framework": "Astro 4 (output: static)",
+  "styles": "Tailwind 3 + src/styles/global.css",
+  "fonts": "Fraunces (display) + Hanken Grotesk (body) — replaced Inter-only",
+  "palette": "custom OKLCH — clay/cream/pine — replaced indigo brand + orange accent",
+  "motion": "motion-cut (no library)",
+  "preserved": ["Astro+Tailwind structure", "content collections", "routes"],
+  "introduced": ["brand token system", "Marquee Hero macrostructure", "N6 masthead", "Ft1 footer"]
+}

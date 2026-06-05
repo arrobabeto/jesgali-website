@@ -1,0 +1,321 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const vacantes = await getCollection('vacantes', v => v.data.activa && v.data.destacada);
+vacantes.sort((a, b) => b.data.fechaPublicacion.getTime() - a.data.fechaPublicacion.getTime());
+const destacadas = vacantes.slice(0, 3);
+
+const pilares = [
+  {
+    n: '01',
+    titulo: 'Crecimiento real',
+    texto: 'No prometemos frases vacías. Aquí tienes un plan de carrera concreto, evaluaciones semestrales y líderes que invierten en tu desarrollo.',
+  },
+  {
+    n: '02',
+    titulo: 'Equipo que te respalda',
+    texto: 'Trabajarás con personas comprometidas y directas, dispuestas a ayudarte a tener éxito. Sin silos, sin política innecesaria.',
+  },
+  {
+    n: '03',
+    titulo: 'Impacto que se siente',
+    texto: 'Tu trabajo tiene consecuencias visibles. Aquí no eres un número: tus decisiones mueven el negocio todos los días.',
+  },
+];
+
+const stats = [
+  { valor: '2013', etiqueta: 'Año de fundación' },
+  { valor: '+10', etiqueta: 'Años en el mercado' },
+  { valor: '100%', etiqueta: 'Prestaciones superiores a la ley' },
+];
+
+const testimonios = [
+  { nombre: 'Carlos Mendoza', area: 'Ventas', cita: 'Entré como Ejecutivo de Ventas y en dos años ya lidero mi propio equipo. El crecimiento aquí es real, no solo en el papel.' },
+  { nombre: 'Laura Rivas', area: 'Recursos Humanos', cita: 'Lo que más valoro es que mi opinión cuenta. Los líderes escuchan, y cuando propones algo bueno, lo implementan.' },
+];
+
+const categorias = [
+  'Refrigeración',
+  'Lavado y secado',
+  'Cocción',
+  'Climatización',
+  'Pequeños electrodomésticos',
+];
+
+const hitos = [
+  { año: '2013', texto: 'Fundamos Jesgali en Ciudad de México con la convicción de que una comercializadora puede ser excelente en procesos y en personas al mismo tiempo.' },
+  { año: '2016', texto: 'Primer equipo de 10 colaboradores y expansión a nuevas zonas de distribución en el país.' },
+  { año: '2019', texto: '30 personas en el equipo. Entramos a nuevos segmentos del mercado y consolidamos operaciones logísticas.' },
+  { año: '2024', texto: 'Más de 50 colaboradores y reconocimiento como referente del sector en México.' },
+];
+
+const alcance = [
+  { valor: '2013', etiqueta: 'Año de fundación' },
+  { valor: '+50', etiqueta: 'Colaboradores' },
+  { valor: 'Nacional', etiqueta: 'Cobertura' },
+];
+---
+
+<Layout
+  title="Grupo Jesgali Empresarial | Comercializadora de Línea Blanca · Vacantes en México"
+  description="Grupo Jesgali Empresarial es una comercializadora de línea blanca mexicana con más de 10 años en el mercado. Únete a nuestro equipo: vacantes abiertas, plan de carrera real y prestaciones superiores a la ley."
+>
+
+  <!-- 1 · HERO MARQUEE -->
+  <section class="section-container" style="padding-top: var(--space-2xl); padding-bottom: var(--space-xl, 3rem); min-height: 78vh; display: flex; flex-direction: column; justify-content: center;">
+    <p class="eyebrow reveal reveal-1" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+      <span style="width: 7px; height: 7px; border-radius: 9999px; background: var(--color-pine); display: inline-block;"></span>
+      Grupo Jesgali · Estamos contratando
+    </p>
+
+    <h1 class="reveal reveal-2" style="font-family: var(--font-display); font-weight: 600; font-size: var(--text-display); line-height: 0.96; margin-top: 1.5rem; max-width: 16ch;">
+      Aquí tu carrera<br /><span style="color: var(--color-accent-deep);">crece de verdad.</span>
+    </h1>
+
+    <p class="reveal reveal-3" style="margin-top: 2rem; max-width: 52ch; font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft);">
+      Somos una comercializadora mexicana donde las personas ambiciosas construyen carreras sólidas. Equipo real, líderes que invierten en ti y retos que importan.
+    </p>
+
+    <div class="reveal reveal-3" style="margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1rem;">
+      <a href="/vacantes" class="btn-primary">Ver vacantes abiertas</a>
+      <a href="/equipo" class="btn-secondary">Conoce el equipo</a>
+    </div>
+  </section>
+
+  <hr class="rule-thick" />
+
+  <!-- Hallmark · pre-emit critique: P5 H4 E4 S5 R5 V4 -->
+
+  <!-- A · QUÉ HACE JESGALI — SEO: comercializadora línea blanca México, distribuidora electrodomésticos -->
+  <section class="section-container" style="padding-block: var(--space-3xl);">
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+      <div class="lg:col-span-7">
+        <p class="eyebrow" style="margin-bottom: 1.5rem;">Qué hacemos</p>
+        <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; margin-bottom: 1.5rem; overflow-wrap: anywhere; min-width: 0;">
+          Comercializamos productos de línea blanca para las familias mexicanas
+        </h2>
+        <p style="font-size: var(--text-md); line-height: 1.65; color: var(--color-ink-soft); margin-bottom: 1.25rem; max-width: 60ch;">
+          Jesgali es una empresa de distribución y comercialización de productos de línea blanca fundada en Ciudad de México. Llevamos más de una década conectando calidad, logística y servicio para llevar refrigeración, lavado, cocción y climatización a los hogares del país.
+        </p>
+        <p style="line-height: 1.65; color: var(--color-ink-soft); margin-bottom: 2rem; max-width: 60ch;">
+          Operamos con un modelo comercial directo: equipo propio de ventas, relaciones sólidas con distribuidores y un proceso de entrega enfocado en la satisfacción del cliente final.
+        </p>
+        <a href="/equipo" class="link-underline">Conoce nuestra historia →</a>
+      </div>
+
+      <div class="lg:col-span-5" style="border-top: var(--rule-hair) solid var(--color-hairline);">
+        <p style="font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-ink-soft); padding-bottom: 1rem; margin-top: 1rem; font-weight: 500;">Categorías de producto</p>
+        {categorias.map(cat => (
+          <div style="display: flex; align-items: center; gap: 1rem; padding-block: 0.875rem; border-top: var(--rule-hair) solid var(--color-hairline);">
+            <span style="width: 6px; height: 6px; border-radius: 9999px; background: var(--color-accent); flex-shrink: 0;"></span>
+            <span style="font-size: var(--text-md); color: var(--color-ink);">{cat}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- B · TRAYECTORIA — SEO: empresa fundada 2013 CDMX, más de 10 años de experiencia línea blanca -->
+  <section style="background: var(--color-paper-2);">
+    <div class="section-container" style="padding-block: var(--space-3xl);">
+      <p class="eyebrow" style="margin-bottom: 1rem;">Fundados en 2013 · Ciudad de México</p>
+      <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; margin-bottom: var(--space-xl, 3rem); overflow-wrap: anywhere; min-width: 0; max-width: 20ch;">
+        Más de una década construyendo el negocio correcto
+      </h2>
+      <div>
+        {hitos.map((h, i) => (
+          <div>
+            {i > 0 && <hr class="rule-hair" />}
+            <div class="grid md:grid-cols-12 gap-4 md:gap-8" style="padding-block: var(--space-lg, 2rem);">
+              <div class="md:col-span-2">
+                <span style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; color: var(--color-accent-deep);">{h.año}</span>
+              </div>
+              <p class="md:col-span-10" style="font-size: var(--text-md); line-height: 1.65; color: var(--color-ink-soft); max-width: 64ch;">{h.texto}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- C · PRESENCIA Y ALCANCE — SEO: comercializadora presencia nacional México, 50 empleados -->
+  <section class="section-container" style="padding-block: var(--space-3xl);">
+    <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; margin-bottom: var(--space-xl, 3rem); overflow-wrap: anywhere; min-width: 0; max-width: 28ch;">
+      Presencia en todo México, con un equipo de más de 50 personas
+    </h2>
+
+    <div class="grid grid-cols-3" style="border-top: var(--rule-hair) solid var(--color-hairline); border-bottom: var(--rule-hair) solid var(--color-hairline); margin-bottom: var(--space-xl, 3rem);">
+      {alcance.map(s => (
+        <div class="proof-item">
+          <span style="font-family: var(--font-display); font-size: clamp(1rem, 4.5vw, 2.5rem); font-weight: 600; color: var(--color-accent-deep); display: block;">{s.valor}</span>
+          <span style="font-size: 0.8rem; color: var(--color-ink-soft); margin-top: 0.25rem; display: block; line-height: 1.4;">{s.etiqueta}</span>
+        </div>
+      ))}
+    </div>
+
+    <div class="grid lg:grid-cols-12 gap-8 items-end">
+      <p class="lg:col-span-8" style="font-size: var(--text-md); line-height: 1.65; color: var(--color-ink-soft); max-width: 64ch;">
+        Operamos en múltiples zonas del país con un modelo de negocio probado en más de 10 años. Nuestro equipo combina experiencia comercial, gestión logística y atención al cliente para mantenernos entre los referentes de la comercialización de línea blanca en México.
+      </p>
+      <div class="lg:col-span-4 lg:text-right">
+        <a href="/vacantes" class="link-underline">Ver vacantes abiertas →</a>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule-thick" />
+
+  <!-- 2 · PROPUESTA DE VALOR — filas numeradas con hairlines -->
+  <section class="section-container" style="padding-block: var(--space-3xl);">
+    <h2 style="font-size: var(--text-2xl); font-weight: 600; max-width: 14ch; margin-bottom: var(--space-xl, 3rem);">
+      ¿Por qué Jesgali?
+    </h2>
+
+    <div>
+      {pilares.map((p, i) => (
+        <div>
+          {i > 0 && <hr class="rule-hair" />}
+          <div class="grid md:grid-cols-12 gap-4 md:gap-8" style="padding-block: var(--space-lg, 2rem);">
+            <div class="md:col-span-5 flex items-baseline gap-4">
+              <span style="font-family: var(--font-display); font-size: var(--text-lg); color: var(--color-accent); font-weight: 500;">{p.n}</span>
+              <h3 style="font-size: var(--text-xl); font-weight: 600; line-height: 1.1;">{p.titulo}</h3>
+            </div>
+            <p class="md:col-span-7" style="font-size: var(--text-md); line-height: 1.65; color: var(--color-ink-soft); max-width: 56ch;">
+              {p.texto}
+            </p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 3 · LA VIDA EN JESGALI — asimétrico texto + mosaico -->
+  <section style="background: var(--color-paper-2);">
+    <div class="section-container" style="padding-block: var(--space-3xl);">
+      <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+        <div class="lg:col-span-5">
+          <h2 style="font-size: var(--text-2xl); font-weight: 600; margin-bottom: 1.5rem;">La vida en Jesgali</h2>
+          <p style="font-size: var(--text-md); line-height: 1.65; color: var(--color-ink-soft); margin-bottom: 1.25rem;">
+            Somos una empresa donde las puertas de los directivos están abiertas, donde el trabajo en equipo no es un eslogan y donde cada persona tiene espacio para proponer, equivocarse y crecer.
+          </p>
+          <p style="line-height: 1.65; color: var(--color-ink-soft); margin-bottom: 2rem;">
+            Combinamos la exigencia de un negocio en crecimiento con el respeto a las personas. Venir con energía e iniciativa cuenta más que cualquier título.
+          </p>
+          <a href="/equipo" class="link-underline">Conoce nuestra cultura →</a>
+        </div>
+
+        <div class="lg:col-span-7 grid grid-cols-2 gap-4">
+          <div style="aspect-ratio: 4/5; border-radius: var(--radius-lg, 0.875rem); background: linear-gradient(140deg, oklch(87% 0.060 50), oklch(79% 0.090 48));"></div>
+          <div style="aspect-ratio: 4/5; margin-top: 2.5rem; border-radius: var(--radius-lg, 0.875rem); background: linear-gradient(140deg, oklch(85% 0.055 162), oklch(75% 0.070 162));"></div>
+          <div style="aspect-ratio: 4/5; margin-top: -2.5rem; border-radius: var(--radius-lg, 0.875rem); background: linear-gradient(140deg, oklch(88% 0.012 78), oklch(80% 0.012 75));"></div>
+          <div style="aspect-ratio: 4/5; border-radius: var(--radius-lg, 0.875rem); background: var(--color-ink-deep);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · QUIÉNES SOMOS + STAT STRIP -->
+  <section class="section-container" style="padding-block: var(--space-3xl);">
+    <div class="grid lg:grid-cols-12 gap-12 items-start">
+      <div class="lg:col-span-7">
+        <h2 style="font-size: var(--text-2xl); font-weight: 600; margin-bottom: 1.5rem;">Quiénes somos</h2>
+        <p style="font-size: var(--text-md); line-height: 1.65; color: var(--color-ink-soft); margin-bottom: 1.25rem; max-width: 60ch;">
+          Somos una empresa en crecimiento real: cada año sumamos personas, abrimos nuevos mercados y mejoramos lo que hacemos.
+        </p>
+        <p style="line-height: 1.65; color: var(--color-ink-soft); margin-bottom: 2rem; max-width: 60ch;">
+          Creemos que el crecimiento de la empresa y el de las personas van de la mano. Por eso invertimos en talento, en formación y en crear un lugar donde la gente quiera quedarse.
+        </p>
+        <a href="/equipo" class="link-underline">Nuestra historia completa →</a>
+      </div>
+
+      <!-- Stat strip vertical con hairlines -->
+      <div class="lg:col-span-5 lg:pl-8" style="border-top: var(--rule-hair) solid var(--color-hairline);">
+        {stats.map(s => (
+          <div class="flex items-baseline justify-between" style="padding-block: 1.5rem; border-bottom: var(--rule-hair) solid var(--color-hairline);">
+            <span style="font-family: var(--font-display); font-size: var(--text-2xl); font-weight: 600; color: var(--color-accent-deep);">{s.valor}</span>
+            <span class="text-right" style="font-size: 0.9rem; color: var(--color-ink-soft); max-width: 18ch;">{s.etiqueta}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 · VACANTES DESTACADAS — lista editorial -->
+  <section style="background: var(--color-paper-2);">
+    <div class="section-container" style="padding-block: var(--space-3xl);">
+      <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4" style="margin-bottom: var(--space-lg, 2rem);">
+        <h2 style="font-size: var(--text-2xl); font-weight: 600;">Posiciones abiertas</h2>
+        <a href="/vacantes" class="link-underline">Ver todas las vacantes →</a>
+      </div>
+
+      <div style="border-top: var(--rule-hair) solid var(--color-hairline);">
+        {destacadas.map(v => (
+          <a href={`/vacantes/${v.slug}`} class="vac-row grid md:grid-cols-12 gap-3 md:gap-6 items-center" style="padding-block: 1.75rem; border-bottom: var(--rule-hair) solid var(--color-hairline);">
+            <div class="md:col-span-6">
+              <h3 class="vac-title" style="font-size: var(--text-lg); font-weight: 600; line-height: 1.15;">{v.data.titulo}</h3>
+            </div>
+            <p class="md:col-span-3" style="font-size: 0.9rem; color: var(--color-ink-soft);">{v.data.area} · {v.data.tipo}</p>
+            <p class="md:col-span-2" style="font-size: 0.9rem; font-weight: 600;">${v.data.salarioMin.toLocaleString()} – ${v.data.salarioMax.toLocaleString()}</p>
+            <span class="md:col-span-1 vac-arrow" style="font-family: var(--font-display); font-size: 1.25rem; color: var(--color-accent-deep); text-align: right;">→</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 · VOZ DEL EQUIPO — T1 pull-quote, banda oscura cálida -->
+  <section style="background: var(--color-ink-deep); color: var(--color-paper);">
+    <div class="section-container" style="padding-block: var(--space-3xl);">
+      <p class="eyebrow" style="color: oklch(80% 0.014 70); margin-bottom: var(--space-xl, 3rem);">Voz del equipo</p>
+
+      <div class="grid gap-12 md:gap-16">
+        {testimonios.map(t => (
+          <div class="grid md:grid-cols-12 gap-4 md:gap-8">
+            <blockquote class="md:col-span-9" style="font-family: var(--font-display); font-size: var(--text-xl); line-height: 1.3; font-style: normal;">
+              “{t.cita}”
+            </blockquote>
+            <p class="md:col-span-3 md:text-right" style="font-size: 0.9rem; color: oklch(82% 0.014 70); align-self: end;">
+              <span style="color: var(--color-paper); font-weight: 600;">{t.nombre}</span><br />{t.area}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 · CTA CIERRE -->
+  <section class="section-container" style="padding-block: var(--space-3xl); text-align: center;">
+    <h2 style="font-size: var(--text-3xl); font-weight: 600; line-height: 1.05; max-width: 18ch; margin-inline: auto;">
+      ¿Listo para dar el siguiente paso?
+    </h2>
+    <p style="margin-top: 1.25rem; color: var(--color-ink-soft); font-size: var(--text-md);">
+      Tu próxima oportunidad está aquí. Revisa las vacantes abiertas y aplica hoy.
+    </p>
+    <div style="margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+      <a href="/vacantes" class="btn-primary">Ver vacantes abiertas</a>
+      <a href="/contacto" class="btn-secondary">Envíanos un mensaje</a>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* Proof strip — responsive cell padding so 3-col stays clean at 375px */
+  .proof-item {
+    padding: 1.75rem clamp(0.375rem, 1.5vw, 1.5rem) 1.75rem 0;
+    min-width: 0;
+  }
+  .proof-item + .proof-item {
+    border-left: var(--rule-hair) solid var(--color-hairline);
+    padding-left: clamp(0.375rem, 1.5vw, 1.5rem);
+  }
+
+  .vac-row { transition: background var(--dur-base) var(--ease-out), padding-left var(--dur-base) var(--ease-out); }
+  .vac-row:hover { background: color-mix(in oklch, var(--color-accent-soft) 60%, transparent); padding-left: 1rem; }
+  .vac-row .vac-arrow { transition: transform var(--dur-base) var(--ease-out); }
+  .vac-row:hover .vac-arrow { transform: translateX(4px); }
+  @media (prefers-reduced-motion: reduce) {
+    .vac-row, .vac-row .vac-arrow { transition: none; }
+  }
+</style>

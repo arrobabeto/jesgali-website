@@ -5,14 +5,14 @@
   "engines": {
     "node": ">=22.12.0"
   },
-  "packageManager": "npm@10.9.0",
+  "packageManager": "pnpm@10.28.1",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
     "test": "vitest run",
-    "verify:modal-html": "PUBLIC_WEB3FORMS_ACCESS_KEY=test-access-key-123 npm run build && node scripts/verify-modal-html.mjs"
+    "verify:modal-html": "PUBLIC_WEB3FORMS_ACCESS_KEY=test-access-key-123 pnpm run build && node scripts/verify-modal-html.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^6.0.2",

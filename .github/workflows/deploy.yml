@@ -14,22 +14,27 @@ jobs:
       - name: Checkout código
         uses: actions/checkout@v4
 
+       - name: Configurar pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.1
+
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '22.12.0'
-          cache: 'npm'
+          cache: 'pnpm'
 
       - name: Instalar dependencias
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Validar código y formularios
         run: |
-          npm run check
-          npm test
+          pnpm run check
+          pnpm test
 
       - name: Build Astro
-        run: npm run build
+        run: pnpm run build
         env:
           PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ secrets.PUBLIC_WEB3FORMS_ACCESS_KEY }}
 

@@ -1,0 +1,248 @@
+---
+/* Hallmark · genre: editorial · macrostructure: Split Contact · theme: custom (clay/cream/pine · Fraunces + Hanken Grotesk) · enrichment: none · nav: N6 · footer: Ft1 */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 */
+import Layout from '../layouts/Layout.astro';
+
+const datos = [
+  { label: 'Correo', valor: 'contacto@jesgali.com.mx', href: 'mailto:contacto@jesgali.com.mx', pendiente: false },
+  { label: 'Teléfono', valor: '— por confirmar', pendiente: true },
+  { label: 'Ubicación', valor: 'Cuernavaca, Morelos', extra: 'Dirección — por confirmar', pendiente: false },
+  { label: 'Horario', valor: '— por confirmar', pendiente: true },
+];
+---
+
+<Layout
+  title="Contacto — Grupo Jesgali Empresarial | Escríbenos"
+  description="¿Tienes una pregunta, propuesta o quieres saber más sobre Grupo Jesgali? Escríbenos por correo o a través del formulario y te responderemos pronto."
+>
+
+  <!-- 1 · HERO TIPOGRÁFICO -->
+  <section class="section-container" style="padding-top: var(--space-2xl); padding-bottom: var(--space-xl);">
+    <p class="eyebrow reveal reveal-1" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+      <span style="width: 7px; height: 7px; border-radius: 9999px; background: var(--color-pine); display: inline-block;"></span>
+      Hablemos
+    </p>
+
+    <h1 class="reveal reveal-2" style="font-family: var(--font-display); font-weight: 600; font-size: var(--text-display); line-height: 0.96; margin-top: 1.5rem; max-width: 15ch; overflow-wrap: anywhere; min-width: 0;">
+      Ponte en <span style="color: var(--color-accent-deep);">contacto</span>
+    </h1>
+
+    <p class="reveal reveal-3" style="margin-top: 2rem; max-width: 54ch; font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft);">
+      ¿Tienes una pregunta, una propuesta o quieres saber más sobre nosotros? Escríbenos. Leemos cada mensaje y te respondemos lo antes posible.
+    </p>
+  </section>
+
+  <hr class="rule-thick" />
+
+  <!-- 2 · SPLIT: INFO + FORMULARIO -->
+  <section class="section-container" style="padding-block: var(--space-3xl);">
+    <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+
+      <!-- Info -->
+      <div class="lg:col-span-5" style="min-width: 0;">
+        <p class="eyebrow" style="margin-bottom: var(--space-lg);">Datos de contacto</p>
+
+        <div>
+          {datos.map((d, i) => (
+            <div style={`border-top: var(--rule-hair) solid var(--color-hairline); padding-block: 1.25rem; ${i === datos.length - 1 ? 'border-bottom: var(--rule-hair) solid var(--color-hairline);' : ''}`}>
+              <p class="eyebrow" style="color: var(--color-accent-deep); margin-bottom: 0.5rem;">{d.label}</p>
+              {d.href ? (
+                <a href={d.href} class="link-underline" style="font-size: var(--text-md);">{d.valor}</a>
+              ) : (
+                <p class={d.pendiente ? 'placeholder-pending' : ''} style={d.pendiente ? '' : 'font-size: var(--text-md); color: var(--color-ink);'}>{d.valor}</p>
+              )}
+              {d.extra && <p class="placeholder-pending" style="margin-top: 0.25rem;">{d.extra}</p>}
+            </div>
+          ))}
+        </div>
+
+        <!-- Redes -->
+        <div style="margin-top: var(--space-lg);">
+          <p class="eyebrow" style="color: var(--color-accent-deep); margin-bottom: 0.75rem;">Síguenos</p>
+          <div style="display: flex; gap: 1.5rem;">
+            <a href="#" class="link-underline" style="font-size: var(--text-md);">LinkedIn</a>
+            <a href="#" class="link-underline" style="font-size: var(--text-md);">Instagram</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario -->
+      <div class="lg:col-span-7" style="min-width: 0;">
+        <form
+          id="form-contacto"
+          action="https://api.web3forms.com/submit"
+          method="POST"
+          style="border: var(--rule-hair) solid var(--color-hairline); border-radius: var(--radius-md); padding: clamp(1.5rem, 4vw, 2.5rem); background: var(--color-paper);"
+        >
+          <input type="hidden" name="access_key" value="TU_ACCESS_KEY_WEB3FORMS" />
+          <input type="hidden" name="subject" value="Contacto — Jesgali.com.mx" />
+          <input type="hidden" name="from_name" value="Jesgali Sitio Web" />
+          <input type="checkbox" name="botcheck" style="display: none;" />
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label class="field-label" for="c-nombre">Nombre completo *</label>
+              <input id="c-nombre" type="text" name="nombre" required class="field-input" placeholder="Tu nombre" />
+            </div>
+            <div>
+              <label class="field-label" for="c-email">Correo electrónico *</label>
+              <input id="c-email" type="email" name="email" required class="field-input" placeholder="tu@correo.com" />
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-5" style="margin-top: 1.25rem;">
+            <div>
+              <label class="field-label" for="c-tel">Teléfono</label>
+              <input id="c-tel" type="tel" name="telefono" class="field-input" placeholder="55 1234 5678" />
+            </div>
+            <div>
+              <label class="field-label" for="c-asunto">Asunto *</label>
+              <input id="c-asunto" type="text" name="asunto" required class="field-input" placeholder="¿Sobre qué nos escribes?" />
+            </div>
+          </div>
+
+          <div style="margin-top: 1.25rem;">
+            <label class="field-label" for="c-mensaje">Mensaje *</label>
+            <textarea
+              id="c-mensaje"
+              name="mensaje"
+              required
+              rows="5"
+              class="field-input"
+              style="resize: vertical; min-height: 8rem;"
+              placeholder="Cuéntanos en qué podemos ayudarte..."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1.75rem;">
+            Enviar mensaje
+          </button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 3 · BANDA OSCURA · CTA VACANTES -->
+  <section style="background: var(--color-ink-deep); color: var(--color-paper);">
+    <div class="section-container" style="padding-block: var(--space-3xl); text-align: center;">
+      <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; color: var(--color-paper); max-width: 22ch; margin-inline: auto; overflow-wrap: anywhere; min-width: 0;">
+        ¿Buscas empleo en Jesgali?
+      </h2>
+      <p style="margin-top: 1.25rem; max-width: 46ch; margin-inline: auto; font-size: var(--text-md); line-height: 1.6; color: oklch(80% 0.014 70);">
+        Si tu mensaje es sobre una vacante, revisa primero nuestras posiciones abiertas y aplica directamente.
+      </p>
+      <div style="margin-top: 2.5rem;">
+        <a href="/vacantes" class="btn-white">Ver vacantes abiertas</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<!-- Modal post-envío -->
+<div id="modal-contacto" class="modal-overlay">
+  <div class="modal-card">
+    <div style="width: 52px; height: 52px; border-radius: 9999px; background: var(--color-accent-soft); display: flex; align-items: center; justify-content: center; margin-inline: auto; margin-bottom: 1.25rem;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-deep)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 6L9 17l-5-5" />
+      </svg>
+    </div>
+    <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: 0.75rem;">Mensaje recibido</h3>
+    <p style="font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft); margin-bottom: 1rem;">
+      Gracias por escribirnos. Te responderemos lo antes posible al correo que nos dejaste.
+    </p>
+    <a href="mailto:contacto@jesgali.com.mx" class="link-underline" style="font-size: var(--text-md);">
+      contacto@jesgali.com.mx
+    </a>
+    <button id="cerrar-modal-contacto" class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Entendido</button>
+  </div>
+</div>
+
+<style>
+  /* ---- Placeholder pendiente ---- */
+  .placeholder-pending {
+    font-size: 0.9rem;
+    color: var(--color-ink-soft);
+    opacity: 0.6;
+    font-style: normal;
+  }
+
+  /* ---- Campos de formulario ---- */
+  .field-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin-bottom: 0.5rem;
+  }
+  .field-input {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    color: var(--color-ink);
+    background: var(--color-paper);
+    border: var(--rule-hair) solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: 0.7rem 0.9rem;
+    transition: border-color var(--dur-base) var(--ease-out);
+  }
+  .field-input:hover { border-color: var(--color-ink-soft); }
+  .field-input:focus { outline: none; border-color: var(--color-accent-deep); box-shadow: 0 0 0 3px var(--color-accent-soft); }
+
+  /* ---- Modal ---- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: oklch(20% 0.02 50 / 0.55);
+  }
+  .modal-overlay.is-open { display: flex; }
+  .modal-card {
+    background: var(--color-paper);
+    border: var(--rule-hair) solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    max-width: 28rem;
+    width: 100%;
+    padding: clamp(1.75rem, 5vw, 2.5rem);
+    text-align: center;
+  }
+</style>
+
+<script>
+  var form = document.getElementById('form-contacto');
+  var modal = document.getElementById('modal-contacto');
+  var cerrar = document.getElementById('cerrar-modal-contacto');
+
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var data = new FormData(form);
+      fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+        .then(function(res) {
+          if (res.ok) {
+            form.reset();
+            if (modal) modal.classList.add('is-open');
+          }
+        })
+        .catch(function() {});
+    });
+  }
+
+  if (cerrar) {
+    cerrar.addEventListener('click', function() {
+      if (modal) modal.classList.remove('is-open');
+    });
+  }
+
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) modal.classList.remove('is-open');
+    });
+  }
+</script>

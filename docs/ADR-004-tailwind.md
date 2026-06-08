@@ -28,6 +28,6 @@ Desde la migración a Astro 6 del 2026-06-08, se retiró `@astrojs/tailwind` por
 |-|---------|
 | ✅ | CSS de producción mínimo (solo clases usadas en el HTML generado) |
 | ✅ | Sin archivos `.css` separados que mantener |
-| ✅ | Design tokens centralizados en `tailwind.config.mjs` (colores de marca, tipografía) |
+| ✅ | Design tokens en una sola fuente: `src/styles/tokens.css`. `tailwind.config.mjs` solo expone un puente semántico que referencia esos tokens (`var(--…)`). Ver **ADR-006**. |
 | ⚠️ | Tailwind 3 queda en modo de mantenimiento; una migración futura a Tailwind 4 debe validarse visualmente |
-| ⚠️ | Los colores de marca y tipografía deben configurarse en `tailwind.config.mjs` una vez definido el branding (**TBD**) |
+| ⚠️ | `var()` en colores de Tailwind 3 no admite `<alpha-value>`: las utilidades de opacidad (`bg-accent/50`) no aplican; usar OKLCH directo para transparencias |

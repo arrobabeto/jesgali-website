@@ -1,0 +1,78 @@
+/* =============================================================================
+ * Design tokens · Grupo Jesgali Empresarial — FUENTE ÚNICA DE VERDAD
+ * Hallmark · genre: editorial · theme: custom (clay/cream/pine · Fraunces + Hanken Grotesk)
+ * -----------------------------------------------------------------------------
+ * Este archivo es el ÚNICO lugar donde se definen los design tokens.
+ * Lo importa `global.css`; Tailwind los expone vía alias `var(--…)`
+ * (ver `tailwind.config.mjs`).
+ *
+ * NOMENCLATURA  ──  --<categoría>-<rol>[-<variante>]
+ *   categorías: color · text · space · rule · radius · dur · ease · font · shadow
+ *   roles SEMÁNTICOS, no por valor:  --color-accent-deep  (no  --color-clay-700)
+ *
+ * PROPIEDAD
+ *   · Prohibido redeclarar `:root` o tokens en otros archivos.
+ *   · Prohibido repetir literales OKLCH/hex en plantillas → crear un token aquí.
+ *
+ * AÑADIR UN TOKEN
+ *   1. Decláralo aquí, bajo su categoría.
+ *   2. Si Tailwind debe exponerlo, añade el alias `var(--…)` en tailwind.config.mjs.
+ *   3. Consúmelo siempre vía `var(--…)`. Nunca dupliques el valor.
+ * ============================================================================= */
+:root {
+  /* ---- Color · núcleo ---- */
+  --color-paper:        oklch(97.6% 0.009 83);
+  --color-paper-2:      oklch(94.8% 0.013 83);
+  --color-ink:          oklch(24% 0.018 55);
+  --color-ink-soft:     oklch(44% 0.016 58);
+  --color-ink-deep:     oklch(26% 0.028 50);
+  --color-hairline:     oklch(87% 0.012 78);
+
+  /* ---- Color · acento clay (marca) ---- */
+  --color-accent:       oklch(54% 0.135 44);
+  --color-accent-deep:  oklch(47% 0.125 43);
+  --color-accent-soft:  oklch(93% 0.030 55);
+
+  /* ---- Color · pino (crecimiento, uso mínimo) ---- */
+  --color-pine:         oklch(48% 0.070 158);
+
+  /* ---- Color · sobre bandas oscuras (--color-ink-deep) ---- */
+  --color-on-dark:       oklch(80% 0.014 70);   /* texto atenuado sobre oscuro */
+  --color-hairline-dark: oklch(38% 0.020 50);   /* hairline sobre oscuro */
+
+  /* ---- Color · superposiciones ---- */
+  --color-scrim:   oklch(20% 0.02 50 / 0.55);   /* velo de modal */
+  --shadow-modal:  0 1.5rem 4rem oklch(15% 0.02 50 / 0.24);
+
+  /* ---- Tipografía ---- */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body:    'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+
+  /* ---- Escala de tipo (fluida) ---- */
+  --text-md:        clamp(1.0625rem, 0.4vw + 0.95rem, 1.15rem);
+  --text-lg:        clamp(1.2rem, 1.5vw, 1.4rem);
+  --text-xl:        clamp(1.5rem, 2.2vw, 2rem);
+  --text-2xl:       clamp(1.9rem, 4vw, 2.9rem);
+  --text-3xl:       clamp(2.25rem, 4.8vw, 3.1rem);
+  --text-display-s: clamp(2.75rem, 6vw, 4.5rem);
+  --text-display:   clamp(3.25rem, 11vw, 8.5rem);
+
+  /* ---- Espaciado ---- */
+  --space-lg:  2rem;
+  --space-xl:  3rem;
+  --space-2xl: 5rem;
+  --space-3xl: 8rem;
+
+  /* ---- Reglas / radios ---- */
+  --rule-hair:  1px;
+  --rule-thick: 3px;
+  --radius-md:  0.5rem;
+
+  /* ---- Movimiento ---- */
+  --dur-base: 260ms;
+  --dur-slow: 600ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ---- Layout ---- */
+  --page-gutter: clamp(1rem, 5vw, 4rem);
+}

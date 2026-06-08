@@ -79,7 +79,7 @@ const pasos = [
   <section style="background: var(--color-ink-deep); color: var(--color-paper);">
     <div class="section-container" style="padding-block: var(--space-3xl);">
       <div style="max-width: 46ch; margin-bottom: var(--space-xl);">
-        <p class="eyebrow" style="color: oklch(80% 0.014 70); margin-bottom: 1rem;">El proceso de selección</p>
+        <p class="eyebrow" style="color: var(--color-on-dark); margin-bottom: 1rem;">El proceso de selección</p>
         <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; color: var(--color-paper); overflow-wrap: anywhere; min-width: 0;">
           Sin misterios, de principio a fin
         </h2>
@@ -87,7 +87,7 @@ const pasos = [
 
       <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-0">
         {pasos.map(p => (
-          <div style="border-top: var(--rule-hair) solid oklch(38% 0.020 50); padding-top: 1.25rem; padding-bottom: 1.5rem;">
+          <div style="border-top: var(--rule-hair) solid var(--color-hairline-dark); padding-top: 1.25rem; padding-bottom: 1.5rem;">
             <span style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; color: var(--color-accent); display: block; margin-bottom: 0.75rem;">{p.num}</span>
             <h3 style="font-size: var(--text-lg); font-weight: 600; color: var(--color-paper); margin-bottom: 0.5rem;">{p.titulo}</h3>
             <p style="font-size: var(--text-md); line-height: 1.55; color: oklch(75% 0.012 70);">{p.texto}</p>

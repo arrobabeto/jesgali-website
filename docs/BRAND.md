@@ -24,7 +24,7 @@ Jesgali no vende productos en este sitio — atrae personas. La identidad gira e
 
 ## 2. Color
 
-Todos los colores se definen en **OKLCH** (espacio perceptualmente uniforme). Tokens en `tokens.css` y `src/styles/global.css` (`:root`), mapeados al scale de Tailwind en `tailwind.config.mjs`.
+Todos los colores se definen en **OKLCH** (espacio perceptualmente uniforme). Los tokens viven en una sola fuente — `src/styles/tokens.css` (`:root`) — y se exponen a Tailwind como alias `var(--…)` en `tailwind.config.mjs`. Ver **ADR-006**.
 
 ### Núcleo
 
@@ -55,7 +55,7 @@ Todos los colores se definen en **OKLCH** (espacio perceptualmente uniforme). To
 
 ### Neutrales cálidos
 
-El scale neutral (`slate` en Tailwind) está **redefinido a grises cálidos** (hue ~55–83) para armonizar con el papel crema. No usar grises fríos por defecto.
+Los neutros son **cálidos** (hue ~50–83) para armonizar con el papel crema — nunca grises fríos. Se expresan con los tokens `--color-paper/paper-2/ink/ink-soft/ink-deep/hairline` (no hay un scale numérico tipo `slate`). Sobre bandas oscuras se usan `--color-on-dark` (texto atenuado) y `--color-hairline-dark` (divisores).
 
 ---
 
@@ -83,7 +83,7 @@ Emparejamiento de **2 fuentes** (display + body). Ambas gratuitas vía Google Fo
 
 ## 4. Layout y composición
 
-- **Escala de espaciado:** 4pt (`--space-xs` … `--space-3xl`). Mínimo `--space-3xl` entre secciones mayores.
+- **Escala de espaciado:** base 4pt (`--space-lg` … `--space-3xl`). Mínimo `--space-3xl` entre secciones mayores.
 - **Asimetría editorial:** columnas desiguales (2:5, 3:7) en prosa; titulares con sesgo a la izquierda, nunca todo centrado.
 - **Hairlines, no cajas:** los divisores son reglas de 1px (`--color-hairline`), no bordes de tarjeta. Evitar card-in-card.
 - **Pilares de valor:** filas numeradas (01/02/03) separadas por hairlines — **prohibido** el grid de tres tarjetas con ícono igual.
@@ -99,7 +99,7 @@ Quieto y editorial. Máximo 3 primitivas:
 2. **Subrayado de enlace** — se dibuja en hover.
 3. **Desplazamiento de fila** — leve shift en hover de cards/filas.
 
-Animar solo `transform` y `opacity`. Easings nombrados (`--ease-out`, `--ease-in-out`), nunca bounce. Respeta `prefers-reduced-motion`.
+Animar solo `transform` y `opacity`. Easing nombrado `--ease-out` (duraciones `--dur-base`/`--dur-slow`), nunca bounce. Respeta `prefers-reduced-motion`.
 
 ---
 

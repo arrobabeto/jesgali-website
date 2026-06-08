@@ -1,4 +1,5 @@
 ---
+id: JES-002
 titulo: Gerente Comercial de Ventas
 area: Ventas
 tipo: Tiempo completo

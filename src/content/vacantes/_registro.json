@@ -1,0 +1,8 @@
+[
+  { "id": "JES-001", "titulo": "Ejecutivo de Ventas", "slug": "ejecutivo-ventas", "activa": true },
+  { "id": "JES-002", "titulo": "Gerente Comercial de Ventas", "slug": "gerente-comercial-ventas", "activa": true },
+  { "id": "JES-003", "titulo": "Analista de Operaciones y Logística", "slug": "analista-operaciones", "activa": true },
+  { "id": "JES-004", "titulo": "Coordinador de Marketing Digital", "slug": "coordinador-marketing", "activa": true },
+  { "id": "JES-005", "titulo": "Coordinador de Recursos Humanos", "slug": "coordinador-rrhh", "activa": true },
+  { "id": "JES-006", "titulo": "Asistente Administrativo", "slug": "asistente-administrativo", "activa": true }
+]

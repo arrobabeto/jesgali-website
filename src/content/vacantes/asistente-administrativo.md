@@ -1,4 +1,5 @@
 ---
+id: JES-006
 titulo: Asistente Administrativo
 area: Administración
 tipo: Tiempo completo

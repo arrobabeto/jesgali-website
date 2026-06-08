@@ -1,4 +1,5 @@
 ---
+id: JES-005
 titulo: Coordinador de Recursos Humanos
 area: Recursos Humanos
 tipo: Tiempo completo

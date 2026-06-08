@@ -1,0 +1,376 @@
+---
+/* Hallmark · genre: editorial · macrostructure: Article/Detail · theme: custom (clay/cream/pine · Fraunces + Hanken Grotesk) · enrichment: none · nav: N6 · footer: Ft1 */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 */
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const vacantes = await getCollection('vacantes', v => v.data.activa);
+  return vacantes.map(v => ({
+    params: { slug: v.slug },
+    props: { entry: v },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { titulo, area, tipo, ubicacion, salarioMin, salarioMax, id, resumen, fechaPublicacion } = entry.data;
+
+// Otras vacantes: activas, excluye la actual, máximo 3
+const todasVacantes = await getCollection('vacantes', v => v.data.activa && v.slug !== entry.slug);
+todasVacantes.sort((a, b) => b.data.fechaPublicacion.getTime() - a.data.fechaPublicacion.getTime());
+const otras = todasVacantes.slice(0, 3);
+
+const fechaISO = fechaPublicacion.toISOString().split('T')[0];
+const fechaDisplay = new Date(fechaPublicacion).toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+
+<Layout
+  title={`${titulo} — Vacantes Grupo Jesgali Empresarial`}
+  description={resumen}
+>
+
+  <!-- 1 · HERO -->
+  <section class="section-container" style="padding-top: var(--space-2xl); padding-bottom: var(--space-xl);">
+    <a href="/vacantes" class="back-link reveal reveal-1" aria-label="Volver a vacantes">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Vacantes
+    </a>
+
+    <p class="eyebrow reveal reveal-2" style="margin-top: 2rem; display: inline-flex; align-items: center; gap: 0.5rem;">
+      <span style="width: 7px; height: 7px; border-radius: 9999px; background: var(--color-pine); display: inline-block;"></span>
+      {area} · {tipo}
+    </p>
+
+    <h1 class="reveal reveal-3" style="font-family: var(--font-display); font-weight: 600; font-size: var(--text-display-s); line-height: 1.0; margin-top: 1.25rem; max-width: 18ch; overflow-wrap: anywhere; min-width: 0;">
+      {titulo}
+    </h1>
+
+    <div class="reveal reveal-3" style="margin-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 2rem;">
+      <span style="font-family: var(--font-display); font-size: var(--text-xl); font-weight: 600; color: var(--color-accent-deep);">
+        ${salarioMin.toLocaleString()} – ${salarioMax.toLocaleString()} <span style="font-size: var(--text-md); color: var(--color-ink-soft); font-family: var(--font-body); font-weight: 400;">/ mes</span>
+      </span>
+      <span style="font-size: var(--text-md); color: var(--color-ink-soft);">{ubicacion}</span>
+    </div>
+
+    <div class="reveal reveal-3" style="margin-top: 2rem; display: flex; flex-wrap: wrap; align-items: center; gap: 1rem;">
+      <a href="#aplicar" class="btn-primary">Aplicar ahora</a>
+      <span class="vacancy-id">Ref. {id}</span>
+    </div>
+
+    <p style="margin-top: 1.5rem; font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft); max-width: 58ch; reveal reveal-3">
+      {resumen}
+    </p>
+  </section>
+
+  <hr class="rule-thick" />
+
+  <!-- 2 · DESCRIPCIÓN (markdown body) -->
+  <section class="section-container" style="padding-block: var(--space-3xl);">
+    <div class="prose-editorial">
+      <Content />
+    </div>
+  </section>
+
+  <hr class="rule-hair" />
+
+  <!-- 3 · FORMULARIO DE APLICACIÓN -->
+  <section id="aplicar" style="background: var(--color-paper-2);">
+    <div class="section-container" style="padding-block: var(--space-3xl);">
+      <div style="max-width: 640px; margin-inline: auto;">
+        <p class="eyebrow" style="margin-bottom: 1rem;">Postúlate ahora</p>
+        <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; margin-bottom: 1rem; overflow-wrap: anywhere; min-width: 0;">
+          ¿Es esta tu siguiente oportunidad?
+        </h2>
+        <p style="font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft); margin-bottom: var(--space-lg);">
+          Completa el formulario. Un integrante de nuestro equipo revisará tu solicitud en menos de 5 días hábiles.
+        </p>
+
+        <form
+          id="form-aplicar"
+          action="https://api.web3forms.com/submit"
+          method="POST"
+          style="border: var(--rule-hair) solid var(--color-hairline); border-radius: var(--radius-md); padding: clamp(1.5rem, 4vw, 2.5rem); background: var(--color-paper);"
+        >
+          <input type="hidden" name="access_key" value="TU_ACCESS_KEY_WEB3FORMS" />
+          <input type="hidden" name="subject" value={`Aplicación: ${titulo} (${id}) — Jesgali.com.mx`} />
+          <input type="hidden" name="from_name" value="Jesgali Sitio Web" />
+          <input type="hidden" name="vacante_id" value={id} />
+          <input type="hidden" name="vacante_titulo" value={titulo} />
+          <input type="checkbox" name="botcheck" style="display: none;" />
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label class="field-label" for="a-nombre">Nombre completo *</label>
+              <input id="a-nombre" type="text" name="nombre" required class="field-input" placeholder="Tu nombre" />
+            </div>
+            <div>
+              <label class="field-label" for="a-email">Correo electrónico *</label>
+              <input id="a-email" type="email" name="email" required class="field-input" placeholder="tu@correo.com" />
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-5" style="margin-top: 1.25rem;">
+            <div>
+              <label class="field-label" for="a-tel">Teléfono *</label>
+              <input id="a-tel" type="tel" name="telefono" required class="field-input" placeholder="55 1234 5678" />
+            </div>
+            <div>
+              <label class="field-label" for="a-linkedin">LinkedIn <span style="font-weight: 400; color: var(--color-ink-soft);">(opcional)</span></label>
+              <input id="a-linkedin" type="url" name="linkedin" class="field-input" placeholder="linkedin.com/in/tu-perfil" />
+            </div>
+          </div>
+
+          <div style="margin-top: 1.25rem;">
+            <label class="field-label" for="a-motivo">¿Por qué quieres unirte a Jesgali? *</label>
+            <textarea
+              id="a-motivo"
+              name="motivacion"
+              required
+              rows="4"
+              class="field-input"
+              style="resize: vertical; min-height: 7rem;"
+              placeholder="Cuéntanos brevemente qué te atrae de esta posición y qué aportarías al equipo..."
+            ></textarea>
+          </div>
+
+          <p style="font-size: 0.8rem; color: var(--color-ink-soft); margin-top: 1rem; line-height: 1.5;">
+            Al enviar este formulario, <strong style="color: var(--color-ink);">adjunta tu CV por correo</strong> a
+            <a href={`mailto:contacto@jesgali.com.mx?subject=CV%20${encodeURIComponent(titulo)}%20(${id})`} class="link-underline">contacto@jesgali.com.mx</a>
+            con el asunto: CV {titulo} ({id}).
+          </p>
+
+          <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1.75rem;">
+            Enviar solicitud
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 · OTRAS VACANTES -->
+  {otras.length > 0 && (
+    <section class="section-container" style="padding-block: var(--space-3xl);">
+      <div style="display: flex; align-items: flex-end; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; margin-bottom: var(--space-xl);">
+        <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; max-width: 18ch; overflow-wrap: anywhere; min-width: 0;">
+          Otras posiciones abiertas
+        </h2>
+        <a href="/vacantes" class="link-underline" style="font-size: var(--text-md); white-space: nowrap;">Ver todas →</a>
+      </div>
+
+      <div>
+        {otras.map((v, i) => (
+          <a
+            href={`/vacantes/${v.slug}`}
+            class="otra-row"
+            style={i === 0 ? 'border-top: var(--rule-hair) solid var(--color-hairline);' : ''}
+          >
+            <div class="otra-row-inner">
+              <div style="min-width: 0;">
+                <p class="eyebrow" style="margin-bottom: 0.5rem;">{v.data.area} · {v.data.tipo}</p>
+                <h3 style="font-size: var(--text-lg); font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; min-width: 0;">{v.data.titulo}</h3>
+              </div>
+              <div class="otra-meta">
+                <span style="font-family: var(--font-display); font-size: var(--text-md); font-weight: 600; color: var(--color-accent-deep); display: block;">
+                  ${v.data.salarioMin.toLocaleString()} – ${v.data.salarioMax.toLocaleString()}
+                </span>
+                <span class="vacante-cta link-underline" style="display: inline-block; margin-top: 0.625rem;">Ver vacante →</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+  )}
+
+</Layout>
+
+<!-- Modal post-envío -->
+<div id="modal-aplicar" class="modal-overlay">
+  <div class="modal-card">
+    <div style="width: 52px; height: 52px; border-radius: 9999px; background: var(--color-accent-soft); display: flex; align-items: center; justify-content: center; margin-inline: auto; margin-bottom: 1.25rem;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-deep)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M20 6L9 17l-5-5" />
+      </svg>
+    </div>
+    <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: 0.75rem;">Solicitud recibida</h3>
+    <p style="font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft); margin-bottom: 1rem;">
+      Ya tenemos tu información. Para completar tu postulación, <strong style="color: var(--color-ink);">envíanos tu CV por correo</strong>:
+    </p>
+    <a href="mailto:contacto@jesgali.com.mx" class="link-underline" style="font-size: var(--text-md);">
+      contacto@jesgali.com.mx
+    </a>
+    <p style="font-size: 0.8rem; color: var(--color-ink-soft); margin-top: 0.75rem; line-height: 1.5;">
+      Asunto recomendado: <strong>CV {titulo} ({id})</strong>
+    </p>
+    <button id="cerrar-modal-aplicar" class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Entendido</button>
+  </div>
+</div>
+
+<style>
+  /* ---- Enlace volver ---- */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    transition: color var(--dur-base) var(--ease-out);
+  }
+  .back-link:hover { color: var(--color-accent-deep); }
+
+  /* ---- Badge ID de vacante ---- */
+  .vacancy-id {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ink-soft);
+    opacity: 0.65;
+  }
+
+  /* ---- Prose editorial para el body de la vacante ---- */
+  .prose-editorial { max-width: 68ch; }
+  .prose-editorial :global(h2) {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    border-top: var(--rule-hair) solid var(--color-hairline);
+    padding-top: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    overflow-wrap: anywhere;
+  }
+  .prose-editorial :global(h3) {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    overflow-wrap: anywhere;
+  }
+  .prose-editorial :global(p) {
+    font-size: var(--text-md);
+    line-height: 1.7;
+    color: var(--color-ink-soft);
+    margin-bottom: 1rem;
+  }
+  .prose-editorial :global(ul) {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+  }
+  .prose-editorial :global(ul li) {
+    font-size: var(--text-md);
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    border-top: var(--rule-hair) solid var(--color-hairline);
+    padding-block: 0.625rem;
+    padding-left: 0.25rem;
+  }
+  .prose-editorial :global(strong) { color: var(--color-ink); font-weight: 600; }
+
+  /* ---- Campos de formulario ---- */
+  .field-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin-bottom: 0.5rem;
+  }
+  .field-input {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    color: var(--color-ink);
+    background: var(--color-paper);
+    border: var(--rule-hair) solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: 0.7rem 0.9rem;
+    transition: border-color var(--dur-base) var(--ease-out);
+  }
+  .field-input:hover { border-color: var(--color-ink-soft); }
+  .field-input:focus { outline: none; border-color: var(--color-accent-deep); box-shadow: 0 0 0 3px var(--color-accent-soft); }
+
+  /* ---- Otras vacantes ---- */
+  .otra-row {
+    display: block;
+    border-bottom: var(--rule-hair) solid var(--color-hairline);
+    transition: background var(--dur-base) var(--ease-out);
+  }
+  .otra-row:hover { background: var(--color-paper-2); }
+  .otra-row:hover .vacante-cta::after { transform: scaleX(1); }
+  .otra-row-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    padding-block: var(--space-lg);
+    padding-inline: clamp(0.5rem, 2vw, 1rem);
+  }
+  .otra-meta { text-align: left; }
+  @media (min-width: 640px) {
+    .otra-row-inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 2rem;
+    }
+    .otra-meta { text-align: right; min-width: 10rem; }
+  }
+
+  /* ---- Modal ---- */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: oklch(20% 0.02 50 / 0.55);
+  }
+  .modal-overlay.is-open { display: flex; }
+  .modal-card {
+    background: var(--color-paper);
+    border: var(--rule-hair) solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    max-width: 28rem;
+    width: 100%;
+    padding: clamp(1.75rem, 5vw, 2.5rem);
+    text-align: center;
+  }
+</style>
+
+<script>
+  var form = document.getElementById('form-aplicar');
+  var modal = document.getElementById('modal-aplicar');
+  var cerrar = document.getElementById('cerrar-modal-aplicar');
+
+  if (form) {
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var data = new FormData(form);
+      fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
+        .then(function(res) {
+          if (res.ok) {
+            form.reset();
+            if (modal) modal.classList.add('is-open');
+          }
+        })
+        .catch(function() {});
+    });
+  }
+
+  if (cerrar) {
+    cerrar.addEventListener('click', function() {
+      if (modal) modal.classList.remove('is-open');
+    });
+  }
+
+  if (modal) {
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) modal.classList.remove('is-open');
+    });
+  }
+</script>

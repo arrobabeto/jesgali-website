@@ -1,0 +1,99 @@
+---
+/* Hallmark · genre: editorial · macrostructure: Utility · theme: custom (clay/cream/pine · Fraunces + Hanken Grotesk) */
+import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const recientes = await getCollection('vacantes', v => v.data.activa);
+recientes.sort((a, b) => b.data.fechaPublicacion.getTime() - a.data.fechaPublicacion.getTime());
+const ultimas = recientes.slice(0, 3);
+---
+
+<Layout
+  title="Página no encontrada — Grupo Jesgali Empresarial"
+  description="La página que buscas ya no existe o fue movida. Revisa nuestras vacantes activas."
+>
+
+  <!-- HERO EDITORIAL 404 -->
+  <section class="section-container" style="padding-top: var(--space-2xl); padding-bottom: var(--space-xl); min-height: 60vh; display: flex; flex-direction: column; justify-content: center;">
+    <p class="eyebrow reveal reveal-1" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+      <span style="width: 7px; height: 7px; border-radius: 9999px; background: var(--color-accent); display: inline-block;"></span>
+      Error 404
+    </p>
+
+    <h1 class="reveal reveal-2" style="font-family: var(--font-display); font-weight: 600; font-size: var(--text-display-s); line-height: 1.0; margin-top: 1.5rem; max-width: 16ch; overflow-wrap: anywhere; min-width: 0;">
+      Esta página ya no existe
+    </h1>
+
+    <p class="reveal reveal-3" style="margin-top: 1.5rem; max-width: 52ch; font-size: var(--text-md); line-height: 1.65; color: var(--color-ink-soft);">
+      Si buscabas una vacante, es posible que la posición ya se haya cerrado o que el enlace haya cambiado. Consulta las oportunidades activas a continuación.
+    </p>
+
+    <div class="reveal reveal-3" style="margin-top: 2.5rem; display: flex; flex-wrap: wrap; gap: 1rem;">
+      <a href="/vacantes" class="btn-primary">Ver vacantes abiertas</a>
+      <a href="/" class="btn-secondary">Volver al inicio</a>
+    </div>
+  </section>
+
+  <hr class="rule-thick" />
+
+  <!-- VACANTES RECIENTES -->
+  {ultimas.length > 0 && (
+    <section class="section-container" style="padding-block: var(--space-3xl);">
+      <p class="eyebrow" style="margin-bottom: var(--space-lg);">Posiciones activas</p>
+
+      <div>
+        {ultimas.map((v, i) => (
+          <a
+            href={`/vacantes/${v.slug}`}
+            class="vacante-404-row"
+            style={i === 0 ? 'border-top: var(--rule-hair) solid var(--color-hairline);' : ''}
+          >
+            <div class="vacante-404-inner">
+              <div style="min-width: 0;">
+                <p class="eyebrow" style="margin-bottom: 0.5rem;">{v.data.area} · {v.data.tipo}</p>
+                <h2 style="font-size: var(--text-lg); font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; min-width: 0;">{v.data.titulo}</h2>
+              </div>
+              <div class="vacante-404-meta">
+                <span style="font-family: var(--font-display); font-size: var(--text-md); font-weight: 600; color: var(--color-accent-deep); display: block;">
+                  ${v.data.salarioMin.toLocaleString()} – ${v.data.salarioMax.toLocaleString()}
+                </span>
+                <span class="vacante-cta link-underline" style="display: inline-block; margin-top: 0.625rem;">Ver vacante →</span>
+              </div>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div style="margin-top: var(--space-lg);">
+        <a href="/vacantes" class="link-underline" style="font-size: var(--text-md);">Ver todas las posiciones →</a>
+      </div>
+    </section>
+  )}
+
+</Layout>
+
+<style>
+  .vacante-404-row {
+    display: block;
+    border-bottom: var(--rule-hair) solid var(--color-hairline);
+    transition: background var(--dur-base) var(--ease-out);
+  }
+  .vacante-404-row:hover { background: var(--color-paper-2); }
+  .vacante-404-row:hover .vacante-cta::after { transform: scaleX(1); }
+  .vacante-404-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    padding-block: var(--space-lg);
+    padding-inline: clamp(0.5rem, 2vw, 1rem);
+  }
+  .vacante-404-meta { text-align: left; }
+  @media (min-width: 640px) {
+    .vacante-404-inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 2rem;
+    }
+    .vacante-404-meta { text-align: right; min-width: 10rem; }
+  }
+</style>

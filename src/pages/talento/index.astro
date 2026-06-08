@@ -14,7 +14,7 @@ const categorias = [...new Set(posts.map(p => p.data.categoria))];
 const destacado = posts[0];
 const resto = posts.slice(1);
 
-function fmtFecha(d) {
+function fmtFecha(d: Date) {
   return new Date(d).toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 }
 ---
@@ -199,11 +199,11 @@ function fmtFecha(d) {
 </style>
 
 <script>
-  var buttons = document.querySelectorAll('.filter-btn');
-  var cards = document.querySelectorAll('.post-card');
+  var buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  var cards = document.querySelectorAll<HTMLElement>('.post-card');
   var noResults = document.getElementById('no-results');
 
-  function applyFilter(filter) {
+  function applyFilter(filter: string) {
     var visible = 0;
     cards.forEach(function(card) {
       var match = filter === 'all' || card.getAttribute('data-categoria') === filter;

@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "astro preview"
+    "preview": "astro preview",
+    "check": "astro check",
+    "test": "vitest run",
+    "verify:modal-html": "PUBLIC_WEB3FORMS_ACCESS_KEY=test-access-key-123 npm run build && node scripts/verify-modal-html.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^3.1.9",
@@ -15,6 +18,9 @@
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "typescript": "^5.6.3"
+    "@astrojs/check": "^0.9.4",
+    "jsdom": "^25.0.1",
+    "typescript": "^5.6.3",
+    "vitest": "^2.1.9"
   }
 }

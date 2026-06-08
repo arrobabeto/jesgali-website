@@ -23,8 +23,15 @@ jobs:
       - name: Instalar dependencias
         run: npm ci
 
+      - name: Validar código y formularios
+        run: |
+          npm run check
+          npm test
+
       - name: Build Astro
         run: npm run build
+        env:
+          PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ secrets.PUBLIC_WEB3FORMS_ACCESS_KEY }}
 
       - name: Deploy vía FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5

@@ -1,6 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import ConfirmationModal from '../../components/ui/ConfirmationModal.astro';
 import { getCollection } from 'astro:content';
+
+const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY?.trim() ?? '';
 
 const vacantes = await getCollection('vacantes', v => v.data.activa);
 vacantes.sort((a, b) => b.data.fechaPublicacion.getTime() - a.data.fechaPublicacion.getTime());
@@ -135,7 +138,7 @@ const pasos = [
           method="POST"
           style="border: var(--rule-hair) solid var(--color-hairline); border-radius: var(--radius-md); padding: clamp(1.5rem, 4vw, 2.5rem); background: var(--color-paper);"
         >
-          <input type="hidden" name="access_key" value="TU_ACCESS_KEY_WEB3FORMS" />
+          <input type="hidden" name="access_key" value={web3formsAccessKey} />
           <input type="hidden" name="subject" value="CV Espontáneo — Jesgali.com.mx" />
           <input type="hidden" name="from_name" value="Jesgali Sitio Web" />
           <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
@@ -178,32 +181,23 @@ const pasos = [
           <button type="submit" class="btn-primary" style="width: 100%; margin-top: 1.5rem;">
             Enviar información
           </button>
+          <p id="estado-form-espontaneo" class="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
     </div>
   </section>
 
-</Layout>
-
-<!-- Modal CV espontáneo post-envío -->
-<div id="modal-cv" class="modal-overlay">
-  <div class="modal-card">
-    <div style="width: 52px; height: 52px; border-radius: 9999px; background: var(--color-accent-soft); display: flex; align-items: center; justify-content: center; margin-inline: auto; margin-bottom: 1.25rem;">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-deep)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M20 6L9 17l-5-5" />
-      </svg>
-    </div>
-    <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: 0.75rem;">¡Gracias por tu interés!</h3>
-    <p style="font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft); margin-bottom: 1rem;">
+  <ConfirmationModal id="modal-cv" title="¡Gracias por tu interés!">
+    <Fragment slot="description">
       Recibimos tu información. Para completar tu solicitud, <strong style="color: var(--color-ink);">envíanos tu CV por correo</strong>:
-    </p>
+    </Fragment>
     <a href="mailto:contacto@jesgali.com.mx?subject=CV%20Espontáneo" class="link-underline" style="font-size: var(--text-md);">
       contacto@jesgali.com.mx
     </a>
     <p style="font-size: 0.85rem; color: var(--color-ink-soft); margin-top: 0.75rem;">Te contactaremos cuando tengamos una posición que encaje con tu perfil.</p>
-    <button id="cerrar-modal-cv" class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Entendido</button>
-  </div>
-</div>
+  </ConfirmationModal>
+
+</Layout>
 
 <style>
   /* ---- Filtros editoriales (texto, no pills) ---- */
@@ -282,36 +276,18 @@ const pasos = [
   .field-input:hover { border-color: var(--color-ink-soft); }
   .field-input:focus { outline: none; border-color: var(--color-accent-deep); box-shadow: 0 0 0 3px var(--color-accent-soft); }
 
-  /* ---- Modal ---- */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    background: oklch(20% 0.02 50 / 0.55);
-  }
-  .modal-overlay.is-open { display: flex; }
-  .modal-card {
-    background: var(--color-paper);
-    border: var(--rule-hair) solid var(--color-hairline);
-    border-radius: var(--radius-md);
-    max-width: 28rem;
-    width: 100%;
-    padding: clamp(1.75rem, 5vw, 2.5rem);
-    text-align: center;
-  }
 </style>
 
 <script>
+  import { initWeb3Forms } from '../../scripts/web3forms';
+  import { initModal } from '../../scripts/modal';
+
   // ---- Filtros ----
-  const buttons = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.vacante-row');
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
+  const cards = document.querySelectorAll<HTMLElement>('.vacante-row');
   const noResults = document.getElementById('no-results');
 
-  function applyFilter(filter) {
+  function applyFilter(filter: string) {
     let visible = 0;
     cards.forEach(card => {
       const match = filter === 'all' || card.dataset.area === filter || card.dataset.tipo === filter;
@@ -327,26 +303,17 @@ const pasos = [
   buttons.forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.filter || 'all')));
 
   // ---- Modal CV espontáneo ----
-  const form = document.getElementById('form-espontaneo');
-  const modal = document.getElementById('modal-cv');
-  const cerrar = document.getElementById('cerrar-modal-cv');
+  const form = document.querySelector<HTMLFormElement>('#form-espontaneo');
+  const status = document.querySelector<HTMLElement>('#estado-form-espontaneo');
+  const modal = document.querySelector<HTMLElement>('#modal-cv');
+  const modalController = modal ? initModal(modal) : null;
 
-  form?.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const data = new FormData(form);
-    try {
-      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: data });
-      if (res.ok) {
-        form.reset();
-        modal?.classList.add('is-open');
-      }
-    } catch {
-      // fallo silencioso
-    }
-  });
-
-  cerrar?.addEventListener('click', () => modal?.classList.remove('is-open'));
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) modal.classList.remove('is-open');
-  });
+  if (form && status) {
+    initWeb3Forms({
+      form,
+      statusElement: status,
+      submittingLabel: 'Enviando información…',
+      onSuccess: submitter => modalController?.open(submitter),
+    });
+  }
 </script>

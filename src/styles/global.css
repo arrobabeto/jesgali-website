@@ -110,6 +110,21 @@
     transition-timing-function: var(--ease-out);
   }
   .btn-primary:hover { background: var(--color-accent); transform: translateY(-1px); }
+  .btn-primary:disabled {
+    cursor: wait;
+    opacity: 0.65;
+    transform: none;
+  }
+
+  .form-status {
+    min-height: 1.5em;
+    margin-top: 0.875rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
+  .form-status[data-state='error'] { color: var(--color-accent-deep); }
+  .form-status[data-state='success'] { color: var(--color-pine); }
 
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2 px-7 py-3 text-sm font-semibold transition;

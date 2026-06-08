@@ -302,7 +302,7 @@ const alcance = [
 
       <div style="border-top: var(--rule-hair) solid var(--color-hairline);">
         {destacadas.map(v => (
-          <a href={`/vacantes/${v.slug}`} class="vac-row grid md:grid-cols-12 gap-3 md:gap-6 items-center" style="padding-block: 1.75rem; border-bottom: var(--rule-hair) solid var(--color-hairline);">
+          <a href={`/vacantes/${v.id}`} class="vac-row grid md:grid-cols-12 gap-3 md:gap-6 items-center" style="padding-block: 1.75rem; border-bottom: var(--rule-hair) solid var(--color-hairline);">
             <div class="md:col-span-6">
               <h3 class="vac-title" style="font-size: var(--text-lg); font-weight: 600; line-height: 1.15;">{v.data.titulo}</h3>
             </div>
@@ -409,8 +409,6 @@ const alcance = [
       <a href="/contacto" class="btn-secondary">Envíanos un mensaje</a>
     </div>
   </section>
-
-</Layout>
 
 <script>
 (() => {
@@ -536,3 +534,5 @@ const alcance = [
     .vac-row, .vac-row .vac-arrow { transition: none; }
   }
 </style>
+
+</Layout>

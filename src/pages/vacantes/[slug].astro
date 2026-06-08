@@ -3,29 +3,26 @@
 /* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 */
 import Layout from '../../layouts/Layout.astro';
 import ConfirmationModal from '../../components/ui/ConfirmationModal.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY?.trim() ?? '';
 
 export async function getStaticPaths() {
   const vacantes = await getCollection('vacantes', v => v.data.activa);
   return vacantes.map(v => ({
-    params: { slug: v.slug },
+    params: { slug: v.id },
     props: { entry: v },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
-const { titulo, area, tipo, ubicacion, salarioMin, salarioMax, id, resumen, fechaPublicacion } = entry.data;
+const { Content } = await render(entry);
+const { titulo, area, tipo, ubicacion, salarioMin, salarioMax, id, resumen } = entry.data;
 
 // Otras vacantes: activas, excluye la actual, máximo 3
-const todasVacantes = await getCollection('vacantes', v => v.data.activa && v.slug !== entry.slug);
+const todasVacantes = await getCollection('vacantes', v => v.data.activa && v.id !== entry.id);
 todasVacantes.sort((a, b) => b.data.fechaPublicacion.getTime() - a.data.fechaPublicacion.getTime());
 const otras = todasVacantes.slice(0, 3);
-
-const fechaISO = fechaPublicacion.toISOString().split('T')[0];
-const fechaDisplay = new Date(fechaPublicacion).toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
 ---
 
 <Layout
@@ -176,7 +173,7 @@ const fechaDisplay = new Date(fechaPublicacion).toLocaleDateString('es-MX', { ye
       <div>
         {otras.map((v, i) => (
           <a
-            href={`/vacantes/${v.slug}`}
+            href={`/vacantes/${v.id}`}
             class="otra-row"
             style={i === 0 ? 'border-top: var(--rule-hair) solid var(--color-hairline);' : ''}
           >
@@ -209,8 +206,6 @@ const fechaDisplay = new Date(fechaPublicacion).toLocaleDateString('es-MX', { ye
       Asunto recomendado: <strong>CV {titulo} ({id})</strong>
     </p>
   </ConfirmationModal>
-
-</Layout>
 
 <style>
   /* ---- Enlace volver ---- */
@@ -363,3 +358,5 @@ const fechaDisplay = new Date(fechaPublicacion).toLocaleDateString('es-MX', { ye
     });
   }
 </script>
+
+</Layout>

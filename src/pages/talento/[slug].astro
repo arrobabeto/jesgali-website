@@ -2,20 +2,20 @@
 /* Hallmark · genre: editorial · macrostructure: Article/Detail + TOC · theme: custom (clay/cream/pine · Fraunces + Hanken Grotesk) · enrichment: featured image · nav: N6 · footer: Ft1 */
 /* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 */
 import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 
 const IMG_FALLBACK = '/images/vida/vida-1.avif';
 
 export async function getStaticPaths() {
   const posts = await getCollection('talento');
   return posts.map(p => ({
-    params: { slug: p.slug },
+    params: { slug: p.id },
     props: { entry: p },
   }));
 }
 
 const { entry } = Astro.props;
-const { Content, headings } = await entry.render();
+const { Content, headings } = await render(entry);
 const { titulo, descripcion, categoria, fechaPublicacion, tiempoLectura, imagen } = entry.data;
 
 // TOC: solo h2
@@ -23,7 +23,7 @@ const toc = headings.filter(h => h.depth === 2);
 
 // Recomendados: misma categoría primero; rellena con los más recientes hasta 3
 const MAX_RECOMENDADOS = 3;
-const todos = await getCollection('talento', p => p.slug !== entry.slug);
+const todos = await getCollection('talento', p => p.id !== entry.id);
 todos.sort((a, b) => b.data.fechaPublicacion.getTime() - a.data.fechaPublicacion.getTime());
 
 const mismaCategoria = todos.filter(p => p.data.categoria === categoria);
@@ -112,7 +112,7 @@ const fechaDisplay = new Date(fechaPublicacion).toLocaleDateString('es-MX', { ye
           <p class="eyebrow" style="margin-bottom: var(--space-lg);">También te puede interesar</p>
           <div class="rel-grid">
             {recomendados.map(p => (
-              <a href={`/talento/${p.slug}`} class="post-card">
+              <a href={`/talento/${p.id}`} class="post-card">
                 <div class="post-media">
                   <img src={p.data.imagen || IMG_FALLBACK} alt={p.data.titulo} loading="lazy" />
                 </div>

@@ -45,7 +45,7 @@ function fmtFecha(d: Date) {
   <!-- 2 · ARTÍCULO DESTACADO -->
   {destacado && (
     <section class="section-container" style="padding-block: var(--space-3xl);">
-      <a href={`/talento/${destacado.slug}`} class="featured">
+      <a href={`/talento/${destacado.id}`} class="featured">
         <div class="featured-media">
           <img src={destacado.data.imagen || IMG_FALLBACK} alt={destacado.data.titulo} loading="eager" />
         </div>
@@ -77,7 +77,7 @@ function fmtFecha(d: Date) {
 
     <div id="posts-grid" class="posts-grid">
       {resto.map(p => (
-        <a href={`/talento/${p.slug}`} class="post-card" data-categoria={p.data.categoria}>
+        <a href={`/talento/${p.id}`} class="post-card" data-categoria={p.data.categoria}>
           <div class="post-media">
             <img src={p.data.imagen || IMG_FALLBACK} alt={p.data.titulo} loading="lazy" />
           </div>
@@ -111,8 +111,6 @@ function fmtFecha(d: Date) {
       </div>
     </div>
   </section>
-
-</Layout>
 
 <style>
   /* ---- Filtros editoriales ---- */
@@ -222,3 +220,5 @@ function fmtFecha(d: Date) {
     });
   });
 </script>
+
+</Layout>

@@ -44,7 +44,7 @@ const ultimas = recientes.slice(0, 3);
       <div>
         {ultimas.map((v, i) => (
           <a
-            href={`/vacantes/${v.slug}`}
+            href={`/vacantes/${v.id}`}
             class="vacante-404-row"
             style={i === 0 ? 'border-top: var(--rule-hair) solid var(--color-hairline);' : ''}
           >

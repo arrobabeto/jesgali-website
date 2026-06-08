@@ -3,6 +3,7 @@ import { defineCollection, z } from 'astro:content';
 const vacantes = defineCollection({
   type: 'content',
   schema: z.object({
+    id: z.string(),
     titulo: z.string(),
     area: z.string(),
     tipo: z.enum(['Tiempo completo', 'Por proyecto', 'Medio tiempo']),

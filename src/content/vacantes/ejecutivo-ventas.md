@@ -1,4 +1,5 @@
 ---
+id: JES-001
 titulo: Ejecutivo de Ventas
 area: Ventas
 tipo: Tiempo completo

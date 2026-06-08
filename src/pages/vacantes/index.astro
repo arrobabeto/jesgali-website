@@ -1,6 +1,8 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ConfirmationModal from '../../components/ui/ConfirmationModal.astro';
+import Field from '../../components/ui/Field.astro';
+import VacanteRow from '../../components/ui/VacanteRow.astro';
 import { getCollection } from 'astro:content';
 
 const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY?.trim() ?? '';
@@ -62,30 +64,7 @@ const pasos = [
     <!-- Listado -->
     <div id="vacantes-grid">
       {vacantes.map((v, i) => (
-        <a
-          href={`/vacantes/${v.id}`}
-          data-area={v.data.area}
-          data-tipo={v.data.tipo}
-          class="vacante-row"
-          style={i === 0 ? 'border-top: var(--rule-hair) solid var(--color-hairline);' : ''}
-        >
-          <div class="vacante-row-inner">
-            <div style="min-width: 0;">
-              <p class="eyebrow" style="margin-bottom: 0.625rem;">{v.data.area} · {v.data.tipo}</p>
-              <h2 style="font-size: var(--text-xl); font-weight: 600; line-height: 1.15; margin-bottom: 0.5rem; overflow-wrap: anywhere; min-width: 0;">
-                {v.data.titulo}
-              </h2>
-              <p style="font-size: var(--text-md); line-height: 1.55; color: var(--color-ink-soft); max-width: 56ch;">{v.data.resumen}</p>
-            </div>
-            <div class="vacante-row-meta">
-              <span style="font-family: var(--font-display); font-size: var(--text-lg); font-weight: 600; color: var(--color-ink); display: block;">
-                ${v.data.salarioMin.toLocaleString()} – ${v.data.salarioMax.toLocaleString()}
-              </span>
-              <span style="font-size: 0.85rem; color: var(--color-ink-soft); display: block; margin-top: 0.25rem;">{v.data.ubicacion}</span>
-              <span class="vacante-cta link-underline" style="display: inline-block; margin-top: 1rem;">Ver vacante →</span>
-            </div>
-          </div>
-        </a>
+        <VacanteRow vacante={v} isFirst={i === 0} />
       ))}
     </div>
 
@@ -144,14 +123,8 @@ const pasos = [
           <input type="checkbox" name="botcheck" class="hidden" style="display: none;" />
 
           <div class="grid sm:grid-cols-2 gap-5">
-            <div>
-              <label class="field-label" for="f-nombre">Nombre completo *</label>
-              <input id="f-nombre" type="text" name="nombre" required class="field-input" />
-            </div>
-            <div>
-              <label class="field-label" for="f-email">Email *</label>
-              <input id="f-email" type="email" name="email" required class="field-input" />
-            </div>
+            <Field id="f-nombre" name="nombre" label="Nombre completo *" required />
+            <Field id="f-email" name="email" type="email" label="Email *" required />
           </div>
 
           <div class="grid sm:grid-cols-2 gap-5" style="margin-top: 1.25rem;">
@@ -167,10 +140,8 @@ const pasos = [
                 <option>Otro</option>
               </select>
             </div>
-            <div>
-              <label class="field-label" for="f-linkedin">LinkedIn (opcional)</label>
-              <input id="f-linkedin" type="url" name="linkedin" placeholder="linkedin.com/in/tu-perfil" class="field-input" />
-            </div>
+            <Field id="f-linkedin" name="linkedin" type="url" label="LinkedIn (opcional)" placeholder="linkedin.com/in/tu-perfil" />
+
           </div>
 
           <div style="margin-top: 1.25rem;">
@@ -197,108 +168,13 @@ const pasos = [
     <p style="font-size: 0.85rem; color: var(--color-ink-soft); margin-top: 0.75rem;">Te contactaremos cuando tengamos una posición que encaje con tu perfil.</p>
   </ConfirmationModal>
 
-<style>
-  /* ---- Filtros editoriales (texto, no pills) ---- */
-  .filter-btn {
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-ink-soft);
-    background: transparent;
-    border: 0;
-    padding: 0;
-    cursor: pointer;
-    position: relative;
-    transition: color var(--dur-base) var(--ease-out);
-  }
-  .filter-btn::after {
-    content: '';
-    position: absolute;
-    left: 0; bottom: -4px;
-    width: 100%; height: 2px;
-    background: var(--color-accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--dur-base) var(--ease-out);
-  }
-  .filter-btn:hover { color: var(--color-ink); }
-  .filter-btn.active { color: var(--color-accent-deep); }
-  .filter-btn.active::after { transform: scaleX(1); }
-
-  /* ---- Fila de vacante ---- */
-  .vacante-row {
-    display: block;
-    border-bottom: var(--rule-hair) solid var(--color-hairline);
-    transition: background var(--dur-base) var(--ease-out);
-  }
-  .vacante-row:hover { background: var(--color-paper-2); }
-  .vacante-row-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 1.25rem;
-    padding-block: var(--space-lg);
-    padding-inline: clamp(0.5rem, 2vw, 1.5rem);
-  }
-  .vacante-row-meta { text-align: left; }
-  .vacante-row:hover .vacante-cta::after { transform: scaleX(1); }
-
-  @media (min-width: 768px) {
-    .vacante-row-inner {
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: start;
-      gap: 2.5rem;
-    }
-    .vacante-row-meta { text-align: right; min-width: 12rem; }
-  }
-
-  /* ---- Campos de formulario ---- */
-  .field-label {
-    display: block;
-    font-family: var(--font-body);
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--color-ink);
-    margin-bottom: 0.5rem;
-  }
-  .field-input {
-    width: 100%;
-    font-family: var(--font-body);
-    font-size: var(--text-md);
-    color: var(--color-ink);
-    background: var(--color-paper);
-    border: var(--rule-hair) solid var(--color-hairline);
-    border-radius: var(--radius-md);
-    padding: 0.7rem 0.9rem;
-    transition: border-color var(--dur-base) var(--ease-out);
-  }
-  .field-input:hover { border-color: var(--color-ink-soft); }
-  .field-input:focus { outline: none; border-color: var(--color-accent-deep); box-shadow: 0 0 0 3px var(--color-accent-soft); }
-
-</style>
-
 <script>
   import { initWeb3Forms } from '../../scripts/web3forms';
   import { initModal } from '../../scripts/modal';
+  import { initFilter } from '../../scripts/filter';
 
   // ---- Filtros ----
-  const buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-  const cards = document.querySelectorAll<HTMLElement>('.vacante-row');
-  const noResults = document.getElementById('no-results');
-
-  function applyFilter(filter: string) {
-    let visible = 0;
-    cards.forEach(card => {
-      const match = filter === 'all' || card.dataset.area === filter || card.dataset.tipo === filter;
-      card.style.display = match ? '' : 'none';
-      if (match) visible++;
-    });
-    if (noResults) noResults.style.display = visible > 0 ? 'none' : 'block';
-    buttons.forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.filter === filter);
-    });
-  }
-
-  buttons.forEach(btn => btn.addEventListener('click', () => applyFilter(btn.dataset.filter || 'all')));
+  initFilter({ cardSelector: '.vacante-row', matchAttrs: ['area', 'tipo'] });
 
   // ---- Modal CV espontáneo ----
   const form = document.querySelector<HTMLFormElement>('#form-espontaneo');

@@ -1,0 +1,110 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  vacante: CollectionEntry<'vacantes'>;
+  /** false = fila completa (resumen + ubicación). true = fila compacta. */
+  compact?: boolean;
+  /** Aplica el borde superior a la primera fila del listado. */
+  isFirst?: boolean;
+  /** Nivel semántico del título. Default: 'h2' en full, 'h3' en compact. */
+  headingLevel?: 'h2' | 'h3';
+}
+
+const { vacante, compact = false, isFirst = false, headingLevel } = Astro.props;
+const v = vacante.data;
+// href usa el id de entrada (slug descriptivo de archivo), que es el que genera getStaticPaths,
+// NO v.id (que es el folio JES-00X del frontmatter).
+const href = `/vacantes/${vacante.id}`;
+const Heading = headingLevel ?? (compact ? 'h3' : 'h2');
+const salario = `$${v.salarioMin.toLocaleString()} – $${v.salarioMax.toLocaleString()}`;
+const rootClass = compact ? 'vacante-row-compact' : 'vacante-row';
+const innerClass = compact ? 'vacante-row-compact-inner' : 'vacante-row-inner';
+const metaClass = compact ? 'vacante-row-compact-meta' : 'vacante-row-meta';
+const topBorder = isFirst ? 'border-top: var(--rule-hair) solid var(--color-hairline);' : '';
+---
+
+<a
+  href={href}
+  data-area={v.area}
+  data-tipo={v.tipo}
+  class={rootClass}
+  style={topBorder}
+>
+  <div class={innerClass}>
+    <div style="min-width: 0;">
+      <p class="eyebrow" style={`margin-bottom: ${compact ? '0.5rem' : '0.625rem'};`}>{v.area} · {v.tipo}</p>
+      {compact ? (
+        <Heading style="font-size: var(--text-lg); font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; min-width: 0;">{v.titulo}</Heading>
+      ) : (
+        <Heading style="font-size: var(--text-xl); font-weight: 600; line-height: 1.15; margin-bottom: 0.5rem; overflow-wrap: anywhere; min-width: 0;">{v.titulo}</Heading>
+      )}
+      {!compact && (
+        <p style="font-size: var(--text-md); line-height: 1.55; color: var(--color-ink-soft); max-width: 56ch;">{v.resumen}</p>
+      )}
+    </div>
+    <div class={metaClass}>
+      {compact ? (
+        <span style="font-family: var(--font-display); font-size: var(--text-md); font-weight: 600; color: var(--color-accent-deep); display: block;">{salario}</span>
+      ) : (
+        <span style="font-family: var(--font-display); font-size: var(--text-lg); font-weight: 600; color: var(--color-ink); display: block;">{salario}</span>
+      )}
+      {!compact && (
+        <span style="font-size: 0.85rem; color: var(--color-ink-soft); display: block; margin-top: 0.25rem;">{v.ubicacion}</span>
+      )}
+      <span class="vacante-cta link-underline" style={`display: inline-block; margin-top: ${compact ? '0.625rem' : '1rem'};`}>Ver vacante →</span>
+    </div>
+  </div>
+</a>
+
+<style>
+  /* ---- Fila completa ---- */
+  .vacante-row {
+    display: block;
+    border-bottom: var(--rule-hair) solid var(--color-hairline);
+    transition: background var(--dur-base) var(--ease-out);
+  }
+  .vacante-row:hover { background: var(--color-paper-2); }
+  .vacante-row:hover .vacante-cta::after { transform: scaleX(1); }
+  .vacante-row-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.25rem;
+    padding-block: var(--space-lg);
+    padding-inline: clamp(0.5rem, 2vw, 1.5rem);
+  }
+  .vacante-row-meta { text-align: left; }
+  @media (min-width: 768px) {
+    .vacante-row-inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 2.5rem;
+    }
+    .vacante-row-meta { text-align: right; min-width: 12rem; }
+  }
+
+  /* ---- Fila compacta (otras vacantes / 404) ---- */
+  .vacante-row-compact {
+    display: block;
+    border-bottom: var(--rule-hair) solid var(--color-hairline);
+    transition: background var(--dur-base) var(--ease-out);
+  }
+  .vacante-row-compact:hover { background: var(--color-paper-2); }
+  .vacante-row-compact:hover .vacante-cta::after { transform: scaleX(1); }
+  .vacante-row-compact-inner {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0.75rem;
+    padding-block: var(--space-lg);
+    padding-inline: clamp(0.5rem, 2vw, 1rem);
+  }
+  .vacante-row-compact-meta { text-align: left; }
+  @media (min-width: 640px) {
+    .vacante-row-compact-inner {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 2rem;
+    }
+    .vacante-row-compact-meta { text-align: right; min-width: 10rem; }
+  }
+</style>

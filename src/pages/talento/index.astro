@@ -113,33 +113,6 @@ function fmtFecha(d: Date) {
   </section>
 
 <style>
-  /* ---- Filtros editoriales ---- */
-  .filter-btn {
-    font-family: var(--font-body);
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--color-ink-soft);
-    background: transparent;
-    border: 0;
-    padding: 0;
-    cursor: pointer;
-    position: relative;
-    transition: color var(--dur-base) var(--ease-out);
-  }
-  .filter-btn::after {
-    content: '';
-    position: absolute;
-    left: 0; bottom: -4px;
-    width: 100%; height: 2px;
-    background: var(--color-accent);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform var(--dur-base) var(--ease-out);
-  }
-  .filter-btn:hover { color: var(--color-ink); }
-  .filter-btn.active { color: var(--color-accent-deep); }
-  .filter-btn.active::after { transform: scaleX(1); }
-
   /* ---- Artículo destacado ---- */
   .featured {
     display: grid;
@@ -177,48 +150,11 @@ function fmtFecha(d: Date) {
   @media (min-width: 1024px) {
     .posts-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   }
-
-  .post-card { display: block; min-width: 0; }
-  .post-media {
-    aspect-ratio: 16 / 10;
-    overflow: hidden;
-    border: var(--rule-hair) solid var(--color-hairline);
-    border-radius: var(--radius-md);
-    background: var(--color-paper-2);
-  }
-  .post-media img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    transition: transform var(--dur-slow) var(--ease-out);
-  }
-  .post-card:hover .post-media img { transform: scale(1.03); }
-  .post-card:hover h3 { color: var(--color-accent-deep); }
-  .post-card h3 { transition: color var(--dur-base) var(--ease-out); }
 </style>
 
 <script>
-  var buttons = document.querySelectorAll<HTMLButtonElement>('.filter-btn');
-  var cards = document.querySelectorAll<HTMLElement>('.post-card');
-  var noResults = document.getElementById('no-results');
-
-  function applyFilter(filter: string) {
-    var visible = 0;
-    cards.forEach(function(card) {
-      var match = filter === 'all' || card.getAttribute('data-categoria') === filter;
-      card.style.display = match ? '' : 'none';
-      if (match) visible++;
-    });
-    if (noResults) noResults.style.display = visible > 0 ? 'none' : 'block';
-    buttons.forEach(function(btn) {
-      btn.classList.toggle('active', btn.getAttribute('data-filter') === filter);
-    });
-  }
-
-  buttons.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      applyFilter(btn.getAttribute('data-filter') || 'all');
-    });
-  });
+  import { initFilter } from '../../scripts/filter';
+  initFilter({ cardSelector: '.post-card', matchAttrs: ['categoria'] });
 </script>
 
 </Layout>

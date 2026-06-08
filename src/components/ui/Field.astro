@@ -1,0 +1,38 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  /** Texto de la etiqueta. Incluye el " *" cuando el campo es obligatorio. */
+  label: string;
+  type?: 'text' | 'email' | 'tel' | 'url';
+  required?: boolean;
+  placeholder?: string;
+  /** Añade un " (opcional)" atenuado tras la etiqueta. */
+  optionalHint?: boolean;
+  autocomplete?: string;
+}
+
+const {
+  id,
+  name,
+  label,
+  type = 'text',
+  required = false,
+  placeholder,
+  optionalHint = false,
+  autocomplete,
+} = Astro.props;
+---
+
+<div>
+  <label class="field-label" for={id}>{label}{optionalHint && (<>{' '}<span style="font-weight: 400; color: var(--color-ink-soft);">(opcional)</span></>)}</label>
+  <input
+    id={id}
+    type={type}
+    name={name}
+    required={required}
+    placeholder={placeholder}
+    autocomplete={autocomplete}
+    class="field-input"
+  />
+</div>

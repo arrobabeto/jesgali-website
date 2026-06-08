@@ -1,6 +1,7 @@
 ---
 /* Hallmark · genre: editorial · macrostructure: Utility · theme: custom (clay/cream/pine · Fraunces + Hanken Grotesk) */
 import Layout from '../layouts/Layout.astro';
+import VacanteRow from '../components/ui/VacanteRow.astro';
 import { getCollection } from 'astro:content';
 
 const recientes = await getCollection('vacantes', v => v.data.activa);
@@ -43,24 +44,7 @@ const ultimas = recientes.slice(0, 3);
 
       <div>
         {ultimas.map((v, i) => (
-          <a
-            href={`/vacantes/${v.id}`}
-            class="vacante-404-row"
-            style={i === 0 ? 'border-top: var(--rule-hair) solid var(--color-hairline);' : ''}
-          >
-            <div class="vacante-404-inner">
-              <div style="min-width: 0;">
-                <p class="eyebrow" style="margin-bottom: 0.5rem;">{v.data.area} · {v.data.tipo}</p>
-                <h2 style="font-size: var(--text-lg); font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; min-width: 0;">{v.data.titulo}</h2>
-              </div>
-              <div class="vacante-404-meta">
-                <span style="font-family: var(--font-display); font-size: var(--text-md); font-weight: 600; color: var(--color-accent-deep); display: block;">
-                  ${v.data.salarioMin.toLocaleString()} – ${v.data.salarioMax.toLocaleString()}
-                </span>
-                <span class="vacante-cta link-underline" style="display: inline-block; margin-top: 0.625rem;">Ver vacante →</span>
-              </div>
-            </div>
-          </a>
+          <VacanteRow vacante={v} compact headingLevel="h2" isFirst={i === 0} />
         ))}
       </div>
 
@@ -71,29 +55,3 @@ const ultimas = recientes.slice(0, 3);
   )}
 
 </Layout>
-
-<style>
-  .vacante-404-row {
-    display: block;
-    border-bottom: var(--rule-hair) solid var(--color-hairline);
-    transition: background var(--dur-base) var(--ease-out);
-  }
-  .vacante-404-row:hover { background: var(--color-paper-2); }
-  .vacante-404-row:hover .vacante-cta::after { transform: scaleX(1); }
-  .vacante-404-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 0.75rem;
-    padding-block: var(--space-lg);
-    padding-inline: clamp(0.5rem, 2vw, 1rem);
-  }
-  .vacante-404-meta { text-align: left; }
-  @media (min-width: 640px) {
-    .vacante-404-inner {
-      grid-template-columns: minmax(0, 1fr) auto;
-      align-items: start;
-      gap: 2rem;
-    }
-    .vacante-404-meta { text-align: right; min-width: 10rem; }
-  }
-</style>

@@ -178,6 +178,134 @@
     text-transform: uppercase;
     color: var(--color-ink-soft);
   }
+
+  /* ---- Campos de formulario ---- */
+  .field-label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin-bottom: 0.5rem;
+  }
+  .field-input {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: var(--text-md);
+    color: var(--color-ink);
+    background: var(--color-paper);
+    border: var(--rule-hair) solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: 0.7rem 0.9rem;
+    transition: border-color var(--dur-base) var(--ease-out);
+  }
+  .field-input:hover { border-color: var(--color-ink-soft); }
+  .field-input:focus { outline: none; border-color: var(--color-accent-deep); box-shadow: 0 0 0 3px var(--color-accent-soft); }
+
+  /* ---- Consentimiento privacidad ---- */
+  .consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+  }
+  .consent-check {
+    margin-top: 0.15rem;
+    width: 1rem;
+    height: 1rem;
+    min-width: 1rem;
+    accent-color: var(--color-accent-deep);
+    cursor: pointer;
+  }
+
+  /* ---- Filtros editoriales (texto, no pills) ---- */
+  .filter-btn {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    transition: color var(--dur-base) var(--ease-out);
+  }
+  .filter-btn::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 100%; height: 2px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .filter-btn:hover { color: var(--color-ink); }
+  .filter-btn.active { color: var(--color-accent-deep); }
+  .filter-btn.active::after { transform: scaleX(1); }
+
+  /* ---- Tarjeta de artículo (talento) ---- */
+  .post-card { display: block; min-width: 0; }
+  .post-media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: var(--rule-hair) solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-paper-2);
+  }
+  .post-media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+  .post-card:hover .post-media img { transform: scale(1.03); }
+  .post-card:hover h3 { color: var(--color-accent-deep); }
+  .post-card h3 { transition: color var(--dur-base) var(--ease-out); }
+
+  /* ---- Prose editorial (cuerpo markdown de artículos y vacantes) ---- */
+  .prose-editorial { max-width: 68ch; min-width: 0; }
+  .prose-editorial h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    border-top: var(--rule-hair) solid var(--color-hairline);
+    padding-top: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    overflow-wrap: anywhere;
+    scroll-margin-top: 6rem;
+  }
+  .prose-editorial h3 {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    overflow-wrap: anywhere;
+    scroll-margin-top: 6rem;
+  }
+  .prose-editorial p {
+    font-size: var(--text-md);
+    line-height: 1.7;
+    color: var(--color-ink-soft);
+    margin-bottom: 1rem;
+  }
+  .prose-editorial ul { list-style: none; padding: 0; margin: 0 0 1rem 0; }
+  .prose-editorial ul li {
+    font-size: var(--text-md);
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    border-top: var(--rule-hair) solid var(--color-hairline);
+    padding-block: 0.625rem;
+    padding-left: 0.25rem;
+  }
+  .prose-editorial strong { color: var(--color-ink); font-weight: 600; }
+  .prose-editorial hr { border: 0; border-top: var(--rule-hair) solid var(--color-hairline); margin-block: 2rem; }
+  .prose-editorial a { color: var(--color-accent-deep); text-decoration: underline; text-underline-offset: 2px; }
 }
 
 @layer utilities {

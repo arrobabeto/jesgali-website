@@ -18,6 +18,7 @@
 | [`docs/adr/ADR-004-tailwind.md`](docs/adr/ADR-004-tailwind.md) | Decisión: Tailwind CSS |
 | [`docs/adr/ADR-005-forms.md`](docs/adr/ADR-005-forms.md) | Decisión: Web3Forms para los tres formularios |
 | [`docs/FORMS.md`](FORMS.md) | Configuración, operación y pruebas de Web3Forms |
+| [`docs/ASTRO-6-MIGRATION.md`](ASTRO-6-MIGRATION.md) | Migración, validación y riesgos de Astro 6 |
 
 ## Estado del proyecto
 

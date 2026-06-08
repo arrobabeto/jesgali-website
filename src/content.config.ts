@@ -1,7 +1,9 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 const vacantes = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/vacantes' }),
   schema: z.object({
     id: z.string(),
     titulo: z.string(),
@@ -18,7 +20,7 @@ const vacantes = defineCollection({
 });
 
 const talento = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/talento' }),
   schema: z.object({
     titulo: z.string(),
     descripcion: z.string(),

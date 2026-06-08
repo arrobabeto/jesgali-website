@@ -2,6 +2,10 @@
   "name": "jesgali",
   "type": "module",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "packageManager": "npm@10.9.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -11,16 +15,16 @@
     "verify:modal-html": "PUBLIC_WEB3FORMS_ACCESS_KEY=test-access-key-123 npm run build && node scripts/verify-modal-html.mjs"
   },
   "dependencies": {
-    "@astrojs/mdx": "^3.1.9",
-    "@astrojs/sitemap": "^3.2.1",
-    "@astrojs/tailwind": "^5.1.4",
-    "astro": "^4.16.18",
+    "@astrojs/mdx": "^6.0.2",
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^6.4.4",
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.4",
+    "@astrojs/check": "^0.9.9",
+    "autoprefixer": "^10.4.21",
     "jsdom": "^25.0.1",
     "typescript": "^5.6.3",
-    "vitest": "^2.1.9"
+    "vitest": "^4.1.8"
   }
 }

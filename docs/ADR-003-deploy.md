@@ -19,8 +19,8 @@ Usar **GitHub Actions** para el pipeline de CI/CD. El trigger es un `push` a la 
 git push → main
     └── GitHub Actions dispara workflow
             ├── actions/checkout@v4
-            ├── actions/setup-node@v4 (Node 20)
-            ├── npm install
+            ├── actions/setup-node@v4 (Node 22.12)
+            ├── npm ci
             ├── npm run build  →  genera /dist
             └── SamKirkland/FTP-Deploy-Action
                     └── sube /dist → /public_html/

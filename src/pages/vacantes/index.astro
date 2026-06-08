@@ -63,7 +63,7 @@ const pasos = [
     <div id="vacantes-grid">
       {vacantes.map((v, i) => (
         <a
-          href={`/vacantes/${v.slug}`}
+          href={`/vacantes/${v.id}`}
           data-area={v.data.area}
           data-tipo={v.data.tipo}
           class="vacante-row"
@@ -197,8 +197,6 @@ const pasos = [
     <p style="font-size: 0.85rem; color: var(--color-ink-soft); margin-top: 0.75rem;">Te contactaremos cuando tengamos una posición que encaje con tu perfil.</p>
   </ConfirmationModal>
 
-</Layout>
-
 <style>
   /* ---- Filtros editoriales (texto, no pills) ---- */
   .filter-btn {
@@ -317,3 +315,5 @@ const pasos = [
     });
   }
 </script>
+
+</Layout>

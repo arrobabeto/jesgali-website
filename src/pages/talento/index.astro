@@ -1,0 +1,224 @@
+---
+/* Hallmark · genre: editorial · macrostructure: Editorial Magazine Grid · theme: custom (clay/cream/pine · Fraunces + Hanken Grotesk) · enrichment: featured imagery · nav: N6 · footer: Ft1 */
+/* Hallmark · pre-emit critique: P5 H5 E4 S5 R5 V4 */
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const IMG_FALLBACK = '/images/vida/vida-1.avif';
+
+const posts = await getCollection('talento');
+posts.sort((a, b) => b.data.fechaPublicacion.getTime() - a.data.fechaPublicacion.getTime());
+
+const categorias = [...new Set(posts.map(p => p.data.categoria))];
+
+const destacado = posts[0];
+const resto = posts.slice(1);
+
+function fmtFecha(d) {
+  return new Date(d).toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+}
+---
+
+<Layout
+  title="Talento — Grupo Jesgali Empresarial | Blog de Desarrollo Profesional"
+  description="Artículos sobre desarrollo profesional, soft skills, búsqueda de empleo y lo que las empresas buscan en los candidatos. Crece con el equipo de Grupo Jesgali."
+>
+
+  <!-- 1 · HERO TIPOGRÁFICO -->
+  <section class="section-container" style="padding-top: var(--space-2xl); padding-bottom: var(--space-xl);">
+    <p class="eyebrow reveal reveal-1" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+      <span style="width: 7px; height: 7px; border-radius: 9999px; background: var(--color-pine); display: inline-block;"></span>
+      {posts.length} {posts.length === 1 ? 'artículo' : 'artículos'}
+    </p>
+
+    <h1 class="reveal reveal-2" style="font-family: var(--font-display); font-weight: 600; font-size: var(--text-display); line-height: 0.96; margin-top: 1.5rem; max-width: 16ch; overflow-wrap: anywhere; min-width: 0;">
+      Crece con <span style="color: var(--color-accent-deep);">nosotros</span>
+    </h1>
+
+    <p class="reveal reveal-3" style="margin-top: 2rem; max-width: 54ch; font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft);">
+      Ideas prácticas sobre desarrollo profesional, soft skills y búsqueda de empleo. Lo que aprendemos en el camino, contado sin rodeos.
+    </p>
+  </section>
+
+  <hr class="rule-thick" />
+
+  <!-- 2 · ARTÍCULO DESTACADO -->
+  {destacado && (
+    <section class="section-container" style="padding-block: var(--space-3xl);">
+      <a href={`/talento/${destacado.slug}`} class="featured">
+        <div class="featured-media">
+          <img src={destacado.data.imagen || IMG_FALLBACK} alt={destacado.data.titulo} loading="eager" />
+        </div>
+        <div class="featured-body" style="min-width: 0;">
+          <p class="eyebrow" style="color: var(--color-accent-deep); margin-bottom: 1rem;">Destacado · {destacado.data.categoria}</p>
+          <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.08; margin-bottom: 1rem; overflow-wrap: anywhere; min-width: 0;">
+            {destacado.data.titulo}
+          </h2>
+          <p style="font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft); margin-bottom: 1.5rem; max-width: 56ch;">
+            {destacado.data.descripcion}
+          </p>
+          <span style="font-size: 0.85rem; color: var(--color-ink-soft);">{fmtFecha(destacado.data.fechaPublicacion)} · {destacado.data.tiempoLectura} min de lectura</span>
+          <span class="featured-cta link-underline" style="display: block; margin-top: 1.25rem; font-size: var(--text-md);">Leer artículo →</span>
+        </div>
+      </a>
+    </section>
+  )}
+
+  <hr class="rule-hair" />
+
+  <!-- 3 · FILTROS + GRID -->
+  <section class="section-container" style="padding-block: var(--space-3xl);">
+    <div id="filtros" style="display: flex; flex-wrap: wrap; align-items: center; gap: 1.25rem 1.5rem; margin-bottom: var(--space-xl);">
+      <button data-filter="all" class="filter-btn active">Todos</button>
+      {categorias.map(cat => (
+        <button data-filter={cat} class="filter-btn">{cat}</button>
+      ))}
+    </div>
+
+    <div id="posts-grid" class="posts-grid">
+      {resto.map(p => (
+        <a href={`/talento/${p.slug}`} class="post-card" data-categoria={p.data.categoria}>
+          <div class="post-media">
+            <img src={p.data.imagen || IMG_FALLBACK} alt={p.data.titulo} loading="lazy" />
+          </div>
+          <p class="eyebrow" style="color: var(--color-accent-deep); margin-top: 1.25rem; margin-bottom: 0.625rem;">{p.data.categoria}</p>
+          <h3 style="font-size: var(--text-lg); font-weight: 600; line-height: 1.2; margin-bottom: 0.625rem; overflow-wrap: anywhere; min-width: 0;">
+            {p.data.titulo}
+          </h3>
+          <p style="font-size: var(--text-md); line-height: 1.55; color: var(--color-ink-soft); margin-bottom: 1rem;">{p.data.descripcion}</p>
+          <span style="font-size: 0.8rem; color: var(--color-ink-soft);">{p.data.tiempoLectura} min de lectura</span>
+        </a>
+      ))}
+    </div>
+
+    <div id="no-results" style="display: none; padding-block: var(--space-2xl); text-align: center;">
+      <p style="font-size: var(--text-md); color: var(--color-ink-soft);">No hay artículos en esta categoría por el momento.</p>
+      <button data-filter="all" class="filter-btn btn-secondary" style="margin-top: 1.5rem;">Ver todos</button>
+    </div>
+  </section>
+
+  <!-- 4 · CTA BAND -->
+  <section style="background: var(--color-ink-deep); color: var(--color-paper);">
+    <div class="section-container" style="padding-block: var(--space-3xl); text-align: center;">
+      <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; color: var(--color-paper); max-width: 22ch; margin-inline: auto; overflow-wrap: anywhere; min-width: 0;">
+        ¿Listo para dar el siguiente paso?
+      </h2>
+      <p style="margin-top: 1.25rem; max-width: 48ch; margin-inline: auto; font-size: var(--text-md); line-height: 1.6; color: oklch(80% 0.014 70);">
+        Pon en práctica lo que lees. Conoce nuestras vacantes abiertas y únete a un equipo que invierte en tu crecimiento.
+      </p>
+      <div style="margin-top: 2.5rem;">
+        <a href="/vacantes" class="btn-white">Ver vacantes abiertas</a>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* ---- Filtros editoriales ---- */
+  .filter-btn {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    background: transparent;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    position: relative;
+    transition: color var(--dur-base) var(--ease-out);
+  }
+  .filter-btn::after {
+    content: '';
+    position: absolute;
+    left: 0; bottom: -4px;
+    width: 100%; height: 2px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .filter-btn:hover { color: var(--color-ink); }
+  .filter-btn.active { color: var(--color-accent-deep); }
+  .filter-btn.active::after { transform: scaleX(1); }
+
+  /* ---- Artículo destacado ---- */
+  .featured {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2rem;
+    align-items: center;
+  }
+  .featured-media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: var(--rule-hair) solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-paper-2);
+  }
+  .featured-media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+  .featured:hover .featured-media img { transform: scale(1.03); }
+  .featured:hover .featured-cta::after { transform: scaleX(1); }
+  @media (min-width: 900px) {
+    .featured { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 3.5rem; }
+  }
+
+  /* ---- Grid de tarjetas ---- */
+  .posts-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl) 2rem;
+  }
+  @media (min-width: 640px) {
+    .posts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (min-width: 1024px) {
+    .posts-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  .post-card { display: block; min-width: 0; }
+  .post-media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: var(--rule-hair) solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-paper-2);
+  }
+  .post-media img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform var(--dur-slow) var(--ease-out);
+  }
+  .post-card:hover .post-media img { transform: scale(1.03); }
+  .post-card:hover h3 { color: var(--color-accent-deep); }
+  .post-card h3 { transition: color var(--dur-base) var(--ease-out); }
+</style>
+
+<script>
+  var buttons = document.querySelectorAll('.filter-btn');
+  var cards = document.querySelectorAll('.post-card');
+  var noResults = document.getElementById('no-results');
+
+  function applyFilter(filter) {
+    var visible = 0;
+    cards.forEach(function(card) {
+      var match = filter === 'all' || card.getAttribute('data-categoria') === filter;
+      card.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    if (noResults) noResults.style.display = visible > 0 ? 'none' : 'block';
+    buttons.forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-filter') === filter);
+    });
+  }
+
+  buttons.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      applyFilter(btn.getAttribute('data-filter') || 'all');
+    });
+  });
+</script>

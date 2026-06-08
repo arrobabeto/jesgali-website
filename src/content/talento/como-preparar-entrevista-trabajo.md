@@ -4,6 +4,7 @@ descripcion: Guía práctica para llegar a tu entrevista con confianza, respuest
 categoria: Búsqueda de Empleo
 fechaPublicacion: 2025-05-10
 tiempoLectura: 7
+imagen: /images/vida/vida-2.avif
 ---
 
 La mayoría de los candidatos llega a una entrevista pensando en qué va a decir. Los que consiguen el trabajo llegan pensando en cómo van a conectar.

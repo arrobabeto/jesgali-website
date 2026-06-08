@@ -22,7 +22,7 @@ const talento = defineCollection({
   schema: z.object({
     titulo: z.string(),
     descripcion: z.string(),
-    categoria: z.enum(['Soft Skills', 'Búsqueda de Empleo', 'Qué Buscan las Empresas', 'Desarrollo Profesional']),
+    categoria: z.string(),
     fechaPublicacion: z.date(),
     tiempoLectura: z.number(),
     imagen: z.string().optional(),

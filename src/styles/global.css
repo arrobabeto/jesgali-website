@@ -1,53 +1,14 @@
 /* Hallmark · genre: editorial · macrostructure: Marquee Hero · theme: custom (clay/cream/pine · Fraunces + Hanken Grotesk) · enrichment: none · nav: N6 · footer: Ft1 */
 /* Hallmark · pre-emit critique: P5 H5 E4 S5 R4 V5 */
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap');
+/* Design tokens — fuente única de verdad. Debe ir antes de @tailwind. */
+@import './tokens.css';
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
-  :root {
-    --color-paper:        oklch(97.6% 0.009 83);
-    --color-paper-2:      oklch(94.8% 0.013 83);
-    --color-ink:          oklch(24% 0.018 55);
-    --color-ink-soft:     oklch(44% 0.016 58);
-    --color-ink-deep:     oklch(26% 0.028 50);
-    --color-hairline:     oklch(87% 0.012 78);
-    --color-accent:       oklch(54% 0.135 44);
-    --color-accent-deep:  oklch(47% 0.125 43);
-    --color-accent-soft:  oklch(93% 0.030 55);
-    --color-pine:         oklch(48% 0.070 158);
-
-    --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
-    --font-body:    'Hanken Grotesk', system-ui, -apple-system, sans-serif;
-
-    --text-display:   clamp(3.25rem, 11vw, 8.5rem);
-    --text-display-s: clamp(2.75rem, 6vw, 4.5rem);
-
-    --text-md:  clamp(1.0625rem, 0.4vw + 0.95rem, 1.15rem);
-    --text-lg:  clamp(1.2rem, 1.5vw, 1.4rem);
-    --text-xl:  clamp(1.5rem, 2.2vw, 2rem);
-    --text-2xl: clamp(1.9rem, 4vw, 2.9rem);
-    --text-3xl: clamp(2.25rem, 4.8vw, 3.1rem);
-    --text-4xl: clamp(2.75rem, 6vw, 4rem);
-
-    --space-lg:  2rem;
-    --space-xl:  3rem;
-    --space-2xl: 5rem;
-    --space-3xl: 8rem;
-    --rule-hair:  1px;
-    --rule-thick: 3px;
-    --radius-md:  0.5rem;
-
-    --dur-base:   260ms;
-    --dur-slow:   600ms;
-    --ease-out:    cubic-bezier(0.16, 1, 0.3, 1);
-    --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
-
-    --page-gutter: clamp(1rem, 5vw, 4rem);
-  }
-
   html {
     scroll-behavior: smooth;
     overflow-x: clip;

@@ -71,7 +71,7 @@ const descriptionId = `${id}-description`;
     justify-content: center;
     padding: 1rem;
     overflow-y: auto;
-    background: oklch(20% 0.02 50 / 0.55);
+    background: var(--color-scrim);
   }
 
   .confirmation-modal[hidden] {
@@ -88,7 +88,7 @@ const descriptionId = `${id}-description`;
     background: var(--color-paper);
     border: var(--rule-hair) solid var(--color-hairline);
     border-radius: var(--radius-md);
-    box-shadow: 0 1.5rem 4rem oklch(15% 0.02 50 / 0.24);
+    box-shadow: var(--shadow-modal);
     animation: confirmation-modal-enter var(--dur-base) var(--ease-out);
   }
 

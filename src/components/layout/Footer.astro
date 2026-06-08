@@ -33,7 +33,7 @@ const links = [
     <hr style="border:0; border-top: var(--rule-hair) solid oklch(45% 0.020 50); margin-block: var(--space-lg, 2rem);" />
 
     <!-- Fila inferior: enlaces + redes + copyright -->
-    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between text-sm" style="color: oklch(80% 0.014 70);">
+    <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between text-sm" style="color: var(--color-on-dark);">
       <nav class="flex flex-wrap gap-x-6 gap-y-2">
         {links.map(l => (
           <a href={l.href} class="foot-link" style="font-family: var(--font-body);">{l.label}</a>
@@ -57,6 +57,6 @@ const links = [
 <style>
   .foot-link { position: relative; transition: color var(--dur-base, 260ms) var(--ease-out, ease); }
   .foot-link:hover { color: var(--color-paper); }
-  .foot-icon { display: inline-flex; transition: color var(--dur-base, 260ms) var(--ease-out, ease); color: oklch(80% 0.014 70); }
+  .foot-icon { display: inline-flex; transition: color var(--dur-base, 260ms) var(--ease-out, ease); color: var(--color-on-dark); }
   .foot-icon:hover { color: var(--color-accent); }
 </style>

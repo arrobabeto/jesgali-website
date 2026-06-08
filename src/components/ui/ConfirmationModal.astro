@@ -1,0 +1,153 @@
+---
+interface Props {
+  id: string;
+  title: string;
+  description?: string;
+  closeLabel?: string;
+}
+
+const {
+  id,
+  title,
+  description = '',
+  closeLabel = 'Entendido',
+} = Astro.props;
+
+const titleId = `${id}-title`;
+const descriptionId = `${id}-description`;
+---
+
+<div id={id} class="confirmation-modal" data-modal-overlay hidden>
+  <div
+    class="confirmation-modal__dialog"
+    data-modal-dialog
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby={titleId}
+    aria-describedby={descriptionId}
+    tabindex="-1"
+  >
+    <div class="confirmation-modal__icon" aria-hidden="true">
+      <svg
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2.5"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M20 6L9 17l-5-5" />
+      </svg>
+    </div>
+
+    <h2 id={titleId} class="confirmation-modal__title">{title}</h2>
+    <p id={descriptionId} class="confirmation-modal__description">
+      <slot name="description">{description}</slot>
+    </p>
+
+    <div class="confirmation-modal__content">
+      <slot />
+    </div>
+
+    <button type="button" class="btn-primary confirmation-modal__close" data-modal-close>
+      {closeLabel}
+    </button>
+  </div>
+</div>
+
+<style>
+  :global(body[data-modal-open]) {
+    overflow: hidden;
+  }
+
+  .confirmation-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow-y: auto;
+    background: oklch(20% 0.02 50 / 0.55);
+  }
+
+  .confirmation-modal[hidden] {
+    display: none;
+  }
+
+  .confirmation-modal__dialog {
+    width: 100%;
+    max-width: 28rem;
+    max-height: calc(100vh - 2rem);
+    padding: clamp(1.75rem, 5vw, 2.5rem);
+    overflow-y: auto;
+    text-align: center;
+    background: var(--color-paper);
+    border: var(--rule-hair) solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    box-shadow: 0 1.5rem 4rem oklch(15% 0.02 50 / 0.24);
+    animation: confirmation-modal-enter var(--dur-base) var(--ease-out);
+  }
+
+  .confirmation-modal__dialog:focus-visible {
+    outline: 3px solid var(--color-accent-deep);
+    outline-offset: 3px;
+  }
+
+  .confirmation-modal__icon {
+    display: flex;
+    width: 52px;
+    height: 52px;
+    align-items: center;
+    justify-content: center;
+    margin-inline: auto;
+    margin-bottom: 1.25rem;
+    color: var(--color-accent-deep);
+    background: var(--color-accent-soft);
+    border-radius: 9999px;
+  }
+
+  .confirmation-modal__title {
+    margin-bottom: 0.75rem;
+    font-size: var(--text-lg);
+    font-weight: 600;
+  }
+
+  .confirmation-modal__description {
+    margin-bottom: 1rem;
+    color: var(--color-ink-soft);
+    font-size: var(--text-md);
+    line-height: 1.6;
+  }
+
+  .confirmation-modal__content:empty {
+    display: none;
+  }
+
+  .confirmation-modal__close {
+    width: 100%;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+
+  @keyframes confirmation-modal-enter {
+    from {
+      opacity: 0;
+      transform: translateY(0.75rem) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .confirmation-modal__dialog {
+      animation: none;
+      transition: none;
+    }
+  }
+</style>

@@ -1,7 +1,7 @@
 # ADR-005: Proveedor de formularios (Forms Backend)
 
-**Estado:** ⚠️ Pendiente de decisión
-**Fecha:** 2025-06
+**Estado:** ✅ Aceptada
+**Fecha:** 2026-06
 
 ---
 
@@ -21,7 +21,7 @@ El formulario de vacantes tiene una necesidad especial: idealmente adjuntar CV. 
 | Aplicación a vacante | Nombre, email, teléfono, LinkedIn, motivación | Media |
 | CV espontáneo | Nombre, email, área de interés, LinkedIn, motivación | Media |
 
-> **TBD:** Confirmar si se requiere adjuntar CV como archivo o es suficiente con link de LinkedIn.
+Los CV se completan por correo; adjuntar archivos desde el formulario permanece fuera de alcance.
 
 ---
 
@@ -48,10 +48,12 @@ El formulario de vacantes tiene una necesidad especial: idealmente adjuntar CV. 
 
 ## Decisión
 
-🟡 **Pendiente** — requiere confirmar la política de recepción de CVs con el cliente.
+Usar **Web3Forms para los tres formularios**, sin adjuntos. La clave se configura mediante `PUBLIC_WEB3FORMS_ACCESS_KEY`, se valida durante el build de producción y nunca se escribe directamente en las páginas.
+
+La lógica enriquecida de cliente es compartida y valida tanto el estado HTTP como `success: true`. Los formularios conservan `action` y `method` para progressive enhancement.
 
 ---
 
 ## Impacto en desarrollo
 
-Esta decisión debe tomarse **antes de desarrollar los componentes de formulario**. El endpoint y los atributos HTML dependen del proveedor elegido.
+La operación, migración, controles de spam y validación manual se documentan en [`FORMS.md`](FORMS.md).

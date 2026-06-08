@@ -1,0 +1,556 @@
+---
+/* Hallmark · genre: editorial · macrostructure: Long Document · theme: custom (clay/cream/pine · Fraunces + Hanken Grotesk) · enrichment: none · nav: N6 · footer: Ft1 */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 */
+/* NOTA LEGAL: Este documento es una plantilla técnica con placeholders. No sustituye asesoría jurídica especializada en LFPDPPP. El responsable del negocio debe validar todo el contenido con un abogado antes de publicarlo como definitivo y retirar el meta noindex. */
+import Layout from '../layouts/Layout.astro';
+
+const toc = [
+  { id: 'responsable',    label: 'Responsable del tratamiento' },
+  { id: 'datos',          label: 'Datos que recabamos' },
+  { id: 'finalidades',    label: 'Finalidades del tratamiento' },
+  { id: 'transferencias', label: 'Transferencias a terceros' },
+  { id: 'conservacion',   label: 'Plazo de conservación' },
+  { id: 'arco',           label: 'Derechos ARCO' },
+  { id: 'limitar',        label: 'Limitar el uso' },
+  { id: 'cambios',        label: 'Cambios al aviso' },
+  { id: 'contacto-arco',  label: 'Contacto' },
+];
+---
+
+<Layout
+  title="Aviso de Privacidad — Grupo Jesgali Empresarial"
+  description="Aviso de privacidad de Grupo Jesgali Empresarial conforme a la Ley Federal de Protección de Datos Personales en Posesión de los Particulares (LFPDPPP). Explica qué datos recabamos, sus finalidades y cómo ejercer tus derechos ARCO."
+  noindex={true}
+>
+
+  <!-- BANNER: PENDIENTE DE VALIDACIÓN LEGAL -->
+  <div class="pending-banner" role="alert">
+    <div class="section-container" style="padding-block: 1rem;">
+      <div style="display: flex; align-items: flex-start; gap: 0.75rem; flex-wrap: wrap; justify-content: center;">
+        <span class="pending-tag">Borrador · No publicar</span>
+        <p style="font-size: 0.9rem; line-height: 1.5; color: var(--color-accent-deep); margin: 0; text-align: center;">
+          Este aviso contiene <strong>placeholders pendientes de validación legal</strong>. No es un documento definitivo. Retira el <code>noindex</code> y elimina este banner solo tras la revisión de un abogado especialista en LFPDPPP.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1 · HERO TIPOGRÁFICO -->
+  <section class="section-container" style="padding-top: var(--space-2xl); padding-bottom: var(--space-xl);">
+    <p class="eyebrow" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+      <span style="width: 7px; height: 7px; border-radius: 9999px; background: var(--color-pine); display: inline-block;"></span>
+      Información legal
+    </p>
+
+    <h1 style="font-family: var(--font-display); font-weight: 600; font-size: var(--text-display-s); line-height: 1.0; margin-top: 1.5rem; max-width: 20ch; overflow-wrap: anywhere; min-width: 0;">
+      Aviso de <span style="color: var(--color-accent-deep);">Privacidad</span>
+    </h1>
+
+    <p style="margin-top: 1.5rem; max-width: 60ch; font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft);">
+      En cumplimiento con la <em>Ley Federal de Protección de Datos Personales en Posesión de los Particulares</em> (LFPDPPP), Grupo Jesgali Empresarial le informa sobre el tratamiento de sus datos personales.
+    </p>
+
+    <p style="margin-top: 1rem; font-size: 0.875rem; color: var(--color-ink-soft);">
+      Última actualización: <span class="legal-ph">PENDIENTE — colocar fecha al validar</span>
+    </p>
+  </section>
+
+  <hr class="rule-thick" />
+
+  <!-- 2 · LONG DOCUMENT: TOC + CUERPO -->
+  <section class="section-container" style="padding-block: var(--space-3xl);">
+    <div class="doc-layout">
+
+      <!-- TOC sticky -->
+      <aside class="doc-toc" aria-label="Tabla de contenido">
+        <p class="eyebrow" style="margin-bottom: 1rem;">En este aviso</p>
+        <nav>
+          <ol style="list-style: none; padding: 0; margin: 0; counter-reset: toc-counter;">
+            {toc.map((item, i) => (
+              <li style="margin-bottom: 0.5rem; display: flex; gap: 0.5rem; align-items: baseline;">
+                <span style="font-size: 0.7rem; color: var(--color-ink-soft); opacity: 0.5; min-width: 1.25rem; font-variant-numeric: tabular-nums;">{String(i + 1).padStart(2, '0')}</span>
+                <a href={`#${item.id}`} class="toc-link">{item.label}</a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+      </aside>
+
+      <!-- Cuerpo del documento -->
+      <article class="doc-prose" aria-label="Aviso de privacidad">
+
+        <!-- ─── SECCIÓN 1 ─── -->
+        <section id="responsable" style="scroll-margin-top: 6rem;">
+          <h2>Responsable del tratamiento</h2>
+          <p>
+            El responsable del tratamiento de sus datos personales es:
+          </p>
+          <div class="legal-pending-block">
+            <p class="legal-pending-label">Validación pendiente — completar con asesor legal</p>
+            <ul style="margin: 0.5rem 0 0 0; padding-left: 1.25rem; list-style: disc; font-size: 0.9rem;">
+              <li><strong>Denominación o razón social:</strong> <span class="legal-ph">POR CONFIRMAR</span></li>
+              <li><strong>RFC:</strong> <span class="legal-ph">POR CONFIRMAR</span></li>
+              <li><strong>Domicilio fiscal:</strong> Cuernavaca, Morelos — <span class="legal-ph">dirección exacta por confirmar</span></li>
+              <li><strong>Responsable de datos personales:</strong> <span class="legal-ph">Nombre del responsable por confirmar</span></li>
+              <li><strong>Número de registro INAI</strong> (si aplica): <span class="legal-ph">POR CONFIRMAR</span></li>
+            </ul>
+          </div>
+          <p>
+            Correo electrónico de contacto: <a href="mailto:contacto@jesgali.com.mx" class="link-underline">contacto@jesgali.com.mx</a>
+          </p>
+        </section>
+
+        <hr class="doc-rule" />
+
+        <!-- ─── SECCIÓN 2 ─── -->
+        <section id="datos" style="scroll-margin-top: 6rem;">
+          <h2>Datos personales que recabamos</h2>
+          <p>
+            Grupo Jesgali recaba datos personales a través de dos formularios presentes en su sitio web:
+          </p>
+
+          <h3>Formulario de contacto general</h3>
+          <ul>
+            <li>Nombre completo</li>
+            <li>Correo electrónico</li>
+            <li>Teléfono (campo opcional)</li>
+            <li>Asunto y mensaje libre</li>
+          </ul>
+
+          <h3>Formulario de postulación a vacantes</h3>
+          <ul>
+            <li>Nombre completo</li>
+            <li>Correo electrónico</li>
+            <li>Teléfono</li>
+            <li>URL de perfil de LinkedIn (campo opcional)</li>
+            <li>Carta de presentación o motivación escrita</li>
+          </ul>
+
+          <div class="doc-callout">
+            <p>
+              <strong>Datos sensibles:</strong> Grupo Jesgali <strong>no recaba datos personales sensibles</strong> conforme al artículo 3, fracción VI de la LFPDPPP (origen racial o étnico, estado de salud presente y futuro, información genética, creencias religiosas, filosóficas o morales, afiliación sindical, opiniones políticas y preferencia sexual).
+            </p>
+          </div>
+        </section>
+
+        <hr class="doc-rule" />
+
+        <!-- ─── SECCIÓN 3 ─── -->
+        <section id="finalidades" style="scroll-margin-top: 6rem;">
+          <h2>Finalidades del tratamiento</h2>
+          <p>Sus datos personales son tratados para las siguientes finalidades:</p>
+
+          <h3>Finalidades primarias</h3>
+          <p>Son necesarias para la relación entre usted y Grupo Jesgali. Sin ellas no es posible atender su solicitud:</p>
+          <ul>
+            <li><strong>Contacto general:</strong> responder consultas, propuestas comerciales y cualquier comunicación que nos remita a través del formulario.</li>
+            <li><strong>Reclutamiento:</strong> recibir y gestionar su solicitud de empleo; evaluar su perfil para la vacante a la que se postula; contactarle para continuar el proceso de selección.</li>
+          </ul>
+
+          <h3>Finalidades secundarias</h3>
+          <p>Son opcionales. Puede oponerse a su tratamiento en cualquier momento sin que ello afecte la atención de su solicitud principal:</p>
+          <ul>
+            <li>Mantener sus datos en nuestra base de talento para notificarle sobre vacantes futuras que coincidan con su perfil.</li>
+            <li>Envío de comunicaciones relacionadas con oportunidades laborales en Grupo Jesgali.</li>
+          </ul>
+          <p style="font-size: 0.9rem; color: var(--color-ink-soft);">
+            Para oponerse a las finalidades secundarias, consulte la sección <a href="#arco" class="link-underline">Derechos ARCO</a> o la sección <a href="#limitar" class="link-underline">Limitar el uso</a>.
+          </p>
+        </section>
+
+        <hr class="doc-rule" />
+
+        <!-- ─── SECCIÓN 4 ─── -->
+        <section id="transferencias" style="scroll-margin-top: 6rem;">
+          <h2>Transferencias a terceros</h2>
+
+          <h3>Web3Forms — encargado del tratamiento</h3>
+          <p>
+            Los datos ingresados en nuestros formularios son procesados técnicamente por <strong>Web3Forms</strong>, una plataforma tecnológica que actúa como <em>encargado del tratamiento</em> (procesador de datos). Web3Forms recibe los datos únicamente para entregarlos a nuestro correo electrónico y no los utiliza para fines propios ni los transfiere a terceros de forma independiente.
+          </p>
+          <p>
+            Para conocer la política de privacidad de Web3Forms, visite:
+            <a href="https://web3forms.com/privacy" target="_blank" rel="noopener noreferrer" class="link-underline">web3forms.com/privacy</a>
+          </p>
+
+          <div class="legal-pending-block">
+            <p class="legal-pending-label">Validación pendiente</p>
+            <p style="font-size: 0.9rem; margin: 0.5rem 0 0 0;">
+              Confirmar con asesor legal si existen otras transferencias (p. ej. plataformas de almacenamiento en nube, CRM, proveedor de correo corporativo hosted en terceros). De existir, deben listarse con su base legal conforme al artículo 36 de la LFPDPPP.
+            </p>
+          </div>
+
+          <p>
+            Fuera del encargado descrito y salvo las excepciones previstas en el artículo 37 de la LFPDPPP, Grupo Jesgali no realiza transferencias de datos personales a terceros sin su consentimiento previo.
+          </p>
+        </section>
+
+        <hr class="doc-rule" />
+
+        <!-- ─── SECCIÓN 5 ─── -->
+        <section id="conservacion" style="scroll-margin-top: 6rem;">
+          <h2>Plazo de conservación</h2>
+
+          <div class="legal-pending-block">
+            <p class="legal-pending-label">Validación pendiente — definir con asesor legal</p>
+            <p style="font-size: 0.9rem; margin: 0.5rem 0 0 0;">
+              El plazo de conservación debe determinarse considerando: (a) normativa fiscal del SAT (mínimo 5 años para documentos con efectos tributarios); (b) Ley Federal del Trabajo, para datos de candidatos y empleados; (c) criterios propios del negocio y política interna de retención. Hasta que se definan los plazos, coloque aquí la redacción validada.
+            </p>
+          </div>
+
+          <p>
+            Sus datos se conservarán durante el tiempo estrictamente necesario para cumplir la finalidad para la que fueron recabados o el plazo que señale la legislación aplicable. Una vez concluido dicho plazo, los datos serán bloqueados y posteriormente suprimidos conforme a lo establecido en la LFPDPPP.
+          </p>
+          <p>
+            Si usted ejerce su derecho de Cancelación y no existe una obligación legal de conservación vigente, sus datos serán eliminados en el plazo establecido por la LFPDPPP.
+          </p>
+        </section>
+
+        <hr class="doc-rule" />
+
+        <!-- ─── SECCIÓN 6 ─── -->
+        <section id="arco" style="scroll-margin-top: 6rem;">
+          <h2>Derechos ARCO</h2>
+          <p>
+            Conforme a la LFPDPPP, usted tiene derecho a:
+          </p>
+          <ul>
+            <li>
+              <strong>Acceso:</strong> conocer qué datos personales tenemos, para qué los utilizamos y las condiciones del uso que les damos.
+            </li>
+            <li>
+              <strong>Rectificación:</strong> solicitar la corrección de sus datos cuando sean inexactos, incompletos o estén desactualizados.
+            </li>
+            <li>
+              <strong>Cancelación:</strong> solicitar la supresión de sus datos cuando considere que no son necesarios para la finalidad declarada o cuando haya concluido la relación que los originó, previo bloqueo durante el plazo legal.
+            </li>
+            <li>
+              <strong>Oposición:</strong> oponerse al tratamiento de sus datos para finalidades secundarias, o cuando exista una causa legítima y específica que lo justifique.
+            </li>
+          </ul>
+
+          <p>
+            <strong>Para ejercer sus derechos ARCO</strong>, envíe un correo electrónico a:
+            <span class="legal-ph">POR CONFIRMAR — definir correo ARCO (puede ser contacto@jesgali.com.mx u otro específico)</span>
+          </p>
+
+          <p>Su solicitud deberá incluir:</p>
+          <ul>
+            <li>Nombre completo del titular.</li>
+            <li>Descripción clara del derecho que desea ejercer y los datos sobre los que lo solicita.</li>
+            <li>Correo electrónico o domicilio para recibir la respuesta.</li>
+            <li>Copia de documento que acredite su identidad (cuando sea necesario para verificarla).</li>
+          </ul>
+
+          <div class="doc-callout">
+            <p>
+              Responderemos en un plazo máximo de <strong>20 días hábiles</strong> contados a partir de la recepción de su solicitud, conforme al artículo 32 de la LFPDPPP. Si su solicitud procede, la haremos efectiva en un plazo de 15 días hábiles adicionales.
+            </p>
+          </div>
+
+          <p style="font-size: 0.9rem; color: var(--color-ink-soft);">
+            Si considera que su derecho a la protección de datos personales ha sido vulnerado, puede presentar una queja ante el Instituto Nacional de Transparencia, Acceso a la Información y Protección de Datos Personales (INAI): <a href="https://home.inai.org.mx" target="_blank" rel="noopener noreferrer" class="link-underline">inai.org.mx</a>
+          </p>
+        </section>
+
+        <hr class="doc-rule" />
+
+        <!-- ─── SECCIÓN 7 ─── -->
+        <section id="limitar" style="scroll-margin-top: 6rem;">
+          <h2>Cómo limitar el uso de sus datos</h2>
+          <p>
+            Para limitar el uso de sus datos personales para finalidades secundarias (por ejemplo, dejar de recibir comunicaciones sobre nuevas vacantes), puede enviar su solicitud al correo indicado en la sección <a href="#arco" class="link-underline">Derechos ARCO</a>, indicando en el asunto: <strong>"Limitación de uso — [su nombre]"</strong>.
+          </p>
+          <div class="legal-pending-block">
+            <p class="legal-pending-label">Validación pendiente</p>
+            <p style="font-size: 0.9rem; margin: 0.5rem 0 0 0;">
+              Confirmar con asesor si la empresa está obligada a inscribirse al Registro Público de Usuarios de la CONDUSEF o al Registro Público de Consumidores de la PROFECO, según la naturaleza de la actividad comercial. Si corresponde, incluir instrucciones de inscripción en esta sección.
+            </p>
+          </div>
+        </section>
+
+        <hr class="doc-rule" />
+
+        <!-- ─── SECCIÓN 8 ─── -->
+        <section id="cambios" style="scroll-margin-top: 6rem;">
+          <h2>Cambios a este aviso</h2>
+          <p>
+            Grupo Jesgali Empresarial se reserva el derecho de modificar el presente Aviso de Privacidad en cualquier momento para adecuarlo a novedades legislativas, jurisprudenciales, políticas internas o prácticas del sector.
+          </p>
+          <p>
+            Cualquier modificación relevante será publicada en esta página. Le recomendamos revisarla periódicamente. Su uso continuado de los formularios tras una modificación implica la aceptación del aviso actualizado.
+          </p>
+          <p>
+            <strong>Fecha de última actualización:</strong> <span class="legal-ph">PENDIENTE — colocar fecha al validar y publicar</span>
+          </p>
+        </section>
+
+        <hr class="doc-rule" />
+
+        <!-- ─── SECCIÓN 9 ─── -->
+        <section id="contacto-arco" style="scroll-margin-top: 6rem;">
+          <h2>Contacto</h2>
+          <p>Para cualquier duda relacionada con el tratamiento de sus datos personales o el contenido de este Aviso de Privacidad:</p>
+          <ul>
+            <li><strong>Correo:</strong> <a href="mailto:contacto@jesgali.com.mx" class="link-underline">contacto@jesgali.com.mx</a></li>
+            <li><strong>Sitio web:</strong> <a href="https://jesgali.com.mx" class="link-underline">jesgali.com.mx</a></li>
+          </ul>
+          <p>
+            Este Aviso de Privacidad está disponible permanentemente en
+            <a href="/politica-de-privacidad" class="link-underline">jesgali.com.mx/politica-de-privacidad</a>
+          </p>
+
+          <p class="doc-disclaimer">
+            La presente especificación técnica no constituye ni sustituye asesoría jurídica especializada. Grupo Jesgali deberá validar este documento con un abogado con experiencia en LFPDPPP antes de presentarlo como definitivo.
+          </p>
+        </section>
+
+      </article>
+    </div>
+  </section>
+
+  <!-- 3 · CHECKLIST DE VALIDACIÓN LEGAL -->
+  <!-- Visible para el responsable del negocio mientras noindex está activo -->
+  <section style="background: var(--color-paper-2); border-top: var(--rule-thick) solid var(--color-accent-deep);">
+    <div class="section-container" style="padding-block: var(--space-3xl);">
+      <div style="max-width: 720px;">
+        <p class="eyebrow" style="color: var(--color-accent-deep); margin-bottom: 1rem;">Para el responsable del negocio</p>
+        <h2 style="font-size: var(--text-xl); font-weight: 600; line-height: 1.1; margin-bottom: 1.5rem; overflow-wrap: anywhere; min-width: 0;">
+          Checklist antes de publicar
+        </h2>
+        <p style="font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft); margin-bottom: var(--space-lg);">
+          Esta sección solo es visible en el borrador (noindex activo). Completa todos los puntos con tu asesor legal antes de publicar el aviso como definitivo.
+        </p>
+
+        <div class="checklist">
+          {[
+            'Razón social completa y RFC confirmados con asesor',
+            'Domicilio fiscal registrado en el aviso de privacidad',
+            'Nombre del responsable de datos personales definido',
+            'Correo específico para solicitudes ARCO creado y operativo',
+            'Plazos de conservación definidos (SAT + LFT + política interna)',
+            'Confirmar si hay otras transferencias a terceros (cloud, CRM, correo hosted)',
+            'Validar obligación de inscripción al Registro Público de Consumidores PROFECO',
+            'Número de registro INAI (si corresponde)',
+            'Revisión final por abogado especialista en LFPDPPP',
+            'Fecha de publicación/actualización fijada e integrada al documento',
+            'Eliminar el banner "Borrador · No publicar" de este archivo',
+            'Retirar noindex={true} del Layout en politica-de-privacidad.astro',
+            'Verificar que los formularios de contacto y vacantes tengan el checkbox de consentimiento funcional',
+            'Verificar que el enlace del footer apunta a esta ruta (/politica-de-privacidad)',
+          ].map(item => (
+            <div class="checklist-item">
+              <span class="checklist-box" aria-hidden="true"></span>
+              <span>{item}</span>
+            </div>
+          ))}
+        </div>
+
+        <p style="margin-top: var(--space-lg); font-size: 0.875rem; line-height: 1.6; color: var(--color-ink-soft); border-top: var(--rule-hair) solid var(--color-hairline); padding-top: 1.25rem;">
+          <strong style="color: var(--color-ink);">Nota:</strong> Este aviso fue generado como guía técnica estructural. El texto legal definitivo debe ser redactado o supervisado por un profesional del derecho. La presencia de este aviso en el sitio no garantiza cumplimiento legal si los datos legales requeridos no han sido completados y validados.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* ─── BANNER PENDIENTE ─── */
+  .pending-banner {
+    background: var(--color-accent-soft);
+    border-bottom: 3px solid var(--color-accent-deep);
+  }
+  .pending-tag {
+    display: inline-block;
+    background: var(--color-accent-deep);
+    color: var(--color-paper);
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  /* ─── PLACEHOLDERS LEGALES ─── */
+  .legal-ph {
+    display: inline-block;
+    background: var(--color-accent-soft);
+    border: 1px solid var(--color-accent);
+    border-radius: 3px;
+    padding: 0.1em 0.4em;
+    font-size: 0.82em;
+    font-weight: 700;
+    color: var(--color-accent-deep);
+    font-family: var(--font-body);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-style: normal;
+  }
+  .legal-pending-block {
+    border-left: 3px solid var(--color-accent-deep);
+    background: var(--color-accent-soft);
+    padding: 1rem 1.25rem;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    margin-block: 1.25rem;
+  }
+  .legal-pending-label {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent-deep);
+    margin: 0 0 0.25rem 0;
+  }
+  .legal-pending-block p { margin: 0; color: var(--color-ink-soft); }
+  .legal-pending-block ul { color: var(--color-ink-soft); }
+
+  /* ─── LAYOUT LONG DOCUMENT ─── */
+  .doc-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-2xl);
+    align-items: start;
+  }
+  @media (min-width: 1024px) {
+    .doc-layout {
+      grid-template-columns: 14rem minmax(0, 1fr);
+      gap: 4rem;
+    }
+  }
+
+  /* ─── TOC ─── */
+  .doc-toc { min-width: 0; }
+  @media (min-width: 1024px) {
+    .doc-toc {
+      position: sticky;
+      top: 6rem;
+      padding-top: 0.25rem;
+    }
+  }
+  @media (max-width: 1023px) {
+    .doc-toc {
+      border: var(--rule-hair) solid var(--color-hairline);
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      background: var(--color-paper-2);
+    }
+  }
+  .toc-link {
+    font-size: 0.875rem;
+    line-height: 1.45;
+    color: var(--color-ink-soft);
+    transition: color var(--dur-base) var(--ease-out);
+    display: inline-block;
+  }
+  .toc-link:hover { color: var(--color-accent-deep); }
+
+  /* ─── PROSE ─── */
+  .doc-prose { max-width: 68ch; min-width: 0; }
+  .doc-prose h2 {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 1.25rem;
+    line-height: 1.1;
+    overflow-wrap: anywhere;
+  }
+  .doc-prose h3 {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.875rem;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+  .doc-prose p {
+    font-size: var(--text-md);
+    line-height: 1.7;
+    color: var(--color-ink-soft);
+    margin-bottom: 1rem;
+  }
+  .doc-prose strong { color: var(--color-ink); font-weight: 600; }
+  .doc-prose em { font-style: italic; }
+  .doc-prose ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1rem 0;
+  }
+  .doc-prose ul li {
+    font-size: var(--text-md);
+    line-height: 1.65;
+    color: var(--color-ink-soft);
+    border-top: var(--rule-hair) solid var(--color-hairline);
+    padding-block: 0.625rem;
+    padding-left: 0.5rem;
+  }
+  .doc-prose ul li:last-child { border-bottom: var(--rule-hair) solid var(--color-hairline); }
+  .doc-prose a { color: var(--color-accent-deep); text-underline-offset: 2px; }
+  .doc-prose code {
+    font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+    background: var(--color-paper-2);
+    border: var(--rule-hair) solid var(--color-hairline);
+    border-radius: 3px;
+    padding: 0.1em 0.35em;
+    color: var(--color-ink);
+  }
+
+  /* ─── SEPARADORES ─── */
+  .doc-rule {
+    border: 0;
+    border-top: var(--rule-hair) solid var(--color-hairline);
+    margin-block: 2.5rem;
+  }
+
+  /* ─── CALLOUT ─── */
+  .doc-callout {
+    border: var(--rule-hair) solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    margin-block: 1.25rem;
+    background: var(--color-paper-2);
+  }
+  .doc-callout p { margin: 0; font-size: 0.9rem; }
+
+  /* ─── DISCLAIMER FINAL ─── */
+  .doc-disclaimer {
+    margin-top: 2rem;
+    font-size: 0.85rem !important;
+    line-height: 1.6 !important;
+    color: var(--color-ink-soft);
+    border-top: var(--rule-hair) solid var(--color-hairline);
+    padding-top: 1.25rem;
+    font-style: italic;
+  }
+
+  /* ─── CHECKLIST ─── */
+  .checklist { display: flex; flex-direction: column; gap: 0; }
+  .checklist-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.875rem;
+    padding-block: 0.875rem;
+    border-top: var(--rule-hair) solid var(--color-hairline);
+    font-size: var(--text-md);
+    line-height: 1.5;
+    color: var(--color-ink-soft);
+  }
+  .checklist-item:last-child { border-bottom: var(--rule-hair) solid var(--color-hairline); }
+  .checklist-box {
+    display: inline-block;
+    width: 1.1rem;
+    height: 1.1rem;
+    min-width: 1.1rem;
+    border: 2px solid var(--color-hairline);
+    border-radius: 3px;
+    margin-top: 0.15rem;
+    background: var(--color-paper);
+  }
+</style>

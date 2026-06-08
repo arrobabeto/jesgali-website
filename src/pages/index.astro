@@ -414,25 +414,25 @@ const alcance = [
 
 <script>
 (() => {
-  const track = document.getElementById('voz-track');
+  const track = document.querySelector<HTMLElement>('#voz-track');
   if (!track) return;
   const cards = track.querySelectorAll('.voz-card');
-  const dots = document.querySelectorAll('.voz-dot');
+  const dots = document.querySelectorAll<HTMLElement>('.voz-dot');
   const counter = document.querySelector('.voz-counter');
   const total = cards.length;
   let cur = 0;
   const rm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  function goTo(n) {
+  function goTo(n: number) {
     cur = Math.max(0, Math.min(total - 1, n));
-    if (rm) track.style.transition = 'none';
-    track.style.transform = `translateX(-${cur * 100}%)`;
+    if (rm) track!.style.transition = 'none';
+    track!.style.transform = `translateX(-${cur * 100}%)`;
     dots.forEach((d, i) => {
       d.classList.toggle('is-active', i === cur);
       d.setAttribute('aria-selected', String(i === cur));
     });
     if (counter) counter.textContent = `${cur + 1} / ${total}`;
-    if (rm) requestAnimationFrame(() => { track.style.transition = ''; });
+    if (rm) requestAnimationFrame(() => { track!.style.transition = ''; });
   }
 
   document.getElementById('voz-prev')?.addEventListener('click', () => goTo(cur - 1));
@@ -446,7 +446,7 @@ const alcance = [
     if (Math.abs(dx) > 50) goTo(cur + (dx < 0 ? 1 : -1));
   }, { passive: true });
 
-  document.querySelectorAll('.voz-video-wrap[data-vid]').forEach(wrap => {
+  document.querySelectorAll<HTMLElement>('.voz-video-wrap[data-vid]').forEach(wrap => {
     wrap.addEventListener('click', () => {
       const id = wrap.dataset.vid;
       wrap.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1" allow="autoplay; encrypted-media" allowfullscreen loading="lazy" title="Testimonio en video"></iframe>`;

@@ -4,6 +4,7 @@ interface Props {
   description: string;
   image?: string;
   canonicalURL?: string;
+  noindex?: boolean;
 }
 
 const {
@@ -11,6 +12,7 @@ const {
   description,
   image = '/og-default.jpg',
   canonicalURL = new URL(Astro.url.pathname, Astro.site),
+  noindex = false,
 } = Astro.props;
 
 const siteName = 'Grupo Jesgali Empresarial';
@@ -18,6 +20,7 @@ const fullTitle = title === siteName ? title : `${title} | ${siteName}`;
 ---
 
 <meta charset="utf-8" />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="generator" content={Astro.generator} />
 

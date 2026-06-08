@@ -16,7 +16,8 @@
 | [`docs/adr/ADR-002-hosting.md`](docs/adr/ADR-002-hosting.md) | Decisión: Hosting HostGator México |
 | [`docs/adr/ADR-003-deploy.md`](docs/adr/ADR-003-deploy.md) | Decisión: GitHub Actions + FTP |
 | [`docs/adr/ADR-004-tailwind.md`](docs/adr/ADR-004-tailwind.md) | Decisión: Tailwind CSS |
-| [`docs/adr/ADR-005-forms.md`](docs/adr/ADR-005-forms.md) | ⚠️ PENDIENTE: Proveedor de formularios |
+| [`docs/adr/ADR-005-forms.md`](docs/adr/ADR-005-forms.md) | Decisión: Web3Forms para los tres formularios |
+| [`docs/FORMS.md`](FORMS.md) | Configuración, operación y pruebas de Web3Forms |
 
 ## Estado del proyecto
 

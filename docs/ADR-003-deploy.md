@@ -33,8 +33,11 @@ git push → main
 | `FTP_SERVER` | cPanel → Cuentas FTP → Host |
 | `FTP_USERNAME` | cPanel → Cuentas FTP → Usuario |
 | `FTP_PASSWORD` | cPanel → Cuentas FTP → Contraseña |
+| `PUBLIC_WEB3FORMS_ACCESS_KEY` | Web3Forms → access key del correo receptor |
 
 Los secrets se configuran en: `GitHub repo → Settings → Secrets and variables → Actions`.
+
+El workflow ejecuta `npm run check` y `npm test` antes del build. `npm run build` falla si `PUBLIC_WEB3FORMS_ACCESS_KEY` falta o contiene un placeholder, por lo que el paso FTP no inicia con una configuración incompleta.
 
 ## Consecuencias
 

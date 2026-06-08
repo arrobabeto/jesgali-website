@@ -2,6 +2,9 @@
 /* Hallmark · genre: editorial · macrostructure: Split Contact · theme: custom (clay/cream/pine · Fraunces + Hanken Grotesk) · enrichment: none · nav: N6 · footer: Ft1 */
 /* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 */
 import Layout from '../layouts/Layout.astro';
+import ConfirmationModal from '../components/ui/ConfirmationModal.astro';
+
+const web3formsAccessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY?.trim() ?? '';
 
 const datos = [
   { label: 'Correo', valor: 'contacto@jesgali.com.mx', href: 'mailto:contacto@jesgali.com.mx', pendiente: false },
@@ -74,7 +77,7 @@ const datos = [
           method="POST"
           style="border: var(--rule-hair) solid var(--color-hairline); border-radius: var(--radius-md); padding: clamp(1.5rem, 4vw, 2.5rem); background: var(--color-paper);"
         >
-          <input type="hidden" name="access_key" value="TU_ACCESS_KEY_WEB3FORMS" />
+          <input type="hidden" name="access_key" value={web3formsAccessKey} />
           <input type="hidden" name="subject" value="Contacto — Jesgali.com.mx" />
           <input type="hidden" name="from_name" value="Jesgali Sitio Web" />
           <input type="checkbox" name="botcheck" style="display: none;" />
@@ -114,9 +117,21 @@ const datos = [
             ></textarea>
           </div>
 
+          <div style="margin-top: 1.25rem;">
+            <label class="consent-label">
+              <input type="checkbox" name="consent_privacidad" required class="consent-check" />
+              <span>
+                He leído y acepto el
+                <a href="/politica-de-privacidad" target="_blank" rel="noopener noreferrer" class="link-underline" style="color: var(--color-accent-deep);">Aviso de Privacidad</a>
+                y consiento el tratamiento de mis datos personales para atender mi consulta. *
+              </span>
+            </label>
+          </div>
+
           <button type="submit" class="btn-primary" style="width: 100%; justify-content: center; margin-top: 1.75rem;">
             Enviar mensaje
           </button>
+          <p id="estado-form-contacto" class="form-status" role="status" aria-live="polite"></p>
         </form>
       </div>
 
@@ -138,26 +153,16 @@ const datos = [
     </div>
   </section>
 
-</Layout>
-
-<!-- Modal post-envío -->
-<div id="modal-contacto" class="modal-overlay">
-  <div class="modal-card">
-    <div style="width: 52px; height: 52px; border-radius: 9999px; background: var(--color-accent-soft); display: flex; align-items: center; justify-content: center; margin-inline: auto; margin-bottom: 1.25rem;">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent-deep)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M20 6L9 17l-5-5" />
-      </svg>
-    </div>
-    <h3 style="font-size: var(--text-lg); font-weight: 600; margin-bottom: 0.75rem;">Mensaje recibido</h3>
-    <p style="font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft); margin-bottom: 1rem;">
+  <ConfirmationModal id="modal-contacto" title="Mensaje recibido">
+    <Fragment slot="description">
       Gracias por escribirnos. Te responderemos lo antes posible al correo que nos dejaste.
-    </p>
+    </Fragment>
     <a href="mailto:contacto@jesgali.com.mx" class="link-underline" style="font-size: var(--text-md);">
       contacto@jesgali.com.mx
     </a>
-    <button id="cerrar-modal-contacto" class="btn-primary" style="width: 100%; margin-top: 1.5rem;">Entendido</button>
-  </div>
-</div>
+  </ConfirmationModal>
+
+</Layout>
 
 <style>
   /* ---- Placeholder pendiente ---- */
@@ -166,6 +171,25 @@ const datos = [
     color: var(--color-ink-soft);
     opacity: 0.6;
     font-style: normal;
+  }
+
+  /* ---- Consentimiento privacidad ---- */
+  .consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: var(--color-ink-soft);
+  }
+  .consent-check {
+    margin-top: 0.15rem;
+    width: 1rem;
+    height: 1rem;
+    min-width: 1rem;
+    accent-color: var(--color-accent-deep);
+    cursor: pointer;
   }
 
   /* ---- Campos de formulario ---- */
@@ -191,58 +215,23 @@ const datos = [
   .field-input:hover { border-color: var(--color-ink-soft); }
   .field-input:focus { outline: none; border-color: var(--color-accent-deep); box-shadow: 0 0 0 3px var(--color-accent-soft); }
 
-  /* ---- Modal ---- */
-  .modal-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 50;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    padding: 1rem;
-    background: oklch(20% 0.02 50 / 0.55);
-  }
-  .modal-overlay.is-open { display: flex; }
-  .modal-card {
-    background: var(--color-paper);
-    border: var(--rule-hair) solid var(--color-hairline);
-    border-radius: var(--radius-md);
-    max-width: 28rem;
-    width: 100%;
-    padding: clamp(1.75rem, 5vw, 2.5rem);
-    text-align: center;
-  }
 </style>
 
 <script>
-  var form = document.getElementById('form-contacto');
-  var modal = document.getElementById('modal-contacto');
-  var cerrar = document.getElementById('cerrar-modal-contacto');
+  import { initWeb3Forms } from '../scripts/web3forms';
+  import { initModal } from '../scripts/modal';
 
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var data = new FormData(form);
-      fetch('https://api.web3forms.com/submit', { method: 'POST', body: data })
-        .then(function(res) {
-          if (res.ok) {
-            form.reset();
-            if (modal) modal.classList.add('is-open');
-          }
-        })
-        .catch(function() {});
-    });
-  }
+  const form = document.querySelector<HTMLFormElement>('#form-contacto');
+  const status = document.querySelector<HTMLElement>('#estado-form-contacto');
+  const modal = document.querySelector<HTMLElement>('#modal-contacto');
+  const modalController = modal ? initModal(modal) : null;
 
-  if (cerrar) {
-    cerrar.addEventListener('click', function() {
-      if (modal) modal.classList.remove('is-open');
-    });
-  }
-
-  if (modal) {
-    modal.addEventListener('click', function(e) {
-      if (e.target === modal) modal.classList.remove('is-open');
+  if (form && status) {
+    initWeb3Forms({
+      form,
+      statusElement: status,
+      submittingLabel: 'Enviando mensaje…',
+      onSuccess: submitter => modalController?.open(submitter),
     });
   }
 </script>

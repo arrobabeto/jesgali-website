@@ -1,0 +1,246 @@
+---
+/* Hallmark · genre: editorial · macrostructure: Article/Detail + TOC · theme: custom (clay/cream/pine · Fraunces + Hanken Grotesk) · enrichment: featured image · nav: N6 · footer: Ft1 */
+/* Hallmark · pre-emit critique: P5 H5 E5 S5 R5 V4 */
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+const IMG_FALLBACK = '/images/vida/vida-1.avif';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('talento');
+  return posts.map(p => ({
+    params: { slug: p.slug },
+    props: { entry: p },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await entry.render();
+const { titulo, descripcion, categoria, fechaPublicacion, tiempoLectura, imagen } = entry.data;
+
+// TOC: solo h2
+const toc = headings.filter(h => h.depth === 2);
+
+// Recomendados: misma categoría primero; rellena con los más recientes hasta 3
+const MAX_RECOMENDADOS = 3;
+const todos = await getCollection('talento', p => p.slug !== entry.slug);
+todos.sort((a, b) => b.data.fechaPublicacion.getTime() - a.data.fechaPublicacion.getTime());
+
+const mismaCategoria = todos.filter(p => p.data.categoria === categoria);
+const otros = todos.filter(p => p.data.categoria !== categoria);
+const recomendados = [...mismaCategoria, ...otros].slice(0, MAX_RECOMENDADOS);
+
+const fechaDisplay = new Date(fechaPublicacion).toLocaleDateString('es-MX', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' });
+---
+
+<Layout
+  title={`${titulo} — Talento Grupo Jesgali Empresarial`}
+  description={descripcion}
+  image={imagen || IMG_FALLBACK}
+>
+
+  <!-- 1 · HERO -->
+  <section class="section-container" style="padding-top: var(--space-2xl); padding-bottom: var(--space-xl);">
+    <a href="/talento" class="back-link reveal reveal-1" aria-label="Volver a Talento">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Talento
+    </a>
+
+    <p class="eyebrow reveal reveal-2" style="color: var(--color-accent-deep); margin-top: 2rem;">{categoria}</p>
+
+    <h1 class="reveal reveal-2" style="font-family: var(--font-display); font-weight: 600; font-size: var(--text-3xl); line-height: 1.05; margin-top: 1rem; max-width: 24ch; overflow-wrap: anywhere; min-width: 0;">
+      {titulo}
+    </h1>
+
+    <p class="reveal reveal-3" style="margin-top: 1.5rem; font-size: 0.9rem; color: var(--color-ink-soft);">
+      {fechaDisplay} · {tiempoLectura} min de lectura
+    </p>
+  </section>
+
+  <!-- 2 · FEATURED IMAGE -->
+  <section class="section-container" style="padding-bottom: var(--space-2xl);">
+    <div class="article-hero-media">
+      <img src={imagen || IMG_FALLBACK} alt={titulo} loading="eager" />
+    </div>
+  </section>
+
+  <hr class="rule-hair" />
+
+  <!-- 3 · TOC + PROSE -->
+  <section class="section-container" style="padding-block: var(--space-3xl);">
+    <div class="article-layout">
+      {toc.length > 0 && (
+        <aside class="toc">
+          <p class="eyebrow" style="margin-bottom: 1rem;">En este artículo</p>
+          <nav>
+            <ul style="list-style: none; padding: 0; margin: 0;">
+              {toc.map(h => (
+                <li style="margin-bottom: 0.5rem;">
+                  <a href={`#${h.slug}`} class="toc-link">{h.text}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      )}
+
+      <article class="prose-editorial">
+        <Content />
+      </article>
+    </div>
+  </section>
+
+  <hr class="rule-thick" />
+
+  <!-- 4 · CTA + RELACIONADOS -->
+  <section style="background: var(--color-paper-2);">
+    <div class="section-container" style="padding-block: var(--space-3xl);">
+      <div style="text-align: center; max-width: 44ch; margin-inline: auto; margin-bottom: var(--space-2xl);">
+        <h2 style="font-size: var(--text-2xl); font-weight: 600; line-height: 1.1; overflow-wrap: anywhere; min-width: 0;">
+          ¿Buscas tu próxima oportunidad?
+        </h2>
+        <p style="margin-top: 1rem; font-size: var(--text-md); line-height: 1.6; color: var(--color-ink-soft);">
+          Explora las posiciones abiertas en Grupo Jesgali y da el siguiente paso.
+        </p>
+        <div style="margin-top: 2rem;">
+          <a href="/vacantes" class="btn-primary">Ver vacantes abiertas</a>
+        </div>
+      </div>
+
+      {recomendados.length > 0 && (
+        <div>
+          <p class="eyebrow" style="margin-bottom: var(--space-lg);">También te puede interesar</p>
+          <div class="rel-grid">
+            {recomendados.map(p => (
+              <a href={`/talento/${p.slug}`} class="post-card">
+                <div class="post-media">
+                  <img src={p.data.imagen || IMG_FALLBACK} alt={p.data.titulo} loading="lazy" />
+                </div>
+                <p class="eyebrow" style="color: var(--color-accent-deep); margin-top: 1rem; margin-bottom: 0.5rem;">{p.data.categoria}</p>
+                <h3 style="font-size: var(--text-lg); font-weight: 600; line-height: 1.2; overflow-wrap: anywhere; min-width: 0;">{p.data.titulo}</h3>
+                <span style="font-size: 0.8rem; color: var(--color-ink-soft); display: block; margin-top: 0.625rem;">{p.data.tiempoLectura} min de lectura</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+</Layout>
+
+<style>
+  /* ---- Back link ---- */
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-ink-soft);
+    transition: color var(--dur-base) var(--ease-out);
+  }
+  .back-link:hover { color: var(--color-accent-deep); }
+
+  /* ---- Featured image ---- */
+  .article-hero-media {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: var(--rule-hair) solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-paper-2);
+  }
+  .article-hero-media img { width: 100%; height: 100%; object-fit: cover; }
+
+  /* ---- Layout TOC + prose ---- */
+  .article-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-xl);
+  }
+  .toc { min-width: 0; }
+  .toc-link {
+    font-size: 0.9rem;
+    line-height: 1.4;
+    color: var(--color-ink-soft);
+    transition: color var(--dur-base) var(--ease-out);
+    display: inline-block;
+  }
+  .toc-link:hover { color: var(--color-accent-deep); }
+
+  @media (min-width: 1024px) {
+    .article-layout {
+      grid-template-columns: 15rem minmax(0, 1fr);
+      gap: 4rem;
+      align-items: start;
+    }
+    .toc {
+      position: sticky;
+      top: 6rem;
+      padding-top: 0.5rem;
+    }
+  }
+
+  /* ---- Prose editorial ---- */
+  .prose-editorial { max-width: 68ch; min-width: 0; }
+  .prose-editorial :global(h2) {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    border-top: var(--rule-hair) solid var(--color-hairline);
+    padding-top: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+    overflow-wrap: anywhere;
+    scroll-margin-top: 6rem;
+  }
+  .prose-editorial :global(h3) {
+    font-family: var(--font-display);
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    overflow-wrap: anywhere;
+    scroll-margin-top: 6rem;
+  }
+  .prose-editorial :global(p) {
+    font-size: var(--text-md);
+    line-height: 1.7;
+    color: var(--color-ink-soft);
+    margin-bottom: 1rem;
+  }
+  .prose-editorial :global(ul) { list-style: none; padding: 0; margin: 0 0 1rem 0; }
+  .prose-editorial :global(ul li) {
+    font-size: var(--text-md);
+    line-height: 1.6;
+    color: var(--color-ink-soft);
+    border-top: var(--rule-hair) solid var(--color-hairline);
+    padding-block: 0.625rem;
+    padding-left: 0.25rem;
+  }
+  .prose-editorial :global(strong) { color: var(--color-ink); font-weight: 600; }
+  .prose-editorial :global(hr) { border: 0; border-top: var(--rule-hair) solid var(--color-hairline); margin-block: 2rem; }
+  .prose-editorial :global(a) { color: var(--color-accent-deep); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* ---- Grid relacionados ---- */
+  .rel-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-lg) 2rem;
+  }
+  @media (min-width: 640px) { .rel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  @media (min-width: 1024px) { .rel-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+  .post-card { display: block; min-width: 0; }
+  .post-media {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border: var(--rule-hair) solid var(--color-hairline);
+    border-radius: var(--radius-md);
+    background: var(--color-paper);
+  }
+  .post-media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--dur-slow) var(--ease-out); }
+  .post-card:hover .post-media img { transform: scale(1.03); }
+  .post-card:hover h3 { color: var(--color-accent-deep); }
+  .post-card h3 { transition: color var(--dur-base) var(--ease-out); }
+</style>

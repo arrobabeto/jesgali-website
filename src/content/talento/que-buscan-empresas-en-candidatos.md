@@ -4,6 +4,7 @@ descripcion: Un reclutador tiene en promedio 6 segundos para decidir si sigue le
 categoria: Qué Buscan las Empresas
 fechaPublicacion: 2025-04-28
 tiempoLectura: 8
+imagen: /images/vida/vida-3.avif
 ---
 
 Tienes el talento. El problema puede ser cómo lo estás presentando.

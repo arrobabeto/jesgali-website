@@ -4,6 +4,7 @@ descripcion: Conoce las habilidades blandas que marcan la diferencia en los proc
 categoria: Soft Skills
 fechaPublicacion: 2025-05-20
 tiempoLectura: 6
+imagen: /images/vida/vida-1.avif
 ---
 
 Las habilidades técnicas te abren la puerta de la entrevista. Las soft skills determinan si te quedas.
